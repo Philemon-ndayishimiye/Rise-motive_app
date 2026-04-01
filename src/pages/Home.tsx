@@ -1,7 +1,11 @@
-
+import Hero from "@/layouts/Hero";
+import WhoweWere from "@/layouts/WhoweWere";
 
 export default function Home() {
   return (
-    <div>This is Home Page</div>
-  )
+    <>
+      <Hero />
+      <WhoweWere />
+    </>
+  );
 }
