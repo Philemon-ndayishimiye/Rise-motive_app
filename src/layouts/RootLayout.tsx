@@ -39,10 +39,10 @@ const RootLayout = () => {
               />
             </div>
             <div className="leading-tight">
-              <h2 className="font-extrabold text-[17px] tracking-wide text-[#1E3A8A] group-hover:text-blue-500 transition-colors duration-200 pb-2">
+              <h2 className="font-extrabold text-[17px] tracking-wide text-[#1E3A8A] group-hover:text-blue-500 transition-colors duration-200 pb-2 font-family-playfair">
                 RISEMOTIVE
               </h2>
-              <p className="text-[11px] font-medium text-blue-400 tracking-wide">
+              <p className="text-[11px] font-medium text-blue-400 tracking-wide font-family-playfair">
                 Building Skills. Delivering Solutions
               </p>
             </div>
@@ -66,7 +66,7 @@ const RootLayout = () => {
           {/* RIGHT: Login + Mobile Toggle */}
           <div className="flex items-center gap-3">
             {/* Portal Login Button */}
-            <button className="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#1E3A8A] border border-blue-300 rounded-xl hover:bg-blue-50 hover:border-blue-400 active:scale-95 transition-all duration-200">
+            <button className="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#1E3A8A] border border-blue-300 rounded-xl hover:bg-blue-50 hover:border-blue-400 active:scale-95 transition-all duration-200 font-family-playfair">
               <User className="w-4 h-4 text-blue-400" />
               Portal Login
             </button>
@@ -97,7 +97,7 @@ const RootLayout = () => {
                 onClick={() => setMobileOpen(false)}
                 className={({ isActive }) =>
                   cn(
-                    "px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
+                    "px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 font-family-playfair",
                     isActive
                       ? "bg-blue-300 text-white"
                       : "text-[#1E3A8A] hover:bg-blue-50 hover:text-blue-500",
@@ -109,7 +109,7 @@ const RootLayout = () => {
             ))}
 
             {/* Mobile Portal Login */}
-            <button className="mt-2 flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-[#1E3A8A] border border-blue-300 rounded-xl hover:bg-blue-50 transition w-full">
+            <button className="mt-2 flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-[#1E3A8A] border border-blue-300 rounded-xl hover:bg-blue-50 transition w-full font-family-playfair">
               <User className="w-4 h-4 text-blue-400" />
               Portal Login
             </button>
