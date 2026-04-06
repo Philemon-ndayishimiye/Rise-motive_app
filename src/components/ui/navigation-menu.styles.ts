@@ -6,7 +6,7 @@ export const navigationMenuTriggerStyle = cva(
     variants: {
       active: {
         true: " border-b text-[#1E3A8A]   ",
-        false: "text-blue-500 hover:text-blue-300 hover:text-blue-300",
+        false: "text-[#1E3A8A] hover:text-blue-300 hover:text-blue-300",
       },
     },
     defaultVariants: {

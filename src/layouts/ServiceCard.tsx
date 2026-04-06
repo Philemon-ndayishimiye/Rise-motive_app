@@ -5,6 +5,7 @@ export interface ServiceCardProps {
   icon: React.ReactNode;
   title: string;
   subtitle: string;
+  linkElement?: React.ReactNode; // ✅ NEW
   onClick?: () => void;
 }
 
@@ -13,11 +14,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   icon,
   title,
   subtitle,
+  linkElement,
   onClick,
 }) => {
   const [hovered, setHovered] = useState(false);
 
-  return (
+  const content = (
     <div
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
@@ -25,14 +27,15 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       style={{
         background: "#ffffff",
         borderRadius: "20px",
-        padding: "70px 70px 70px 70px",
+        padding: "70px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        fontFamily: "font-family-playfair",
         gap: "20px",
-        cursor: "pointer",
-        border: `1.5px solid ${hovered ? "rgba(59,130,246,0.25)" : "transparent"}`,
+        cursor: linkElement || onClick ? "pointer" : "default",
+        border: `1.5px solid ${
+          hovered ? "rgba(59,130,246,0.25)" : "transparent"
+        }`,
         boxShadow: hovered
           ? "0 16px 40px rgba(59,130,246,0.14)"
           : "0 2px 12px rgba(0,0,0,0.06)",
@@ -41,63 +44,49 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           : "translateY(0) scale(1)",
         transition:
           "transform 0.22s cubic-bezier(.34,1.56,.64,1), box-shadow 0.12s ease, border-color 0.22s ease",
-        position: "relative",
-        overflow: "hidden",
       }}
     >
-      {/* Icon wrapper */}
+      {/* Icon */}
       <div
         style={{
           width: "70px",
           height: "70px",
           borderRadius: "50%",
           background: "#60A5FA",
-          fontFamily: "font-family-playfair",
           display: "flex",
           color: "#ffffff",
           alignItems: "center",
           justifyContent: "center",
-          transition:
-            "background 0.22s ease, transform 0.22s cubic-bezier(.34,1.56,.64,1)",
-          transform: hovered
-            ? "scale(1.1) rotate(-4deg)"
-            : "scale(1) rotate(0deg)",
-          flexShrink: 0,
+          transform: hovered ? "scale(1.1) rotate(-4deg)" : "scale(1)",
+          transition: "0.2s",
         }}
       >
         {icon}
       </div>
 
       {/* Title */}
-      <p
-        style={{
-          fontSize: "17px",
-          fontWeight: 800,
-          color: "#374151",
-          textAlign: "center",
-          lineHeight: 1.3,
-          fontFamily: "font-family-playfair",
-          margin: 0,
-        }}
-      >
-        {title}
-      </p>
+      <p style={{ fontSize: "17px", fontFamily: "Playfair", fontWeight: 600, margin: 0 }}>{title}</p>
 
       {/* Subtitle */}
-      <p
-        style={{
-          fontSize: "15px",
-          fontWeight: 400,
-          color: "#60A5FA",
-          textAlign: "center",
-          fontFamily: "font-family-playfair",
-          marginTop: "-6px",
-          margin: 0,
-        }}
-      >
+      <p style={{ fontSize: "15px", color: "#60A5FA", margin: 0 }}>
         {subtitle}
       </p>
+
+      {/* See more */}
+      {linkElement && (
+        <span style={{ color: "#1D4ED8", fontFamily: "Playfair", fontWeight: 600 }}>See more →</span>
+      )}
     </div>
+  );
+
+  //  Wrap with Link if provided
+  return linkElement ? (
+    <div style={{ textDecoration: "none" }}>
+      {linkElement &&
+        React.cloneElement(linkElement as React.ReactElement, {}, content)}
+    </div>
+  ) : (
+    content
   );
 };
 

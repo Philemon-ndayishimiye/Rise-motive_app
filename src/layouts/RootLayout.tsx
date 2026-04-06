@@ -1,5 +1,6 @@
 import { Outlet, NavLink } from "react-router-dom";
 import logo from "../assets/logo.jpg";
+import { useNavigate } from "react-router-dom";
 import { cn } from "../lib/utils";
 import {
   NavigationMenu,
@@ -17,11 +18,17 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 const navItems = [
   { to: "/", label: "Who We Are", end: true },
-  { to: "/cluster", label: "Clusters" },
-  { to: "/model", label: "Our Model" },
+  { to: "/TaskSpot", label: "RM TaskSpot" },
+  { to: "/ProSpot", label: "RM ProSpot " },
+  { to: "/InfoSpot", label: "RM InfoSpot " },
 ];
 
 const RootLayout = () => {
+  const navigate = useNavigate();
+  const handleLoginClick = () => {
+    setMobileOpen(false)
+    navigate("/login");
+  };
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -66,7 +73,10 @@ const RootLayout = () => {
           {/* RIGHT: Login + Mobile Toggle */}
           <div className="flex items-center gap-3">
             {/* Portal Login Button */}
-            <button className="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#1E3A8A] border border-blue-300 rounded-xl hover:bg-blue-50 hover:border-blue-400 active:scale-95 transition-all duration-200 font-family-playfair">
+            <button
+              onClick={handleLoginClick}
+              className="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#1E3A8A] border border-blue-300 rounded-xl hover:bg-blue-50 hover:border-blue-400 active:scale-95 transition-all duration-200 cursor-pointer font-family-playfair"
+            >
               <User className="w-4 h-4 text-blue-400" />
               Portal Login
             </button>
@@ -109,7 +119,11 @@ const RootLayout = () => {
             ))}
 
             {/* Mobile Portal Login */}
-            <button className="mt-2 flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-[#1E3A8A] border border-blue-300 rounded-xl hover:bg-blue-50 transition w-full font-family-playfair">
+            <button
+            
+              onClick={handleLoginClick}
+              className="mt-2 flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-[#1E3A8A] border border-blue-300 cursor-pointer transition rounded-xl hover:bg-blue-50  w-full font-family-playfair"
+            >
               <User className="w-4 h-4 text-blue-400" />
               Portal Login
             </button>
