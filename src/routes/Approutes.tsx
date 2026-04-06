@@ -5,7 +5,11 @@ import Login from "@/pages/Login";
 import TaskSpot from "@/pages/TaskSpot";
 import InfoSpot from "@/pages/InfoSpot";
 import ProSpot from "@/pages/ProSpot";
-import NotFound from "@/pages/notFound";
+import NotFound from "@/pages/NotFound";
+import AdminLayout from "@/layouts/Admin/AdminLayout";
+import Application from "@/layouts/Admin/Application";
+import Dashboard from "@/layouts/Admin/Dashboard";
+import Governemnt from "@/layouts/Admin/Governemnt";
 
 const AppRouter = () => {
   return (
@@ -18,11 +22,16 @@ const AppRouter = () => {
           <Route path="/InfoSpot" element={<InfoSpot />} />
           <Route path="/ProSpot" element={<ProSpot />} />
           <Route path="/login" element={<Login />} />
-          <Route path="*" element={<NotFound />} />
         </Route>
-
+        <Route path="*" element={<NotFound />} />
         {/* 404 has no layout */}
         {/* <Route path="*" element={<notFound />} /> */}
+
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="government" element={<Governemnt />} />
+          <Route path="applications" element={<Application />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
