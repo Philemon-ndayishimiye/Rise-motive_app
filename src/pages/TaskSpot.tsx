@@ -13,10 +13,6 @@ import egovernment from "../assets/e-Government Tools & Services.jpg";
 import GovernmentForm from "@/layouts/Forms/GovernmentForm";
 import { Modal } from "@/components/ui/Model";
 import { useState } from "react";
-import ApplicationAndDocument from "@/layouts/Forms/ApplicationAndDocumentation";
-import CreativeForm from "@/layouts/Forms/CreativeForm";
-import WebAndDigital from "@/layouts/Forms/WebAndDigital";
-import LegalandOfficialServices from "@/layouts/Forms/Legal";
 import CourseForm from "@/layouts/Forms/Courses";
 
 type Bubble = {
@@ -142,7 +138,7 @@ export default function TaskSpot() {
               title="e-Government & Online Services"
               subtitle="Fill in the details below and we'll connect you with the right agency."
             >
-              <GovernmentForm />
+              <GovernmentForm title="Submit your request for e-Government services quickly and securely." />
             </Modal>
           </>
 
@@ -168,7 +164,7 @@ export default function TaskSpot() {
               title="Application And Documentation"
               subtitle="Fill in the details below and we'll connect you with the right agency."
             >
-              <ApplicationAndDocument />
+              <GovernmentForm title="Easily apply for services and handle your documentation in one place." />
             </Modal>
           </>
 
@@ -186,7 +182,7 @@ export default function TaskSpot() {
               title="Creative and Media Services"
               subtitle="Fill in the details below and we'll connect you with the right agency."
             >
-              <CreativeForm />
+              <GovernmentForm title="Bring your ideas to life with expert creative and media solutions." />
             </Modal>
           </>
 
@@ -204,7 +200,7 @@ export default function TaskSpot() {
               title="Web and Digital Solution"
               subtitle="Fill in the details below and we'll connect you with the right agency."
             >
-              <WebAndDigital />
+              <GovernmentForm title="Empowering your business with smart web and digital solutions." />
             </Modal>
           </>
 
@@ -229,7 +225,10 @@ export default function TaskSpot() {
               title="Legal and Official Services"
               subtitle="Fill in the details below and we'll connect you with the right agency."
             >
-              <LegalandOfficialServices />
+              <GovernmentForm
+                title="Providing trusted legal and official solutions with expertise,
+        integrity, and precision to safeguard your rights and ensure compliance."
+              />
             </Modal>
           </>
         </div>

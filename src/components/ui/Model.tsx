@@ -2,12 +2,16 @@
 import React, { useEffect } from "react";
 import { X } from "lucide-react";
 
+type WithTitle = {
+  title?: string;
+};
+
 type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   title: string;
   subtitle?: string;
-  children: React.ReactNode;
+  children: React.ReactElement<WithTitle>;
 };
 
 export const Modal: React.FC<ModalProps> = ({
@@ -29,18 +33,18 @@ export const Modal: React.FC<ModalProps> = ({
   // Prevent body scroll when open
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isOpen]);
 
   if (!isOpen) return null;
 
   return (
-    // Backdrop — click outside to close
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-white/5 backdrop-blur-sm px-4"
       onClick={onClose}
     >
-      {/* Modal Panel — stop propagation so clicking inside doesn't close */}
       <div
         className="
           relative w-full max-w-[70vw] max-h-[90vh]
@@ -66,7 +70,6 @@ export const Modal: React.FC<ModalProps> = ({
             )}
           </div>
 
-          {/* Close button */}
           <button
             onClick={onClose}
             className="
@@ -84,9 +87,7 @@ export const Modal: React.FC<ModalProps> = ({
         </div>
 
         {/* ── Scrollable Body ── */}
-        <div className="overflow-y-auto flex-1 px-8 py-7">
-          {children}
-        </div>
+        <div className="overflow-y-auto flex-1 px-8 py-7">{children}</div>
       </div>
     </div>
   );

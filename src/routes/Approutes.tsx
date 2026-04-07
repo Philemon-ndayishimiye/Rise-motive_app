@@ -10,6 +10,15 @@ import AdminLayout from "@/layouts/Admin/AdminLayout";
 import Application from "@/layouts/Admin/Application";
 import Dashboard from "@/layouts/Admin/Dashboard";
 import Governemnt from "@/layouts/Admin/Governemnt";
+import Web from "@/layouts/Admin/Web";
+import CreativePage from "@/layouts/Admin/CreativePage";
+import LegalandOfficialServices from "@/layouts/Admin/LegalandOfficialServices";
+import StudentApplication from "@/layouts/Admin/StudentApplication";
+import ViewStaff from "@/layouts/Admin/ViewStaff";
+import OrderedProduct from "@/layouts/Admin/OrderedProduct";
+import Notifications from "@/layouts/Admin/Notifications";
+import Settings from "@/layouts/Admin/Settings";
+import ProfilePage from "@/layouts/Admin/ProfilePage";
 
 const AppRouter = () => {
   return (
@@ -28,9 +37,18 @@ const AppRouter = () => {
         {/* <Route path="*" element={<notFound />} /> */}
 
         <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="government" element={<Governemnt />} />
           <Route path="applications" element={<Application />} />
+          <Route path="order" element={<OrderedProduct />} />
+          <Route path="staff" element={<ViewStaff />} />
+          <Route path="creative" element={<CreativePage />} />
+          <Route path="web" element={<Web />} />
+          <Route path="students" element={<StudentApplication />} />
+          <Route path="legal" element={<LegalandOfficialServices />} />
+          <Route path="notification" element={<Notifications />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="profile" element={<ProfilePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

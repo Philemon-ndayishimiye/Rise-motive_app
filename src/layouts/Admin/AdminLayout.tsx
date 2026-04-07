@@ -4,6 +4,7 @@ import {
   Globe,
   FileText,
   Palette,
+  Plus,
   Code,
   Scale,
   GraduationCap,
@@ -20,7 +21,7 @@ export default function AdminLayout() {
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
-      <div className="w-74 bg-linear-to-b from-blue-300 to-blue-900 font-family-playfair text-white ">
+      <div className="w-64 bg-linear-to-b from-blue-300 to-blue-900 font-family-playfair text-white ">
         <div className="pt-2 pl-2">
           <div className="flex items-center gap-3 shrink-0 group">
             <div className="relative">
@@ -30,72 +31,92 @@ export default function AdminLayout() {
                 className="h-10 w-10 object-contain group-hover:ring-blue-300 transition-all duration-300"
               />
             </div>
-            <div className="leading-tight">
+            <NavLink to="/admin/dashboard" className="leading-tight">
               <h2 className="font-extrabold text-[17px] tracking-wide text-[#1E3A8A] group-hover:text-blue-500 transition-colors duration-200 pb-2 font-family-playfair">
                 RISEMOTIVE
               </h2>
               <p className="text-[11px] font-medium text-blue-400 tracking-wide font-family-playfair">
                 Building Skills. Delivering Solutions
               </p>
-            </div>
+            </NavLink>
           </div>
         </div>
         <h1 className="text-[20px] font-bold mb-3 pt-5 text-center">
           Admin Panel
         </h1>
 
-        <ul className="space-y-4 font-family-playfair text-[16px]">
+        <ul className="space-y-1 font-family-playfair text-[16px]">
           <li className="">
             <NavLink to="/admin/government" className={navLinkClass}>
-              <Globe />
-              <h1>e-Government and Online Services</h1>
+              <Globe size={15} />
+              <h1 className="text-[14.5px]">
+                e-Government and Online Services
+              </h1>
             </NavLink>
           </li>
           <li>
             <NavLink to="/admin/applications" className={navLinkClass}>
-              <FileText />
-              <h1> Applications and Documentation</h1>
+              <FileText size={15} />
+              <h1 className="text-[14.5px]"> Applications and Documentation</h1>
             </NavLink>
           </li>
           <li>
             <NavLink to="/admin/creative" className={navLinkClass}>
-              <Palette />
-              <h1>Creative and Media Services</h1>
+              <Palette size={15} />
+              <h1 className="text-[14.5px]">Creative and Media Services</h1>
             </NavLink>
           </li>
           <li>
             <NavLink to="/admin/web" className={navLinkClass}>
-              <Code />
-              <h1>Web and Digital Solution</h1>
+              <Code size={15} />
+              <h1 className="text-[14.5px]">Web and Digital Solution</h1>
             </NavLink>
           </li>
           <li>
             <NavLink to="/admin/legal" className={navLinkClass}>
-              <Scale />
-              <h1>Legal and Official Services</h1>
+              <Scale size={15} />
+              <h1 className="text-[14.5px]">Legal and Official Services</h1>
             </NavLink>
           </li>
           <li>
             <NavLink to="/admin/students" className={navLinkClass}>
-              <GraduationCap />
-              <h1>Student Applications</h1>
+              <GraduationCap size={15} />
+              <h1 className="text-[14.5px]">Student Applications</h1>
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/admin/order" className={navLinkClass}>
+              <GraduationCap size={15} />
+              <h1 className="text-[14.5px]">View Ordered Product</h1>
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/admin/order" className={navLinkClass}>
+              <Plus size={15} />
+              <h1 className="text-[14.5px]">View Product</h1>
+            </NavLink>
+          </li>
+
+            <li>
+            <NavLink to="/admin/order" className={navLinkClass}>
+              <Plus size={15} />
+              <h1 className="text-[14.5px]">View Information</h1>
             </NavLink>
           </li>
           <li>
             <NavLink to="/admin/staff" className={navLinkClass}>
-              <UserPlus />
-              <h1>Add Staff</h1>
+              <UserPlus size={15} />
+              <h1 className="text-[14.5px]">View Staff</h1>
             </NavLink>
           </li>
-          
         </ul>
-
-        
       </div>
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
-        <div className="h-16 border-b flex items-center justify-between px-6">
+        <div className=" flex justify-end px-6">
           <AdminHeader />
         </div>
         <div className="p-6 overflow-y-auto flex-1">

@@ -1,55 +1,89 @@
-import {
-  NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-  NavigationMenuTrigger,
-  NavigationMenuContent,
-  NavigationMenuLink,
-} from "@/components/ui/navigation-menu";
-
-import { Bell } from "lucide-react";
-//import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import philemon from "../../assets/komvuga ndayishimiye philemon.jpg";
+import { Settings, LogOut, User, Bell } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminHeader() {
+  const [open, setOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+
+  // Close when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Logout logic
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
-    <div className="h-16  flex items-center justify-start pl-[57%]">
-      {/* LEFT: Welcome */}
-      <h2 className="font-semibold text-lg">Welcome, Admin 👋</h2>
+    <div className="py-3 flex items-center gap-2 pr-2">
+      {/* Welcome */}
+      <h2 className="font-semibold font-family-playfair text-gray-700 text-[16px]">
+        Welcome, Philemon
+      </h2>
 
-      {/* RIGHT: Menu */}
-      <div className="flex items-center gap-6">
+      {/* Right Side */}
+      <div className="flex items-center gap-4 pr-1">
         {/* 🔔 Notification */}
-        <Bell className="cursor-pointer" />
+        <div className="relative">
+          <Bell size={16} className="cursor-pointer text-gray-500" />
+          <span className="absolute font-family-playfair -top-1 -right-2 bg-red-400 text-white text-xs w-3 h-3 flex items-center justify-center rounded-full">
+            3
+          </span>
+        </div>
 
-        {/* 👤 Profile Menu using NavigationMenu */}
-        <NavigationMenu>
-          <NavigationMenuList>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>
-                <img
-                  src="https://via.placeholder.com/30"
-                  className="w-8 h-8 rounded-full cursor-pointer"
-                />
-              </NavigationMenuTrigger>
+        {/* 👤 Profile Dropdown */}
+        <div className="relative" ref={dropdownRef}>
+          {/* Avatar */}
+          <img
+            src={philemon}
+            onClick={() => setOpen(!open)}
+            className="w-8 h-8 rounded-full cursor-pointer"
+          />
 
-              <NavigationMenuContent>
-                <ul className="w-37.5 p-2 space-y-1">
-                  <li>
-                    <NavigationMenuLink>Profile</NavigationMenuLink>
-                  </li>
-                  <li>
-                    <NavigationMenuLink>Settings</NavigationMenuLink>
-                  </li>
-                  <li>
-                    <NavigationMenuLink className="text-red-500">
-                      Logout
-                    </NavigationMenuLink>
-                  </li>
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
+          {/* Dropdown */}
+          {open && (
+            <div className="absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-sm z-50 p-2 space-y-1">
+              <div
+                onClick={() => navigate("/admin/profile")}
+                className="flex items-center gap-2 p-2 rounded-md hover:bg-gray-100 cursor-pointer"
+              >
+                <User size={15} />
+                <span className="font-family-playfair">Profile</span>
+              </div>
+
+              <div
+                onClick={() => navigate("/admin/settings")}
+                className="flex items-center gap-2 p-2 rounded-md hover:bg-gray-100 cursor-pointer"
+              >
+                <Settings size={15} />
+                <span className="font-family-playfair">Settings</span>
+              </div>
+
+              <div
+                onClick={handleLogout}
+                className="flex items-center gap-2 p-2 rounded-md hover:bg-red-100 text-red-500 cursor-pointer"
+              >
+                <LogOut size={15} />
+                <span className="font-family-playfair">Logout</span>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
