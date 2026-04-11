@@ -1,8 +1,17 @@
 import { useState } from "react";
 import { Button, Input } from "@/components/ui/InputAndButton";
 import { SERVICE_OPTIONS, TASKER_OPTIONS } from "@/utils/Constants";
+import { useCreateServiceRequestMutation } from "../../app/api/Taskspot/government";
 
 // ── Types ──────────────────────────────────────────────────────────────────
+
+interface ApiError {
+  status: number;
+  data: {
+    message?: string;
+    errors?: unknown;
+  };
+}
 
 type GovernmentFormProps = {
   title: string;
@@ -65,16 +74,18 @@ export default function GovernmentForm({ title }: GovernmentFormProps) {
   const [formData, setFormData] =
     useState<GovernmentFormData>(INITIAL_FORM_STATE);
   const [errors, setErrors] = useState<FormErrors>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  // ── Field change — clears error as soon as user starts typing ────────────
+  const [createServiceRequest, { isLoading }] =
+    useCreateServiceRequestMutation();
+
+  // ── Field change ─────────────────────────────────────────────────────────
 
   const handleChange = (
     field: keyof GovernmentFormData,
     value: string | File | null,
   ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-    // Clear the error for this field the moment user corrects it
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
@@ -83,52 +94,60 @@ export default function GovernmentForm({ title }: GovernmentFormProps) {
   // ── Submit ────────────────────────────────────────────────────────────────
 
   const handleSubmit = async () => {
-    // Run validation and show all errors at once
     const validationErrors = validateForm(formData);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
-    // Build payload matching your backend contract
     const payload = {
       customerName: formData.customerName,
       customerPhone: formData.customerPhone,
       customerEmail: formData.customerEmail,
-      serviceCategory: "E_GOVERNMENT",
       service: formData.service,
       description: formData.description,
       documentUrl: formData.documentUrl?.name ?? "",
       preferredDate: formData.preferredDate,
-      location: "",
-      taskerId: formData.taskerId ? Number(formData.taskerId) : 0,
+      tasker: formData.taskerId,
     };
 
-    setIsSubmitting(true);
-
     try {
-      // ── Console log for now — replace with your API call later ──
-      console.log("📦 Submitting Government Service Request:", payload);
-
-      // TODO: replace with your real API call, e.g.:
-      // const response = await fetch("/api/service-requests", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(payload),
-      // });
-
-      await new Promise((resolve) => setTimeout(resolve, 800));
-
-      alert("Request submitted successfully!");
+      await createServiceRequest(payload).unwrap();
+      setIsSuccess(true);
       setFormData(INITIAL_FORM_STATE);
       setErrors({});
-    } catch (error) {
-      console.error(" Submission failed:", error);
+    } catch (error: unknown) {
+      const err = error as ApiError;
+      console.error("❌ Status:", err?.status);
+      console.error("❌ Backend message:", err?.data?.message);
+      console.error("❌ Backend data:", JSON.stringify(err?.data, null, 2));
       alert("Something went wrong. Please try again.");
-    } finally {
-      setIsSubmitting(false);
     }
   };
+
+  // ── Success Screen ────────────────────────────────────────────────────────
+
+  if (isSuccess) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 px-6 text-center">
+        <div className="bg-blue-50 border border-blue-200 rounded-2xl p-10 max-w-md">
+          <div className="text-5xl mb-4">✅</div>
+          <h2 className="font-bold text-[#1E3A8A] text-2xl mb-3">
+            Thank You for Your Request!
+          </h2>
+          <p className="text-gray-600 text-sm leading-relaxed">
+            Our team will review your request and reach out to you soon.
+          </p>
+          <button
+            onClick={() => setIsSuccess(false)}
+            className="mt-6 px-6 py-2 bg-[#1E3A8A] text-white rounded-lg text-sm hover:opacity-90 transition"
+          >
+            Submit Another Request
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   // ── Render ────────────────────────────────────────────────────────────────
 
@@ -206,7 +225,7 @@ export default function GovernmentForm({ title }: GovernmentFormProps) {
           />
         </div>
 
-        {/* Row 4 — Tasker & File (both optional) */}
+        {/* Row 4 — Tasker & File */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-8 pb-3">
           <Input
             type="select"
@@ -233,9 +252,9 @@ export default function GovernmentForm({ title }: GovernmentFormProps) {
         {/* Submit */}
         <div>
           <Button
-            label={isSubmitting ? "Submitting..." : "Click To Request Service"}
+            label={isLoading ? "Submitting..." : "Click To Request Service"}
             onClick={handleSubmit}
-            disabled={isSubmitting}
+            disabled={isLoading}
           />
         </div>
       </div>

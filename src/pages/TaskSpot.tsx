@@ -14,6 +14,10 @@ import GovernmentForm from "@/layouts/Forms/GovernmentForm";
 import { Modal } from "@/components/ui/Model";
 import { useState } from "react";
 import CourseForm from "@/layouts/Forms/Courses";
+import CreativeForm from "@/layouts/Forms/CreativeForm";
+import LegalandOfficialServices from "@/layouts/Forms/Legal";
+import WebAndDigital from "@/layouts/Forms/WebAndDigital";
+import ApplicationAndDocument from "@/layouts/Forms/ApplicationAndDocumentation";
 
 type Bubble = {
   size: number;
@@ -164,7 +168,7 @@ export default function TaskSpot() {
               title="Application And Documentation"
               subtitle="Fill in the details below and we'll connect you with the right agency."
             >
-              <GovernmentForm title="Easily apply for services and handle your documentation in one place." />
+              <ApplicationAndDocument />
             </Modal>
           </>
 
@@ -182,7 +186,7 @@ export default function TaskSpot() {
               title="Creative and Media Services"
               subtitle="Fill in the details below and we'll connect you with the right agency."
             >
-              <GovernmentForm title="Bring your ideas to life with expert creative and media solutions." />
+              <CreativeForm />
             </Modal>
           </>
 
@@ -200,7 +204,7 @@ export default function TaskSpot() {
               title="Web and Digital Solution"
               subtitle="Fill in the details below and we'll connect you with the right agency."
             >
-              <GovernmentForm title="Empowering your business with smart web and digital solutions." />
+              <WebAndDigital />
             </Modal>
           </>
 
@@ -225,10 +229,7 @@ export default function TaskSpot() {
               title="Legal and Official Services"
               subtitle="Fill in the details below and we'll connect you with the right agency."
             >
-              <GovernmentForm
-                title="Providing trusted legal and official solutions with expertise,
-        integrity, and precision to safeguard your rights and ensure compliance."
-              />
+              <LegalandOfficialServices />
             </Modal>
           </>
         </div>
