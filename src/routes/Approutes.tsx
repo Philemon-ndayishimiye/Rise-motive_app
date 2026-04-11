@@ -5,7 +5,6 @@ import Login from "@/pages/Login";
 import TaskSpot from "@/pages/TaskSpot";
 import InfoSpot from "@/pages/InfoSpot";
 import ProSpot from "@/pages/ProSpot";
-import NotFound from "@/pages/NotFound";
 import AdminLayout from "@/layouts/Admin/AdminLayout";
 import Application from "@/layouts/Admin/Application";
 import Dashboard from "@/layouts/Admin/Dashboard";
@@ -32,7 +31,7 @@ const AppRouter = () => {
           <Route path="/ProSpot" element={<ProSpot />} />
           <Route path="/login" element={<Login />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
+        {/* <Route path="*" element={<NotFound />} /> */}
         {/* 404 has no layout */}
         {/* <Route path="*" element={<notFound />} /> */}
 
