@@ -31,6 +31,11 @@ export interface UpdateServiceRequestRequest extends Partial<CreateServiceReques
   id: number | string;
 }
 
+export interface ServiceRequestsResponse {
+  items: ServiceRequest[];
+  total: number;
+}
+
 export interface MessageResponse {
   message: string;
 }
@@ -38,7 +43,7 @@ export interface MessageResponse {
 export const creativeApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
 
-    getAllCreativeRequests: builder.query<ServiceRequest[], void>({
+    getAllCreativeRequests: builder.query<ServiceRequestsResponse, void>({
       query: () => "creative-media",
       providesTags: ["ServiceRequest"],
     }),
@@ -48,7 +53,7 @@ export const creativeApi = apiSlice.injectEndpoints({
       providesTags: (_result, _error, id) => [{ type: "ServiceRequest", id }],
     }),
 
-    createCreativeRequest: builder.mutation<ServiceRequest, CreateServiceRequestRequest>({
+    createCreativeRequest: builder.mutation<ServiceRequest, FormData>({
       query: (data) => ({
         url: "creative-media",
         method: "POST",

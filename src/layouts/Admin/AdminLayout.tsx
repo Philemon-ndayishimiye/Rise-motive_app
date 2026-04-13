@@ -19,9 +19,9 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 export default function AdminLayout() {
   return (
-    <div className="flex h-screen">
-      {/* Sidebar */}
-      <div className="w-64 bg-linear-to-b from-blue-300 to-blue-900 font-family-playfair text-white ">
+    <div className="flex h-screen overflow-hidden">
+      {/* ── Sidebar ── */}
+      <div className="w-64 shrink-0 bg-linear-to-b from-blue-300 to-blue-900 font-family-playfair text-white overflow-y-auto overflow-x-hidden">
         <div className="pt-2 pl-2">
           <div className="flex items-center gap-3 shrink-0 group">
             <div className="relative">
@@ -41,12 +41,13 @@ export default function AdminLayout() {
             </NavLink>
           </div>
         </div>
+
         <h1 className="text-[20px] font-bold mb-3 pt-5 text-center">
           Admin Panel
         </h1>
 
         <ul className="space-y-1 font-family-playfair text-[16px]">
-          <li className="">
+          <li>
             <NavLink to="/admin/government" className={navLinkClass}>
               <Globe size={15} />
               <h1 className="text-[14.5px]">
@@ -57,7 +58,7 @@ export default function AdminLayout() {
           <li>
             <NavLink to="/admin/applications" className={navLinkClass}>
               <FileText size={15} />
-              <h1 className="text-[14.5px]"> Applications and Documentation</h1>
+              <h1 className="text-[14.5px]">Applications and Documentation</h1>
             </NavLink>
           </li>
           <li>
@@ -84,23 +85,20 @@ export default function AdminLayout() {
               <h1 className="text-[14.5px]">Student Applications</h1>
             </NavLink>
           </li>
-
           <li>
             <NavLink to="/admin/order" className={navLinkClass}>
               <GraduationCap size={15} />
               <h1 className="text-[14.5px]">View Ordered Product</h1>
             </NavLink>
           </li>
-
           <li>
-            <NavLink to="/admin/order" className={navLinkClass}>
+            <NavLink to="/admin/products" className={navLinkClass}>
               <Plus size={15} />
               <h1 className="text-[14.5px]">View Product</h1>
             </NavLink>
           </li>
-
-            <li>
-            <NavLink to="/admin/order" className={navLinkClass}>
+          <li>
+            <NavLink to="/admin/info" className={navLinkClass}>
               <Plus size={15} />
               <h1 className="text-[14.5px]">View Information</h1>
             </NavLink>
@@ -114,12 +112,15 @@ export default function AdminLayout() {
         </ul>
       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col">
-        <div className=" flex justify-end px-6">
+      {/* ── Main Content ── */}
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        {/* Header */}
+        <div className="shrink-0 flex justify-end px-6">
           <AdminHeader />
         </div>
-        <div className="p-6 overflow-y-auto flex-1">
+
+        {/* Page content — only this scrolls */}
+        <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden p-6">
           <Outlet />
         </div>
       </div>

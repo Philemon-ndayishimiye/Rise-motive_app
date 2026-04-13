@@ -62,32 +62,33 @@ export default function LegalandOfficialServices() {
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 
-  const handleSubmit = async () => {
+ const handleSubmit = async () => {
     const validationErrors = validateForm(formData);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
-    const payload = {
-      customerName: formData.customerName,
-      customerPhone: formData.customerPhone,
-      customerEmail: formData.customerEmail,
-      service: formData.service,
-      description: formData.description,
-      documentUrl: formData.documentUrl?.name ?? "",
-      preferredDate: formData.preferredDate,
-      tasker: formData.taskerId,
-    };
+
+    const form = new FormData();
+    form.append("customerName", formData.customerName);
+    form.append("customerPhone", formData.customerPhone);
+    form.append("customerEmail", formData.customerEmail);
+    form.append("service", formData.service);
+    form.append("description", formData.description);
+    form.append("preferredDate", formData.preferredDate);
+    form.append("tasker", formData.taskerId);
+    if (formData.documentUrl) {
+      form.append("documentUrl", formData.documentUrl); // File object
+    }
+
     try {
-      await createLegalRequest(payload).unwrap();
+      await createLegalRequest(form).unwrap();
       setIsSuccess(true);
       setFormData(INITIAL_FORM_STATE);
       setErrors({});
     } catch (error: unknown) {
       const err = error as ApiError;
-      console.error("❌ Status:", err?.status);
-      console.error("❌ Backend message:", err?.data?.message);
-      console.error("❌ Backend data:", JSON.stringify(err?.data, null, 2));
+      console.error(" Backend data:", JSON.stringify(err?.data, null, 2));
       alert("Something went wrong. Please try again.");
     }
   };

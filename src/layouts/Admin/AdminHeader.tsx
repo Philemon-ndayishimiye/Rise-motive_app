@@ -30,7 +30,7 @@ export default function AdminHeader() {
   };
 
   return (
-    <div className="py-3 flex items-center gap-2 pr-2">
+    <div className="pt-3 flex items-center gap-2 pr-2">
       {/* Welcome */}
       <h2 className="font-semibold font-family-playfair text-gray-700 text-[16px]">
         Welcome, Philemon

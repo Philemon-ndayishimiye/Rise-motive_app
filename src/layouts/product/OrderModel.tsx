@@ -1,6 +1,12 @@
 import { useState } from "react";
 import type { CartItem } from "../product/CartSideBar";
 import { X, Package, Truck, Clock } from "lucide-react";
+import { useCreateOrderMutation } from "../../app/api/ProductSpot/Order";
+
+interface ApiError {
+  status: number;
+  data: { message?: string; errors?: unknown };
+}
 
 type OrderForm = {
   fullName: string;
@@ -9,6 +15,8 @@ type OrderForm = {
   location: string;
   delivery: "sameday" | "scheduled" | "";
   scheduledDate: string;
+  paymentMethod: string;
+  note: string;
 };
 
 export function OrderModal({
@@ -27,15 +35,22 @@ export function OrderModal({
     location: "",
     delivery: "",
     scheduledDate: "",
+    paymentMethod: "",
+    note: "",
   });
-  const [loading, setLoading] = useState(false);
+
   const [errors, setErrors] = useState<
     Partial<Record<keyof OrderForm, string>>
   >({});
+  const [createOrder, { isLoading }] = useCreateOrderMutation();
 
   const set =
     (field: keyof OrderForm) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
+    (
+      e: React.ChangeEvent<
+        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+      >,
+    ) =>
       setForm((p) => ({ ...p, [field]: e.target.value }));
 
   const validate = () => {
@@ -44,41 +59,40 @@ export function OrderModal({
     if (!form.phone.trim()) err.phone = "Phone number is required";
     if (!form.location.trim()) err.location = "Delivery location is required";
     if (!form.delivery) err.delivery = "Please select a delivery option";
+    if (!form.paymentMethod)
+      err.paymentMethod = "Please select a payment method";
     if (form.delivery === "scheduled" && !form.scheduledDate)
       err.scheduledDate = "Please choose a date";
     return err;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const err = validate();
     if (Object.keys(err).length > 0) {
       setErrors(err);
       return;
     }
-    setLoading(true);
 
-    // ── Simulate API call — replace with real endpoint later ──
-    const orderPayload = {
-      customer: {
-        fullName: form.fullName,
-        phone: form.phone,
-        email: form.email,
-        location: form.location,
-        delivery: form.delivery,
-        scheduledDate: form.scheduledDate,
-      },
-      products: cart.map((i) => ({
-        id: i.id,
-        name: i.name,
-        quantity: i.quantity,
-        category: i.category,
-      })),
-    };
-    console.log("ORDER PAYLOAD →", orderPayload);
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      // Create one order per cart item
+      for (const item of cart) {
+        await createOrder({
+          customerName: form.fullName,
+          customerPhone: form.phone,
+          customerEmail: form.email,
+          address: form.location,
+          quantity: item.quantity,
+          paymentMethod: form.paymentMethod,
+          note: form.note,
+          productId: item.id,
+        }).unwrap();
+      }
       onSuccess();
-    }, 1500);
+    } catch (error: unknown) {
+      const err = error as ApiError;
+      console.error("❌ Order error:", err?.data?.message);
+      alert("Something went wrong placing your order. Please try again.");
+    }
   };
 
   const inputClass = (field: keyof OrderForm) =>
@@ -232,7 +246,29 @@ export function OrderModal({
               )}
             </div>
 
-            {/* Scheduled Date — shown only when scheduled is selected */}
+            {/* Payment Method */}
+            <div className="flex flex-col gap-1">
+              <label className="font-family-playfair text-gray-700 font-bold text-[13px]">
+                Payment Method <span className="text-blue-800">*</span>
+              </label>
+              <select
+                className={inputClass("paymentMethod")}
+                value={form.paymentMethod}
+                onChange={set("paymentMethod")}
+              >
+                <option value="">Select payment method…</option>
+                <option value="CASH">Cash on Delivery</option>
+                <option value="MOMO">Mobile Money (MTN)</option>
+                <option value="AIRTEL">Airtel Money</option>
+              </select>
+              {errors.paymentMethod && (
+                <p className="text-red-500 text-[11px] font-family-playfair">
+                  {errors.paymentMethod}
+                </p>
+              )}
+            </div>
+
+            {/* Scheduled Date */}
             {form.delivery === "scheduled" && (
               <div className="flex flex-col gap-1">
                 <label className="font-family-playfair text-gray-700 font-bold text-[13px]">
@@ -252,6 +288,21 @@ export function OrderModal({
                 )}
               </div>
             )}
+
+            {/* Note */}
+            <div className="flex flex-col gap-1 sm:col-span-2">
+              <label className="font-family-playfair text-gray-700 font-bold text-[13px]">
+                Note{" "}
+                <span className="text-gray-400 font-normal">(optional)</span>
+              </label>
+              <textarea
+                className={`${inputClass("note")} resize-none`}
+                placeholder="Any special instructions or notes for delivery…"
+                value={form.note}
+                onChange={set("note")}
+                rows={3}
+              />
+            </div>
           </div>
 
           {/* Delivery info tags */}
@@ -270,10 +321,10 @@ export function OrderModal({
           <div className="mt-6">
             <button
               onClick={handleSubmit}
-              disabled={loading}
+              disabled={isLoading}
               className="w-full bg-blue-800 hover:bg-blue-900 disabled:opacity-60 text-white font-family-playfair font-bold text-[14px] py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2"
             >
-              {loading ? (
+              {isLoading ? (
                 <>
                   <svg
                     className="w-4 h-4 animate-spin"

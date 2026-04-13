@@ -26,6 +26,11 @@ export interface CreateServiceRequestRequest {
   tasker: string;
 }
 
+export interface ServiceRequestsResponse {
+  items: ServiceRequest[];
+  total: number;
+}
+
 export interface UpdateServiceRequestRequest extends Partial<CreateServiceRequestRequest> {
   id: number | string;
 }
@@ -37,7 +42,7 @@ export interface MessageResponse {
 export const legalApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
 
-    getAllLegalRequests: builder.query<ServiceRequest[], void>({
+    getAllLegalRequests: builder.query<ServiceRequestsResponse, void>({
       query: () => "legal",
       providesTags: ["ServiceRequest"],
     }),
@@ -47,7 +52,7 @@ export const legalApi = apiSlice.injectEndpoints({
       providesTags: (_result, _error, id) => [{ type: "ServiceRequest", id }],
     }),
 
-    createLegalRequest: builder.mutation<ServiceRequest, CreateServiceRequestRequest>({
+    createLegalRequest: builder.mutation<ServiceRequest, FormData>({
       query: (data) => ({
         url: "legal",
         method: "POST",

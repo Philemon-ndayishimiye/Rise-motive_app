@@ -1,6 +1,5 @@
 import { apiSlice } from "../../api/EntryApi";
 
-// Types
 export interface ServiceRequest {
   id: number | string;
   customerName: string;
@@ -12,8 +11,14 @@ export interface ServiceRequest {
   preferredDate: string;
   tasker: string;
   status?: string;
+  trackingCode?: string;
   createdAt?: string;
   updatedAt?: string;
+}
+
+export interface ServiceRequestsResponse {
+  items: ServiceRequest[];
+  total: number;
 }
 
 export interface CreateServiceRequestRequest {
@@ -27,34 +32,31 @@ export interface CreateServiceRequestRequest {
   tasker: string;
 }
 
-export interface UpdateServiceRequestRequest extends Partial<CreateServiceRequestRequest> {
+export interface UpdateServiceRequestRequest {
   id: number | string;
+  status: string;
 }
 
 export interface MessageResponse {
   message: string;
 }
 
-// API Slice
 export const serviceRequestApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    // GET /service-requests
-    getAllServiceRequests: builder.query<ServiceRequest[], void>({
+    // GET ALL
+    getAllServiceRequests: builder.query<ServiceRequestsResponse, void>({
       query: () => "egov",
       providesTags: ["ServiceRequest"],
     }),
 
-    // GET /service-requests/:id
+    // GET BY ID
     getServiceRequestById: builder.query<ServiceRequest, number | string>({
       query: (id) => `egov/${id}`,
       providesTags: (_result, _error, id) => [{ type: "ServiceRequest", id }],
     }),
 
-    // POST /service-requests
-    createServiceRequest: builder.mutation<
-      ServiceRequest,
-      CreateServiceRequestRequest
-    >({
+    // CREATE
+    createServiceRequest: builder.mutation<ServiceRequest, FormData>({
       query: (data) => ({
         url: "egov",
         method: "POST",
@@ -63,15 +65,15 @@ export const serviceRequestApi = apiSlice.injectEndpoints({
       invalidatesTags: ["ServiceRequest"],
     }),
 
-    // PUT /service-requests/:id
+    // ✅ UPDATE STATUS ONLY (FIXED)
     updateServiceRequest: builder.mutation<
       ServiceRequest,
       UpdateServiceRequestRequest
     >({
-      query: ({ id, ...data }) => ({
-        url: `egov/${id}`,
-        method: "PUT",
-        body: data,
+      query: ({ id, status }) => ({
+        url: `egov/${id}/status`,
+        method: "PATCH",
+        body: { status },
       }),
       invalidatesTags: (_result, _error, { id }) => [
         { type: "ServiceRequest", id },
@@ -79,7 +81,7 @@ export const serviceRequestApi = apiSlice.injectEndpoints({
       ],
     }),
 
-    // DELETE /service-requests/:id
+    // DELETE
     deleteServiceRequest: builder.mutation<MessageResponse, number | string>({
       query: (id) => ({
         url: `egov/${id}`,

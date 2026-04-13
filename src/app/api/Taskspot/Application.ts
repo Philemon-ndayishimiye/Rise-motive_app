@@ -1,5 +1,9 @@
 import { apiSlice } from "../../api/EntryApi";
 
+/* ───────────────────────────────
+   TYPES
+────────────────────────────── */
+
 export interface ServiceRequest {
   id: number | string;
   customerName: string;
@@ -11,8 +15,14 @@ export interface ServiceRequest {
   preferredDate: string;
   tasker: string;
   status?: string;
+  trackingCode?: string;
   createdAt?: string;
   updatedAt?: string;
+}
+
+export interface ServiceRequestsResponse {
+  items: ServiceRequest[];
+  total: number;
 }
 
 export interface CreateServiceRequestRequest {
@@ -26,28 +36,35 @@ export interface CreateServiceRequestRequest {
   tasker: string;
 }
 
-export interface UpdateServiceRequestRequest extends Partial<CreateServiceRequestRequest> {
+export interface UpdateServiceRequestRequest {
   id: number | string;
+  status: string;
 }
 
 export interface MessageResponse {
   message: string;
 }
 
+/* ───────────────────────────────
+   API SLICE
+────────────────────────────── */
+
 export const applicationApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-
-    getAllApplicationRequests: builder.query<ServiceRequest[], void>({
+    /* GET ALL */
+    getAllApplicationRequests: builder.query<ServiceRequestsResponse, void>({
       query: () => "application-docs",
       providesTags: ["ServiceRequest"],
     }),
 
+    /* GET BY ID */
     getApplicationRequestById: builder.query<ServiceRequest, number | string>({
       query: (id) => `application-docs/${id}`,
       providesTags: (_result, _error, id) => [{ type: "ServiceRequest", id }],
     }),
 
-    createApplicationRequest: builder.mutation<ServiceRequest, CreateServiceRequestRequest>({
+    /* CREATE */
+    createApplicationRequest: builder.mutation<ServiceRequest, FormData>({
       query: (data) => ({
         url: "application-docs",
         method: "POST",
@@ -56,11 +73,15 @@ export const applicationApi = apiSlice.injectEndpoints({
       invalidatesTags: ["ServiceRequest"],
     }),
 
-    updateApplicationRequest: builder.mutation<ServiceRequest, UpdateServiceRequestRequest>({
-      query: ({ id, ...data }) => ({
-        url: `application-docs/${id}`,
-        method: "PUT",
-        body: data,
+    /* UPDATE STATUS */
+    updateApplicationRequest: builder.mutation<
+      ServiceRequest,
+      UpdateServiceRequestRequest
+    >({
+      query: ({ id, status }) => ({
+        url: `application-docs/${id}/status`,
+        method: "PATCH",
+        body: { status },
       }),
       invalidatesTags: (_result, _error, { id }) => [
         { type: "ServiceRequest", id },
@@ -68,16 +89,23 @@ export const applicationApi = apiSlice.injectEndpoints({
       ],
     }),
 
-    deleteApplicationRequest: builder.mutation<MessageResponse, number | string>({
+    /* DELETE */
+    deleteApplicationRequest: builder.mutation<
+      MessageResponse,
+      number | string
+    >({
       query: (id) => ({
         url: `application-docs/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["ServiceRequest"],
     }),
-
   }),
 });
+
+/* ───────────────────────────────
+   EXPORT HOOKS
+────────────────────────────── */
 
 export const {
   useGetAllApplicationRequestsQuery,

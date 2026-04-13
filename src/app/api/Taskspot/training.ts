@@ -9,8 +9,14 @@ export interface TrainingRequest {
   preferredSchedule: string;
   experienceLevel: string;
   status?: string;
+  trackingCode?: string;
   createdAt?: string;
   updatedAt?: string;
+}
+
+export interface TrainingRequestsResponse {
+  items: TrainingRequest[];
+  total: number;
 }
 
 export interface CreateTrainingRequest {
@@ -32,8 +38,7 @@ export interface MessageResponse {
 
 export const trainingApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-
-    getAllTrainingRequests: builder.query<TrainingRequest[], void>({
+    getAllTrainingRequests: builder.query<TrainingRequestsResponse, void>({
       query: () => "training",
       providesTags: ["ServiceRequest"],
     }),
@@ -43,7 +48,10 @@ export const trainingApi = apiSlice.injectEndpoints({
       providesTags: (_result, _error, id) => [{ type: "ServiceRequest", id }],
     }),
 
-    createTrainingRequest: builder.mutation<TrainingRequest, CreateTrainingRequest>({
+    createTrainingRequest: builder.mutation<
+      TrainingRequest,
+      CreateTrainingRequest
+    >({
       query: (data) => ({
         url: "training",
         method: "POST",
@@ -52,7 +60,10 @@ export const trainingApi = apiSlice.injectEndpoints({
       invalidatesTags: ["ServiceRequest"],
     }),
 
-    updateTrainingRequest: builder.mutation<TrainingRequest, UpdateTrainingRequest>({
+    updateTrainingRequest: builder.mutation<
+      TrainingRequest,
+      UpdateTrainingRequest
+    >({
       query: ({ id, ...data }) => ({
         url: `training/${id}`,
         method: "PUT",
@@ -71,7 +82,6 @@ export const trainingApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["ServiceRequest"],
     }),
-
   }),
 });
 

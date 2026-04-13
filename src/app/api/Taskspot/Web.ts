@@ -26,6 +26,11 @@ export interface CreateServiceRequestRequest {
   tasker: string;
 }
 
+export interface ServiceRequestsResponse {
+  items: ServiceRequest[];
+  total: number;
+}
+
 export interface UpdateServiceRequestRequest extends Partial<CreateServiceRequestRequest> {
   id: number | string;
 }
@@ -36,8 +41,7 @@ export interface MessageResponse {
 
 export const webApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-
-    getAllWebRequests: builder.query<ServiceRequest[], void>({
+    getAllWebRequests: builder.query<ServiceRequestsResponse, void>({
       query: () => "web-digital",
       providesTags: ["ServiceRequest"],
     }),
@@ -47,7 +51,10 @@ export const webApi = apiSlice.injectEndpoints({
       providesTags: (_result, _error, id) => [{ type: "ServiceRequest", id }],
     }),
 
-    createWebRequest: builder.mutation<ServiceRequest, CreateServiceRequestRequest>({
+    createWebRequest: builder.mutation<
+      ServiceRequest,
+      FormData
+    >({
       query: (data) => ({
         url: "web-digital",
         method: "POST",
@@ -56,7 +63,10 @@ export const webApi = apiSlice.injectEndpoints({
       invalidatesTags: ["ServiceRequest"],
     }),
 
-    updateWebRequest: builder.mutation<ServiceRequest, UpdateServiceRequestRequest>({
+    updateWebRequest: builder.mutation<
+      ServiceRequest,
+      UpdateServiceRequestRequest
+    >({
       query: ({ id, ...data }) => ({
         url: `web-digital/${id}`,
         method: "PUT",
@@ -75,7 +85,6 @@ export const webApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["ServiceRequest"],
     }),
-
   }),
 });
 
