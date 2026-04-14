@@ -190,11 +190,18 @@ export default function TrainingForm() {
             placeholder="Choose a Course"
             options={[
               { value: "COMPUTER_FOUNDATIONS", label: "Computer Foundations" },
-              { value: "WEB_DEVELOPMENT", label: "Web Development" },
+              { value: "MICROSOFT_OFFICE", label: "Microsoft Office" },
+              { value: "GOOGLE_TOOLS", label: "Google Tools" },
+              { value: "E_GOVERNMENT_TOOLS", label: "E-Government Tools" },
+              {
+                value: "DIGITAL_CONTENT_CREATION",
+                label: "Digital Content Creation",
+              },
               { value: "GRAPHIC_DESIGN", label: "Graphic Design" },
-              { value: "DATA_ANALYSIS", label: "Data Analysis" },
-              { value: "DIGITAL_MARKETING", label: "Digital Marketing" },
+              { value: "AI_AND_DIGITAL_TOOLS", label: "AI & Digital Tools" },
+              { value: "BASIC_PROGRAMMING", label: "Basic Programming" },
             ]}
+            
             value={formData.selectedCourse}
             variant={errors.selectedCourse ? "danger" : "default"}
             helperText={errors.selectedCourse}

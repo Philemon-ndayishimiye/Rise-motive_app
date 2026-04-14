@@ -17,13 +17,17 @@ export function ProductCard({
   onViewDetail: () => void;
 }) {
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl p-5 flex flex-col gap-3 hover:shadow-md hover:border-blue-200 transition-all duration-200">
+    <div className="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col gap-3 hover:shadow-md hover:border-blue-200 transition-all duration-200">
       {/* Emoji + badge */}
       <div
-        className="w-full aspect-square bg-gray-50 border-2 border-dashed border-gray-200 rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer hover:border-blue-300 hover:bg-blue-50/40 transition-colors"
+        className="w-full aspect-square bg-gray-50 border border-dashed border-gray-100 rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer hover:border-blue-300 hover:bg-blue-50/40 transition-colors"
         onClick={onViewDetail}
       >
-        <span className="text-5xl">{product.emoji}</span>
+        <img
+          src={product.imageUrl}
+          alt={product.name}
+          className="w-24 h-24 object-cover rounded-lg"
+        />
         <span className="text-[11px] font-family-playfair text-gray-400">
           Tap to view details
         </span>
@@ -34,11 +38,11 @@ export function ProductCard({
         <span className="text-[10px] font-family-playfair text-blue-700 bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-full font-bold tracking-wide">
           {product.category}
         </span>
-        {product.badge && (
+        {/* {product.badge && (
           <span className="text-[10px] font-family-playfair text-amber-700 bg-amber-50 border border-amber-100 px-2 py-0.5 rounded-full font-bold">
             ★ {product.badge}
           </span>
-        )}
+        )} */}
       </div>
 
       {/* Name */}

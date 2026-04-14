@@ -36,6 +36,12 @@ export interface CreateOrderRequest {
 
 export interface UpdateOrderRequest extends Partial<CreateOrderRequest> {
   id: number;
+  status: string;
+}
+
+export interface UpdateOrderStatusRequest {
+  id: number;
+  status: string;
 }
 
 export interface MessageResponse {
@@ -63,11 +69,12 @@ export const orderApi = apiSlice.injectEndpoints({
       invalidatesTags: ["Order"],
     }),
 
-    updateOrder: builder.mutation<Order, UpdateOrderRequest>({
-      query: ({ id, ...data }) => ({
-        url: `orders/${id}`,
-        method: "PUT",
-        body: data,
+    /* UPDATE STATUS */
+    updateOrder: builder.mutation<Order, UpdateOrderStatusRequest>({
+      query: ({ id, status }) => ({
+        url: `orders/${id}/status`,
+        method: "PATCH",
+        body: { status },
       }),
       invalidatesTags: (_result, _error, { id }) => [
         { type: "Order", id },

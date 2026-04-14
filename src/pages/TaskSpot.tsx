@@ -18,6 +18,8 @@ import CreativeForm from "@/layouts/Forms/CreativeForm";
 import LegalandOfficialServices from "@/layouts/Forms/Legal";
 import WebAndDigital from "@/layouts/Forms/WebAndDigital";
 import ApplicationAndDocument from "@/layouts/Forms/ApplicationAndDocumentation";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 type Bubble = {
   size: number;
@@ -35,6 +37,16 @@ const bubbles: Bubble[] = Array.from({ length: 15 }).map(() => ({
 
 export default function TaskSpot() {
   const [openModal, setOpenModal] = useState<string | null>(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const el = document.querySelector(location.hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
 
   return (
     <div className="py-7">
@@ -121,7 +133,10 @@ export default function TaskSpot() {
           below;
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div
+          id="services"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
+        >
           <>
             <TaskCardService
               title="e-Government & Online Services"

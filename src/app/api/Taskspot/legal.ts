@@ -2,6 +2,7 @@ import { apiSlice } from "../../api/EntryApi";
 
 export interface ServiceRequest {
   id: number | string;
+  trackingCode: string;
   customerName: string;
   customerPhone: string;
   customerEmail: string;
@@ -31,8 +32,9 @@ export interface ServiceRequestsResponse {
   total: number;
 }
 
-export interface UpdateServiceRequestRequest extends Partial<CreateServiceRequestRequest> {
+export interface UpdateServiceRequestRequest {
   id: number | string;
+  status: string;
 }
 
 export interface MessageResponse {
@@ -41,7 +43,6 @@ export interface MessageResponse {
 
 export const legalApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-
     getAllLegalRequests: builder.query<ServiceRequestsResponse, void>({
       query: () => "legal",
       providesTags: ["ServiceRequest"],
@@ -61,11 +62,15 @@ export const legalApi = apiSlice.injectEndpoints({
       invalidatesTags: ["ServiceRequest"],
     }),
 
-    updateLegalRequest: builder.mutation<ServiceRequest, UpdateServiceRequestRequest>({
-      query: ({ id, ...data }) => ({
-        url: `legal/${id}`,
-        method: "PUT",
-        body: data,
+    /* UPDATE STATUS */
+    updateLegalRequest: builder.mutation<
+      ServiceRequest,
+      UpdateServiceRequestRequest
+    >({
+      query: ({ id, status }) => ({
+        url: `legal/${id}/status`,
+        method: "PATCH",
+        body: { status },
       }),
       invalidatesTags: (_result, _error, { id }) => [
         { type: "ServiceRequest", id },
@@ -80,7 +85,6 @@ export const legalApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["ServiceRequest"],
     }),
-
   }),
 });
 

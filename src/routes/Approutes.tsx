@@ -18,6 +18,8 @@ import OrderedProduct from "@/layouts/Admin/OrderedProduct";
 import Notifications from "@/layouts/Admin/Notifications";
 import Settings from "@/layouts/Admin/Settings";
 import ProfilePage from "@/layouts/Admin/ProfilePage";
+import ViewProduct from "@/layouts/Admin/ViewProduct";
+import Information from "@/layouts/Admin/Information";
 
 const AppRouter = () => {
   return (
@@ -48,6 +50,8 @@ const AppRouter = () => {
           <Route path="notification" element={<Notifications />} />
           <Route path="settings" element={<Settings />} />
           <Route path="profile" element={<ProfilePage />} />
+          <Route path="products" element={<ViewProduct />} />
+          <Route path="info" element={<Information />} />
         </Route>
       </Routes>
     </BrowserRouter>

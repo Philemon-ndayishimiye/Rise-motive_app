@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BadgeCheck, Search, ShoppingCart } from "lucide-react";
 import prospot from "../assets/RM PROSPOT.jpg.jpeg";
 import { OrderSuccessModal } from "@/layouts/product/OrderSucess";
@@ -9,6 +9,7 @@ import { ProductCard } from "@/layouts/product/ProductCard";
 import { CartSidebar } from "@/layouts/product/CartSideBar";
 import type { CartItem } from "../layouts/product/CartSideBar";
 import { OrderModal } from "@/layouts/product/OrderModel";
+import { useLocation } from "react-router-dom";
 
 type Bubble = { size: number; left: number; duration: number; delay: number };
 
@@ -26,6 +27,17 @@ export default function ProSpot() {
   const [showOrder, setShowOrder] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [detailProduct, setDetailProduct] = useState<Product | null>(null);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const el = document.querySelector(location.hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
 
   const { products, isLoading, isError } = useProducts();
 
@@ -181,7 +193,7 @@ export default function ProSpot() {
 
         {/* Loading state */}
         {isLoading && (
-          <div className="text-center py-16">
+          <div  className="text-center py-16">
             <p className="font-family-playfair text-gray-400 text-[15px]">
               Loading products…
             </p>
@@ -208,7 +220,7 @@ export default function ProSpot() {
 
         {/* Product grid */}
         {!isLoading && !isError && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          <div id="product" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {filtered.map((product) => (
               <ProductCard
                 key={product.id}

@@ -1,8 +1,8 @@
-
 import { apiSlice } from "../../api/EntryApi";
 
 export interface ServiceRequest {
   id: number | string;
+  trackingCode: string;
   customerName: string;
   customerPhone: string;
   customerEmail: string;
@@ -27,8 +27,9 @@ export interface CreateServiceRequestRequest {
   tasker: string;
 }
 
-export interface UpdateServiceRequestRequest extends Partial<CreateServiceRequestRequest> {
+export interface UpdateServiceRequestRequest {
   id: number | string;
+  status: string;
 }
 
 export interface ServiceRequestsResponse {
@@ -42,7 +43,6 @@ export interface MessageResponse {
 
 export const creativeApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-
     getAllCreativeRequests: builder.query<ServiceRequestsResponse, void>({
       query: () => "creative-media",
       providesTags: ["ServiceRequest"],
@@ -62,11 +62,15 @@ export const creativeApi = apiSlice.injectEndpoints({
       invalidatesTags: ["ServiceRequest"],
     }),
 
-    updateCreativeRequest: builder.mutation<ServiceRequest, UpdateServiceRequestRequest>({
-      query: ({ id, ...data }) => ({
-        url: `creative-media/${id}`,
-        method: "PUT",
-        body: data,
+    /* UPDATE STATUS */
+    updateCreativeRequest: builder.mutation<
+      ServiceRequest,
+      UpdateServiceRequestRequest
+    >({
+      query: ({ id, status }) => ({
+        url: `creative-media/${id}/status`,
+        method: "PATCH",
+        body: { status },
       }),
       invalidatesTags: (_result, _error, { id }) => [
         { type: "ServiceRequest", id },
@@ -81,7 +85,6 @@ export const creativeApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["ServiceRequest"],
     }),
-
   }),
 });
 

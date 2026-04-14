@@ -2,6 +2,7 @@ import { apiSlice } from "../../api/EntryApi";
 
 export interface ServiceRequest {
   id: number | string;
+  trackingCode: string;
   customerName: string;
   customerPhone: string;
   customerEmail: string;
@@ -31,8 +32,9 @@ export interface ServiceRequestsResponse {
   total: number;
 }
 
-export interface UpdateServiceRequestRequest extends Partial<CreateServiceRequestRequest> {
+export interface UpdateServiceRequestRequest {
   id: number | string;
+  status: string;
 }
 
 export interface MessageResponse {
@@ -51,10 +53,7 @@ export const webApi = apiSlice.injectEndpoints({
       providesTags: (_result, _error, id) => [{ type: "ServiceRequest", id }],
     }),
 
-    createWebRequest: builder.mutation<
-      ServiceRequest,
-      FormData
-    >({
+    createWebRequest: builder.mutation<ServiceRequest, FormData>({
       query: (data) => ({
         url: "web-digital",
         method: "POST",
@@ -63,14 +62,15 @@ export const webApi = apiSlice.injectEndpoints({
       invalidatesTags: ["ServiceRequest"],
     }),
 
+    /* UPDATE STATUS */
     updateWebRequest: builder.mutation<
       ServiceRequest,
       UpdateServiceRequestRequest
     >({
-      query: ({ id, ...data }) => ({
-        url: `web-digital/${id}`,
-        method: "PUT",
-        body: data,
+      query: ({ id, status }) => ({
+        url: `web-digital/${id}/status`,
+        method: "PATCH",
+        body: { status },
       }),
       invalidatesTags: (_result, _error, { id }) => [
         { type: "ServiceRequest", id },

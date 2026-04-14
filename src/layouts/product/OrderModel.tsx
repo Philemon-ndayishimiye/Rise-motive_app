@@ -3,22 +3,21 @@ import type { CartItem } from "../product/CartSideBar";
 import { X, Package, Truck, Clock } from "lucide-react";
 import { useCreateOrderMutation } from "../../app/api/ProductSpot/Order";
 
-interface ApiError {
-  status: number;
-  data: { message?: string; errors?: unknown };
-}
+// interface ApiError {
+//   status: number;
+//   data: { message?: string; errors?: unknown };
+// }
+
+//type OrderFormErrors = Partial<Record<keyof OrderForm, string>>;
 
 type OrderForm = {
-  fullName: string;
-  phone: string;
-  email: string;
-  location: string;
-  delivery: "sameday" | "scheduled" | "";
-  scheduledDate: string;
+  customerName: string;
+  customerPhone: string;
+  customerEmail: string;
+  address: string;
   paymentMethod: string;
   note: string;
 };
-
 export function OrderModal({
   cart,
   onClose,
@@ -29,12 +28,10 @@ export function OrderModal({
   onSuccess: () => void;
 }) {
   const [form, setForm] = useState<OrderForm>({
-    fullName: "",
-    phone: "",
-    email: "",
-    location: "",
-    delivery: "",
-    scheduledDate: "",
+    customerName: "",
+    customerPhone: "",
+    customerEmail: "",
+    address: "",
     paymentMethod: "",
     note: "",
   });
@@ -53,45 +50,45 @@ export function OrderModal({
     ) =>
       setForm((p) => ({ ...p, [field]: e.target.value }));
 
-  const validate = () => {
-    const err: typeof errors = {};
-    if (!form.fullName.trim()) err.fullName = "Full name is required";
-    if (!form.phone.trim()) err.phone = "Phone number is required";
-    if (!form.location.trim()) err.location = "Delivery location is required";
-    if (!form.delivery) err.delivery = "Please select a delivery option";
-    if (!form.paymentMethod)
-      err.paymentMethod = "Please select a payment method";
-    if (form.delivery === "scheduled" && !form.scheduledDate)
-      err.scheduledDate = "Please choose a date";
+  type OrderFormErrors = Partial<Record<keyof OrderForm, string>>;
+
+  const validate = (): OrderFormErrors => {
+    const err: OrderFormErrors = {};
+
+    if (!form.customerName) err.customerName = "Required";
+    if (!form.customerPhone) err.customerPhone = "Required";
+    if (!form.address) err.address = "Required";
+    if (!form.paymentMethod) err.paymentMethod = "Required";
+
     return err;
   };
 
   const handleSubmit = async () => {
     const err = validate();
+
     if (Object.keys(err).length > 0) {
       setErrors(err);
       return;
     }
 
     try {
-      // Create one order per cart item
       for (const item of cart) {
         await createOrder({
-          customerName: form.fullName,
-          customerPhone: form.phone,
-          customerEmail: form.email,
-          address: form.location,
+          customerName: form.customerName,
+          customerPhone: form.customerPhone,
+          customerEmail: form.customerEmail,
+          address: form.address,
           quantity: item.quantity,
           paymentMethod: form.paymentMethod,
           note: form.note,
           productId: item.id,
         }).unwrap();
       }
+
       onSuccess();
-    } catch (error: unknown) {
-      const err = error as ApiError;
-      console.error("❌ Order error:", err?.data?.message);
-      alert("Something went wrong placing your order. Please try again.");
+    } catch (error) {
+      console.error("Order failed:", error);
+      alert("Failed to place order. Try again.");
     }
   };
 
@@ -160,14 +157,14 @@ export function OrderModal({
               </label>
               <input
                 type="text"
-                className={inputClass("fullName")}
+                className={inputClass("customerName")}
                 placeholder="e.g. Jean Pierre Habimana"
-                value={form.fullName}
-                onChange={set("fullName")}
+                value={form.customerName}
+                onChange={set("customerName")}
               />
-              {errors.fullName && (
+              {errors.customerName && (
                 <p className="text-red-500 text-[11px] font-family-playfair">
-                  {errors.fullName}
+                  {errors.customerName}
                 </p>
               )}
             </div>
@@ -179,14 +176,14 @@ export function OrderModal({
               </label>
               <input
                 type="tel"
-                className={inputClass("phone")}
+                className={inputClass("customerPhone")}
                 placeholder="+250 700 000 000"
-                value={form.phone}
-                onChange={set("phone")}
+                value={form.customerPhone}
+                onChange={set("customerPhone")}
               />
-              {errors.phone && (
+              {errors.customerPhone && (
                 <p className="text-red-500 text-[11px] font-family-playfair">
-                  {errors.phone}
+                  {errors.customerPhone}
                 </p>
               )}
             </div>
@@ -199,10 +196,10 @@ export function OrderModal({
               </label>
               <input
                 type="email"
-                className={inputClass("email")}
+                className={inputClass("customerEmail")}
                 placeholder="yourname@example.com"
-                value={form.email}
-                onChange={set("email")}
+                value={form.customerEmail}
+                onChange={set("customerEmail")}
               />
             </div>
 
@@ -213,26 +210,26 @@ export function OrderModal({
               </label>
               <input
                 type="text"
-                className={inputClass("location")}
+                className={inputClass("address")}
                 placeholder="e.g. Kicukiro, Kigali"
-                value={form.location}
-                onChange={set("location")}
+                value={form.address}
+                onChange={set("address")}
               />
-              {errors.location && (
+              {errors.address && (
                 <p className="text-red-500 text-[11px] font-family-playfair">
-                  {errors.location}
+                  {errors.address}
                 </p>
               )}
             </div>
 
             {/* Delivery Option */}
-            <div className="flex flex-col gap-1">
+            {/* <div className="flex flex-col gap-1">
               <label className="font-family-playfair text-gray-700 font-bold text-[13px]">
                 Delivery Option <span className="text-blue-800">*</span>
               </label>
               <select
                 className={inputClass("delivery")}
-                value={form.delivery}
+                value={form.paymentMethod}
                 onChange={set("delivery")}
               >
                 <option value="">Select delivery type…</option>
@@ -244,7 +241,7 @@ export function OrderModal({
                   {errors.delivery}
                 </p>
               )}
-            </div>
+            </div> */}
 
             {/* Payment Method */}
             <div className="flex flex-col gap-1">
@@ -269,25 +266,6 @@ export function OrderModal({
             </div>
 
             {/* Scheduled Date */}
-            {form.delivery === "scheduled" && (
-              <div className="flex flex-col gap-1">
-                <label className="font-family-playfair text-gray-700 font-bold text-[13px]">
-                  Preferred Date <span className="text-blue-800">*</span>
-                </label>
-                <input
-                  type="date"
-                  className={inputClass("scheduledDate")}
-                  value={form.scheduledDate}
-                  onChange={set("scheduledDate")}
-                  min={new Date().toISOString().split("T")[0]}
-                />
-                {errors.scheduledDate && (
-                  <p className="text-red-500 text-[11px] font-family-playfair">
-                    {errors.scheduledDate}
-                  </p>
-                )}
-              </div>
-            )}
 
             {/* Note */}
             <div className="flex flex-col gap-1 sm:col-span-2">

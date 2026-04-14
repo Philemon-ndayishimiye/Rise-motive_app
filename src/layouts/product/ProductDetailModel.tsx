@@ -48,13 +48,13 @@ export function ProductDetailModal({
           {/* Big emoji display */}
           <div className="text-7xl text-center py-4">{product.emoji}</div>
 
-          {product.badge && (
+          {/* {product.badge && (
             <div className="flex justify-center mb-3">
               <span className="text-[11px] font-bold font-family-playfair bg-blue-50 text-blue-800 border border-blue-200 px-3 py-1 rounded-full tracking-wide">
                 ★ {product.badge}
               </span>
             </div>
-          )}
+          )} */}
 
           <p className="font-family-playfair text-gray-700 text-[14px] leading-relaxed text-center">
             {product.fullDescription}

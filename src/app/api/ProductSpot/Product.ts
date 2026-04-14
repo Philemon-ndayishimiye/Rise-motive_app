@@ -17,17 +17,14 @@ export interface ProductsResponse {
   total: number;
 }
 
-export interface CreateProductRequest {
-  name: string;
-  description: string;
-  price: string;
-  category: string;
-  imageUrl: string;
-  inStock: boolean;
-}
-
-export interface UpdateProductRequest extends Partial<CreateProductRequest> {
+export interface UpdateProductRequest {
   id: number;
+  name?: string;
+  description?: string;
+  price?: string;
+  category?: string;
+  imageUrl?: string;
+  inStock?: boolean;
 }
 
 export interface MessageResponse {
@@ -46,15 +43,19 @@ export const productApi = apiSlice.injectEndpoints({
       providesTags: (_result, _error, id) => [{ type: "Product", id }],
     }),
 
-    createProduct: builder.mutation<Product, CreateProductRequest>({
+    //  Accepts FormData — image goes to Cloudinary via server.ts POST /products
+    createProduct: builder.mutation<Product, FormData>({
       query: (data) => ({
         url: "products",
         method: "POST",
         body: data,
+        //  Do NOT set Content-Type — browser sets it with boundary automatically
+        formData: true,
       }),
       invalidatesTags: ["Product"],
     }),
 
+    //  JSON update (no file upload on edit)
     updateProduct: builder.mutation<Product, UpdateProductRequest>({
       query: ({ id, ...data }) => ({
         url: `products/${id}`,

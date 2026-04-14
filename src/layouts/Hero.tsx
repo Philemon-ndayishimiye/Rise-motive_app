@@ -1,10 +1,12 @@
-import image1 from "../assets/3.png";
-import image2 from "../assets/4.png";
-import image3 from "../assets/Hanging Files (1).png";
-import image4 from "../assets/PRODUCTS-PAPETERIE RM PROSPOT.jpg.jpeg";
+import { useNavigate } from "react-router-dom";
+import image1 from "../assets/RM PROSPOT.jpg.jpeg";
+import image2 from "../assets/RM TASKSPOT.jpg.jpeg";
+import image4 from "../assets/RM INFOSPOT.jpg.jpeg";
 
 export default function Hero() {
-  const images = [image1, image2, image3, image4];
+  const navigate = useNavigate();
+  const images = [image1, image2, image4];
+  const total = images.length;
 
   return (
     <>
@@ -13,7 +15,7 @@ export default function Hero() {
 
         /* ─── Background ─────────────────────────── */
         .hero-section {
-          background: linear-gradient(145deg, #1E40AF 10%, #BFDBFE 100%);
+          background-color: #1E40AF;
           min-height: 100vh;
           position: relative;
           overflow: hidden;
@@ -85,7 +87,7 @@ export default function Hero() {
           position: absolute;
           inset: 21%;
           border-radius: 50%;
-          background: rgba(255,255,255,0.55);
+          background-color: #ffffff;
           backdrop-filter: blur(18px);
           -webkit-backdrop-filter: blur(18px);
           border: 1px solid rgba(255,255,255,0.85);
@@ -133,10 +135,7 @@ export default function Hero() {
           animation: orbitCW 60s linear infinite;
           z-index: 10;
         }
-        .orbit-wrapper:nth-child(1) { animation-delay:   0s; }
-        .orbit-wrapper:nth-child(2) { animation-delay: -15s; }
-        .orbit-wrapper:nth-child(3) { animation-delay: -30s; }
-        .orbit-wrapper:nth-child(4) { animation-delay: -45s; }
+      
 
         .orbit-wrapper img {
           width: 100%;
@@ -148,10 +147,7 @@ export default function Hero() {
           animation: counterCW 60s linear infinite;
           transition: box-shadow 0.3s ease;
         }
-        .orbit-wrapper:nth-child(1) img { animation-delay:   0s; }
-        .orbit-wrapper:nth-child(2) img { animation-delay: -15s; }
-        .orbit-wrapper:nth-child(3) img { animation-delay: -30s; }
-        .orbit-wrapper:nth-child(4) img { animation-delay: -45s; }
+        
 
         .orbit-wrapper:hover img {
           box-shadow: 0 0 0 4px rgba(59,130,246,0.6), 0 10px 32px rgba(30,58,138,0.4);
@@ -210,17 +206,19 @@ export default function Hero() {
 }
 
 /* 🎨 Different colors per letter */
-.hero-title span:nth-child(1) { color: #EF4444; animation-delay: 0s; }
-.hero-title span:nth-child(2) { color: #F97316; animation-delay: 0.15s; }
-.hero-title span:nth-child(3) { color: #EAB308; animation-delay: 0.3s; }
-.hero-title span:nth-child(4) { color: #22C55E; animation-delay: 0.45s; }
-.hero-title span:nth-child(5) { color: #06B6D4; animation-delay: 0.6s; }
-.hero-title span:nth-child(6) { color: #3B82F6; animation-delay: 0.75s; }
-.hero-title span:nth-child(7) { color: #8B5CF6; animation-delay: 0.9s; }
-.hero-title span:nth-child(8) { color: ##FFA500; animation-delay: 0.45s; }
-.hero-title span:nth-child(9) { color: #06B6D4; animation-delay: 0.6s; }
-.hero-title span:nth-child(10) { color: #EF4444; animation-delay: 0.75s; }
-.hero-title span:nth-child(11) { color: #FF0000; animation-delay: 0.9s; }
+.hero-title span:nth-child(1) { color: #ffffff; animation-delay: 0s; }
+.hero-title span:nth-child(2) { color: #ffffff; animation-delay: 0.15s; }
+.hero-title span:nth-child(3) { color: #ffffff; animation-delay: 0.3s; }
+.hero-title span:nth-child(4) { color: #ffffff; animation-delay: 0.45s; }
+.hero-title span:nth-child(5) { color: #ffffff; animation-delay: 0.6s; }
+.hero-title span:nth-child(6) { color: #ffffff; animation-delay: 0.75s; }
+.hero-title span:nth-child(7) { color: #ffffff; animation-delay: 0.9s; }
+.hero-title span:nth-child(8) { color: #ffffff; animation-delay: 0.45s; }
+.hero-title span:nth-child(9) { color: #ffffff; animation-delay: 0.6s; }
+.hero-title span:nth-child(10) { color: #ffffff; animation-delay: 0.75s; }
+.hero-title span:nth-child(11) { color: #ffffff; animation-delay: 0.9s; }
+.hero-title span:nth-child(12) { color: #ffffff; animation-delay: 0.9s; }
+.hero-title span:nth-child(13) { color: #ffffff; animation-delay: 0.9s; }
 
 @keyframes letterAnim {
   0% {
@@ -247,9 +245,9 @@ export default function Hero() {
 
         .hero-body {
           font-family: 'playfair', sans-serif;
-          font-size: clamp(13px,1.4vw,14px);
+          font-size: clamp(14px,1.6vw,16px);
           font-weight: 200;
-          color:#374151;
+          color:#ffffff;
           opacity: 1.85;
           line-height: 1.85;
           margin-bottom: 38px;
@@ -302,8 +300,8 @@ export default function Hero() {
           border-top: 1px solid rgba(30,58,138,0.15);
           flex-wrap: wrap;
         }
-        .stat-item .num { font-family: 'playfair', sans-serif; font-size:28px; font-weight:700; color:#1E3A8A; line-height:1; }
-        .stat-item .label { font-family: 'playfair', sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#374151; font-weight:700 margin-top:5px; opacity:0.8; }
+        .stat-item .num { font-family: 'playfair', sans-serif; font-size:28px; font-weight:700; color:#ffffff; line-height:1; }
+        .stat-item .label { font-family: 'playfair', sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#ffffff; font-weight:700 margin-top:5px; opacity:0.8; }
 
         /* ─── Responsive ─────────────────────────── */
         @media (max-width: 768px) {
@@ -326,7 +324,7 @@ export default function Hero() {
             <div className="ring-mid" />
 
             <div className="circle-center">
-              <p>
+              <p className="">
                 Rise Motive Ltd, your gateway for products, services, and
                 opportunities. Explore our Clusters; RM TaskSpot, RM ProSpot,
                 and RM InfoSpot.
@@ -334,30 +332,48 @@ export default function Hero() {
               <span>Rise Motive Ltd</span>
             </div>
 
-            {images.map((src, i) => (
-              <div className="orbit-wrapper" key={i}>
-                <img src={src} alt={`Product ${i + 1}`} />
-              </div>
-            ))}
+            {images.map((src, i) => {
+              const delay = -(i * (60 / images.length)); // dynamic spacing
+
+              return (
+                <div
+                  className="orbit-wrapper"
+                  key={i}
+                  style={{ animationDelay: `${delay}s` }}
+                >
+                  <img
+                    src={src}
+                    alt={`Product ${i + 1}`}
+                    style={{ animationDelay: `${delay}s` }}
+                  />
+                </div>
+              );
+            })}
           </div>
 
           {/* ── Right: text ── */}
           <div className="hero-text">
-            <p className="eyebrow">Innovation · Education · Growth</p>
+            <p className="eyebrow"></p>
 
             <h1 className="hero-title">
-              <span>S</span>
-              <span>H</span>
-              <span>A</span>
-              <span>p</span>
               <span>I</span>
-              <span>N</span>
-              <span>G</span>
               <span>F</span>
+              <span></span>
+              <span>Y</span>
+              <span>O</span>
               <span>U</span>
-              <span>T</span>
-              <span>U</span>
+              <span></span>
               <span>R</span>
+              <span>I</span>
+              <span>S</span>
+              <span>E</span>
+              <span></span>
+              <span>W</span>
+              <span>E</span>
+              <span></span>
+              <span>R</span>
+              <span>I</span>
+              <span>S</span>
               <span>E</span>
             </h1>
 
@@ -398,14 +414,17 @@ export default function Hero() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap justify-center gap-4 mt-20">
-              <button className="px-6 py-3 bg-blue-400 cursor-pointer hover:bg-blue-500 active:scale-95 text-white text-sm font-semibold rounded-lg transition-all duration-200 shadow-md font-family-poppins">
-                Apply Now
+            <div className="flex flex-wrap justify-center gap-8 mt-20">
+              <button
+                onClick={() => navigate("/taskSpot#services")}
+                className="px-6 py-3 bg-transparent cursor-pointer border border-white/60 hover:bg-white/10 active:scale-95 text-white text-sm font-semibold rounded-lg transition-all duration-200 font-family-poppins"
+              >
+                Submit A Task
               </button>
-              <button className="px-6 py-3 bg-transparent cursor-pointer border border-white/60 hover:bg-white/10 active:scale-95 text-white text-sm font-semibold rounded-lg transition-all duration-200 font-family-poppins">
-                Request a Tasker
-              </button>
-              <button className="px-6 py-3 cursor-pointer bg-transparent border border-white/60 hover:bg-white/10 active:scale-95 text-white text-sm font-semibold rounded-lg transition-all duration-200 font-family-poppins">
+              <button
+                onClick={() => navigate("/proSpot#product")}
+                className="px-6 py-3 cursor-pointer bg-transparent border border-white/60 hover:bg-white/10 active:scale-95 text-white text-sm font-semibold rounded-lg transition-all duration-200 font-family-poppins"
+              >
                 Order Products
               </button>
             </div>

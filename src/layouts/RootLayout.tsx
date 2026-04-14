@@ -37,12 +37,12 @@ const RootLayout = () => {
       <header className="sticky top-0 z-50 py-2 bg-white/95 backdrop-blur-md border-blue-5 ">
         <div className="max-w-7xl mx-auto h-16 flex items-center justify-between px-6">
           {/* LEFT: Logo */}
-          <NavLink to="/" className="flex items-center gap-3 shrink-0 group">
+          <NavLink to="/" className="flex items-center  shrink-0 group">
             <div className="relative">
               <img
                 src={logo}
                 alt="Risemotive Logo"
-                className="h-10 w-10 object-contain  group-hover:ring-blue-300 transition-all duration-300"
+                className="h-15 w-15 object-contain  group-hover:ring-blue-300 transition-all duration-300"
               />
             </div>
             <div className="leading-tight">
@@ -50,7 +50,7 @@ const RootLayout = () => {
                 RISEMOTIVE
               </h2>
               <p className="text-[11px] font-medium text-blue-400 tracking-wide font-family-playfair">
-                Building Skills. Delivering Solutions
+                
               </p>
             </div>
           </NavLink>
