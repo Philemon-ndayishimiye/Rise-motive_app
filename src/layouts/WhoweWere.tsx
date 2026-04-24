@@ -14,14 +14,10 @@ import { testimonials } from "./Testimonies";
 import { Link } from "react-router-dom";
 
 export default function WhoweWere() {
-  
   return (
     <div id="whoWeAre" className="px-2 sm:px-4 md:px-8 lg:px-15  ">
       {/* Gradient Heading */}
-      <h1
-        
-        className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-blue-800 text-center font-bold py-5 font-family-playfair"
-      >
+      <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-blue-800 text-center font-bold py-5 font-family-playfair">
         WHO WE ARE
       </h1>
 
@@ -32,8 +28,11 @@ export default function WhoweWere() {
         to solve real-life problems today while preparing for the future.
       </h4>
 
-      <div className="py-4 px-5">
-        <div id="clusters" className="flex flex-col md:flex-row gap-7">
+      <div className="py-4  ">
+        <div
+          id="clusters"
+          className="flex  justify-center flex-col md:flex-row gap-14"
+        >
           <ServiceCard
             icon={<Code />}
             title="RM TaskSpot"
@@ -229,7 +228,10 @@ export default function WhoweWere() {
         </h1>
 
         {/* Profile Cards Grid */}
-        <div id="proffessionals" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-7 justify-items-center">
+        <div
+          id="proffessionals"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-7 justify-items-center"
+        >
           <ProfileCard
             photo={prote}
             email="tasks.risemotive@gmail.com"
