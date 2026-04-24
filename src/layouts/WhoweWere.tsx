@@ -60,8 +60,7 @@ export default function WhoweWere() {
       <div className="py-7 ">
         {/* Section Title */}
         <h1 className="py-12 text-xl sm:text-2xl md:text-3xl lg:4xl font-family-playfair text-blue-800 font-bold text-center">
-          We deliver creative media and graphic design solutions that engage,
-          inspire, and bring your brand to life
+          We deliver creative Solutions
         </h1>
 
         {/* Responsive Grid */}
