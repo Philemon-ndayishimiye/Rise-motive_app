@@ -22,10 +22,13 @@ import Information from "@/layouts/Admin/Information";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import LawyersCorner from "@/pages/LawyersCorner";
 import TermsAndConditions from "@/pages/TermsandCondition";
+import ScrollManager from "@/layouts/ScrollRestoration";
+
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
+    <ScrollManager/>
       <Routes>
         {/* All routes inside RootLayout get Navbar + Footer */}
         <Route element={<RootLayout />}>

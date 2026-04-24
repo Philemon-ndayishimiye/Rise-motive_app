@@ -27,9 +27,7 @@ export default function Hero() {
           content: '';
           position: absolute;
           inset: 0;
-          background:
-            radial-gradient(ellipse 55% 65% at 10% 60%, rgba(255,255,255,0.35) 0%, transparent 55%),
-            radial-gradient(ellipse 45% 55% at 90% 30%, rgba(30,58,138,0.1) 0%, transparent 55%);
+          background: rgb(30 64 175);
           pointer-events: none;
         }
 

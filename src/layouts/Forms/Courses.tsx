@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { GraduationCap } from "lucide-react";
 import { Button, Input } from "@/components/ui/InputAndButton";
 import { useCreateTrainingRequestMutation } from "../../app/api/Taskspot/training";
 
@@ -98,48 +99,33 @@ export default function TrainingForm() {
 
   if (isSuccess) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 px-6 text-center">
-        <div className="bg-blue-50 border border-blue-200 rounded-2xl p-10 max-w-md">
-          <div className="text-5xl mb-4">✅</div>
-          <h2 className="font-bold text-[#1E3A8A] text-2xl mb-3">
-            Thank You for Enrolling!
-          </h2>
-          <p className="text-gray-600 text-sm leading-relaxed">
-            Our team will review your registration and reach out to you soon.
-          </p>
-          <button
-            onClick={() => setIsSuccess(false)}
-            className="mt-6 px-6 py-2 bg-[#1E3A8A] text-white rounded-lg text-sm hover:opacity-90 transition"
-          >
-            Submit Another Request
-          </button>
+      <div className="flex flex-col items-center justify-center w-full h-full min-h-[60vh] text-center px-6">
+        {/* Icon */}
+        <div className="flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full mx-auto mb-6">
+          <GraduationCap className="w-10 h-10 text-[#1E3A8A]" />
         </div>
+
+        {/* Title */}
+        <h2 className="font-bold text-[#1E3A8A] text-2xl mb-3 font-family-playfair">
+          Enrollment Received!
+        </h2>
+
+        {/* Message */}
+        <p className="text-gray-600 text-sm sm:text-base leading-relaxed font-family-playfair max-w-sm">
+          Thank you for registering for our training program. Our team will
+          contact you shortly via your phone number or email to confirm your
+          enrollment and share next steps.
+        </p>
+
+        {/* Button */}
+        <button
+          onClick={() => setIsSuccess(false)}
+          className="mt-8 w-full sm:w-auto px-8 py-3 bg-[#1E3A8A] text-white rounded-lg text-sm font-medium hover:opacity-90 active:scale-95 transition-all duration-200 font-family-playfair"
+        >
+          Register Another
+        </button>
       </div>
     );
-
-    if (isSuccess) {
-      return (
-        <div className="flex flex-col items-center justify-center py-20 px-6 text-center">
-          <div className="bg-blue-50 border border-blue-200 rounded-2xl p-10 max-w-md">
-            <div className="text-5xl mb-4">🎓</div>
-            <h2 className="font-bold text-[#1E3A8A] text-2xl mb-3">
-              Enrollment Received!
-            </h2>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              Thank you for registering for our training program. Our team will
-              contact you shortly via your phone number or email to confirm your
-              enrollment and share next steps.
-            </p>
-            <button
-              onClick={() => setIsSuccess(false)}
-              className="mt-6 px-6 py-2 bg-[#1E3A8A] text-white rounded-lg text-sm hover:opacity-90 transition"
-            >
-              Register Another
-            </button>
-          </div>
-        </div>
-      );
-    }
   }
 
   // ── Render ────────────────────────────────────────────────────────────────
@@ -201,7 +187,6 @@ export default function TrainingForm() {
               { value: "AI_AND_DIGITAL_TOOLS", label: "AI & Digital Tools" },
               { value: "BASIC_PROGRAMMING", label: "Basic Programming" },
             ]}
-            
             value={formData.selectedCourse}
             variant={errors.selectedCourse ? "danger" : "default"}
             helperText={errors.selectedCourse}
@@ -245,9 +230,10 @@ export default function TrainingForm() {
         {/* Submit */}
         <div>
           <Button
-            label={isLoading ? "Submitting..." : "Click To Enroll Now"}
+            label="Click To Request Service"
             onClick={handleSubmit}
             disabled={isLoading}
+            loading={isLoading}
           />
         </div>
       </div>

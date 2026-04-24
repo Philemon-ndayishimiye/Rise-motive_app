@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button, Input } from "@/components/ui/InputAndButton";
 import { useCreateLegalRequestMutation } from "../../app/api/Taskspot/legal";
+import { MailCheck } from "lucide-react";
 
 interface ApiError {
   status: number;
@@ -95,22 +96,35 @@ export default function LegalandOfficialServices() {
 
   if (isSuccess) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 px-6 text-center">
-        <div className="bg-blue-50 border border-blue-200 rounded-2xl p-10 max-w-md">
-          <div className="text-5xl mb-4">✅</div>
-          <h2 className="font-bold text-[#1E3A8A] text-2xl mb-3">
-            Thank You for Your Request!
-          </h2>
-          <p className="text-gray-600 text-sm leading-relaxed">
-            Our team will review your request and reach out to you soon.
-          </p>
-          <button
-            onClick={() => setIsSuccess(false)}
-            className="mt-6 px-6 py-2 bg-[#1E3A8A] text-white rounded-lg text-sm hover:opacity-90 transition"
-          >
-            Submit Another Request
-          </button>
+      <div className="flex flex-col items-center justify-center w-full h-full min-h-[40vh] text-center px-6">
+        {/* Icon */}
+        <div className="flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full mx-auto mb-6">
+          <MailCheck className="w-10 h-10 text-[#1E3A8A]" />
         </div>
+
+        {/* Title */}
+        <h2 className="font-bold font-family-playfair text-[#1E3A8A] text-2xl mb-3">
+          Request Submitted!
+        </h2>
+
+        {/* Message */}
+        <p className="text-gray-600 font-family-playfair text-sm sm:text-base leading-relaxed mb-2 max-w-sm">
+          Thank you! Our team will review your request shortly.
+        </p>
+        <p className="font-family-playfair text-gray-500 text-sm leading-relaxed max-w-sm">
+          We've sent an email with your{" "}
+          <span className="font-semibold text-[#1E3A8A]">tracking code</span> 
+          please check your inbox (and spam folder) to track your request
+          status.
+        </p>
+
+        {/* Button */}
+        <button
+          onClick={() => setIsSuccess(false)}
+          className="font-family-playfair mt-8 w-full sm:w-auto px-8 py-3 bg-[#1E3A8A] text-white rounded-lg text-sm font-medium hover:opacity-90 active:scale-95 transition-all duration-200"
+        >
+          Submit Another Request
+        </button>
       </div>
     );
   }
@@ -225,9 +239,10 @@ export default function LegalandOfficialServices() {
         </div>
         <div>
           <Button
-            label={isLoading ? "Submitting..." : "Click To Request Service"}
+            label="Click To Request Service"
             onClick={handleSubmit}
             disabled={isLoading}
+            loading={isLoading}
           />
         </div>
       </div>

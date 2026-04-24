@@ -28,7 +28,7 @@ const RootLayout = () => {
   const [openSearch, setOpenSearch] = useState(false);
 
   return (
-    <div className="flex flex-col min-h-screen bg-white z-50">
+    <div className="flex flex-col min-h-screen  z-50">
       {/* HEADER */}
       <header className="sticky top-0 z-50 py-2 bg-white/95 backdrop-blur-md border-blue-5 ">
         <div className="max-w-7xl mx-auto h-16 flex items-center justify-between px-6">
@@ -69,9 +69,9 @@ const RootLayout = () => {
             {/* Portal Login Button */}
             <button
               onClick={() => setOpenSearch(true)}
-              className="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#1E3A8A] border border-blue-300 rounded-xl hover:bg-blue-50 hover:border-blue-400 active:scale-95 transition-all duration-200 cursor-pointer font-family-playfair"
+              className="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#1E3A8A] border border-blue-800 rounded-xl hover:bg-blue-50 hover:border-blue-800 active:scale-95 transition-all duration-200 cursor-pointer font-family-playfair"
             >
-              <Search className="w-4 h-4 text-blue-400" />
+              <Search className="w-4 h-4 text-blue-800" />
               Track Request
             </button>
 
@@ -104,7 +104,7 @@ const RootLayout = () => {
                     "px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 font-family-playfair",
                     isActive
                       ? "bg-blue-300 text-white"
-                      : "text-[#1E3A8A] hover:bg-blue-50 hover:text-blue-500",
+                      : "text-[#1E3A8A] hover:bg-blue-50 hover:text-blue-800",
                   )
                 }
               >
@@ -115,7 +115,7 @@ const RootLayout = () => {
             {/* Mobile Portal Login */}
             <button
               onClick={() => setOpenSearch(true)}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#1E3A8A] border border-blue-300 rounded-xl hover:bg-blue-50 hover:border-blue-400 active:scale-95 transition-all duration-200 cursor-pointer font-family-playfair"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#1E3A8A] border border-blue-800 rounded-xl hover:bg-blue-50 hover:border-blue-800 active:scale-95 transition-all duration-200 cursor-pointer font-family-playfair"
             >
               <Search className="w-4 h-4 text-blue-400" />
               Track Request
@@ -130,7 +130,7 @@ const RootLayout = () => {
       </main>
 
       {/* FOOTER */}
-      <footer className=" border-blue-100 bg-[#F8FAFF]">
+      <footer className=" bg-blue-800">
         <Footer />
       </footer>
 

@@ -6,7 +6,7 @@ const Footer = () => {
   const navigate = useNavigate();
   return (
     <>
-      <footer className="bg-blue-800 text-white">
+      <footer className="bg-blue-800 ">
         {/* CTA Section */}
         <div className="max-w-3xl mx-auto px-6 pt-16 pb-7 flex flex-col items-center text-center gap-6">
           <span className="text-md font-bold tracking-[0.2em] uppercase text-white font-family-playfair">

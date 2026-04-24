@@ -42,20 +42,21 @@ export const Modal: React.FC<ModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-white/5 backdrop-blur-sm px-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-white/5 backdrop-blur-sm px-0 sm:px-4"
       onClick={onClose}
     >
       <div
         className="
-          relative w-full max-w-[70vw] max-h-[90vh]
-          bg-white rounded-2xl shadow-sm
-          flex flex-col overflow-hidden
-          animate-in fade-in zoom-in-95 duration-200
+         relative w-full max-w-none sm:max-w-[70vw] 
+  h-screen sm:h-auto sm:max-h-[90vh]
+  bg-white rounded-none sm:rounded-2xl shadow-sm
+  flex flex-col overflow-hidden
+  animate-in fade-in zoom-in-95 duration-200
         "
         onClick={(e) => e.stopPropagation()}
       >
         {/* ── Header ── */}
-        <div className="flex items-start justify-between px-8 py-4 border-b border-gray-100 bg-linear-to-r from-blue-900 to-blue-300">
+        <div className="flex items-start justify-between px-8 py-4 border-b border-gray-100 bg-blue-800">
           <div>
             <p className="text-blue-200 font-family-playfair text-[11px] tracking-widest uppercase mb-1">
               Service Request
@@ -87,7 +88,7 @@ export const Modal: React.FC<ModalProps> = ({
         </div>
 
         {/* ── Scrollable Body ── */}
-        <div className="overflow-y-auto flex-1 px-8 py-7">{children}</div>
+        <div className="overflow-y-auto flex-1 px-8 py-4">{children}</div>
       </div>
     </div>
   );

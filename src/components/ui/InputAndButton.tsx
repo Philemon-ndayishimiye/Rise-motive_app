@@ -42,7 +42,7 @@ type InputProps = BaseInputProps &
   };
 
 interface ButtonProps {
-  label: string;
+  label: React.ReactNode;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   variant?: "primary" | "outline" | "ghost";
   size?: "sm" | "md" | "lg";
@@ -396,21 +396,30 @@ export const Button: React.FC<ButtonProps> = ({
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const id = Date.now();
-    setRipple({ x: e.clientX - rect.left, y: e.clientY - rect.top, id });
+
+    setRipple({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+      id,
+    });
+
     setTimeout(() => setRipple(null), 600);
-    if (!disabled && !loading && onClick) onClick(e);
+
+    if (!disabled && !loading && onClick) {
+      onClick(e);
+    }
   };
 
   const sizeStyles = {
     sm: "px-4 py-2 text-[12px] gap-1.5 rounded-lg",
-    md: "px-6 py-3 text-[14px] gap-2   rounded-xl",
+    md: "px-6 py-3 text-[14px] gap-2 rounded-xl",
     lg: "px-8 py-4 text-[16px] gap-2.5 rounded-2xl",
   };
 
   const variantMap = {
     primary: `
-      bg-linear-to-r from-blue-900 to-blue-300 text-white
-      hover:bg-blue-500 active:bg-blue-600
+      bg-blue-800 text-white
+      hover:bg-blue-700 active:bg-blue-600
       shadow-lg shadow-blue-400/30 hover:shadow-blue-500/40
       border border-transparent
     `,
@@ -433,14 +442,14 @@ export const Button: React.FC<ButtonProps> = ({
       disabled={disabled || loading}
       className={`
         relative overflow-hidden inline-flex items-center justify-center
-        font-playfair font-bold tracking-wide w-[98%]
-        transition-all duration-200 ease-out font-family-playfair text-[15px]
+        font-playfair font-bold tracking-wide
+        transition-all duration-200 ease-out text-[15px]
         focus:outline-none focus:ring-1 focus:ring-blue-400/40 focus:ring-offset-2
         disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none
         select-none cursor-pointer
         ${sizeStyles[size]}
         ${variantMap[variant]}
-        ${fullWidth ? "w-full" : ""}
+        ${fullWidth ? "w-full" : "w-[98%]"}
         ${className}
       `}
     >
@@ -458,36 +467,23 @@ export const Button: React.FC<ButtonProps> = ({
         />
       )}
 
-      {/* Shimmer on hover */}
+      {/* Shimmer */}
       <span className="absolute inset-0 rounded-xl overflow-hidden pointer-events-none">
         <span
           className="
-          absolute inset-0 -translate-x-full
-          bg-linear-to-r from-transparent via-white/10 to-transparent
-          group-hover:translate-x-full transition-transform duration-700
-        "
+            absolute inset-0 -translate-x-full
+            bg-gradient-to-r from-transparent via-white/10 to-transparent
+            hover:translate-x-full transition-transform duration-700
+          "
         />
       </span>
 
-      {/* Loading Spinner */}
+      {/* CONTENT */}
       {loading ? (
         <span className="flex items-center gap-2">
-          <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-            <circle
-              className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
-            />
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-            />
-          </svg>
-          Loading…
+          {/* 🔥 CLEAN SPINNER */}
+          <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+          Loading...
         </span>
       ) : (
         <>

@@ -84,7 +84,7 @@ export default function ProSpot() {
   };
 
   return (
-    <div className="py-7">
+    <div className="">
       {/* Hero Banner */}
       <div className="px-7 relative overflow-hidden py-20  bg-blue-800">
         {bubbles.map((bubble, i) => (
@@ -104,8 +104,8 @@ export default function ProSpot() {
           <h1 className="font-family-playfair text-white text-[20px] font-bold py-5">
             RISEMOTIVE PRODUCT SPOT
           </h1>
-          <p className="font-family-playfair text-white text-[17px]">
-            <strong className="text-white">
+          <p className="font-family-playfair text-white text-[16px]">
+            <strong className="text-white py-1">
               Smart Supplies for Work, School & Everyday Needs
             </strong>{" "}
             <br />

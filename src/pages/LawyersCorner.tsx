@@ -59,22 +59,22 @@ const sections = [
 
 export default function LawyersCorner() {
   return (
-    <div className="py-7">
+    <div className="">
       {/* Hero */}
-      <div className="px-7 relative overflow-hidden py-16 bg-linear-to-r from-blue-900 to-blue-300">
+      <div className="px-7 relative overflow-hidden py-16 bg-blue-800">
         <div className="relative z-10 text-center px-4">
           <div className="flex justify-center mb-4">
-            <Scale size={40} color="#1E3A8A" />
+            <Scale size={40} color="#ffffff" />
           </div>
-          <h1 className="font-family-playfair text-[#1E3A8A] text-[24px] font-bold py-3">
+          <h1 className="font-family-playfair text-white text-[24px] font-bold py-3">
             LAWYER'S CORNER
           </h1>
-          <p className="font-family-playfair text-gray-700 text-[15px] max-w-xl mx-auto">
+          <p className="font-family-playfair text-white text-[16px] max-w-xl mx-auto">
             Legal clarity for clients and the company. Rise Motive Ltd is
             committed to transparent, professional, and lawful operations.
           </p>
-          <p className="font-family-playfair text-gray-500 text-[12px] mt-3">
-            Last updated: April 2026 — © 2026 RISE MOTIVE. All rights reserved.
+          <p className="font-family-playfair text-white text-[12px] mt-3">
+            Last updated: April 2026 RISE MOTIVE.
           </p>
         </div>
       </div>
@@ -84,8 +84,8 @@ export default function LawyersCorner() {
         {/* Rwanda Law Banner */}
         <div
           style={{
-            background: "#DCFCE7",
-            border: "1px solid #86EFAC",
+            background: "#ffffff",
+            border: "1px solid #1E40AF",
             borderRadius: "12px",
             padding: "14px 20px",
             marginBottom: "24px",
@@ -94,8 +94,8 @@ export default function LawyersCorner() {
             gap: "10px",
           }}
         >
-          <Scale size={16} color="#14532D" />
-          <p className="font-family-playfair text-[#14532D] text-[13px] font-bold">
+          <Scale size={16} color="#1E40AF" />
+          <p className="font-family-playfair text-gray-600 text-[13px] font-bold">
             Rise Motive Ltd operates under the laws of the Republic of Rwanda.
             All disputes are subject to Rwandan jurisdiction.
           </p>
@@ -106,7 +106,7 @@ export default function LawyersCorner() {
             key={idx}
             style={{
               background: "#fff",
-              border: "1px solid #DBEAFE",
+              border: "1px solid #1E40AF",
               borderRadius: "14px",
               padding: "20px 24px",
               marginBottom: "16px",
@@ -195,9 +195,9 @@ export default function LawyersCorner() {
           <h3 className="font-family-playfair font-bold text-white text-[16px] mb-2">
             Acceptance of Terms
           </h3>
-          <p className="font-family-playfair text-blue-200 text-[13px] leading-relaxed">
-            By engaging with Rise Motive Ltd — through our website, services, or
-            any communication — you confirm that you have read, understood, and
+          <p className="font-family-playfair text-blue-200 text-[14px] leading-relaxed">
+            By engaging with Rise Motive Ltd through our website, services, or
+            any communication  you confirm that you have read, understood, and
             accepted all terms outlined across our Privacy Policy, Terms and
             Conditions, and this Lawyer's Corner.
           </p>
@@ -207,7 +207,7 @@ export default function LawyersCorner() {
         <div
           style={{
             background: "#EFF6FF",
-            border: "1px solid #BFDBFE",
+            border: "1px solid #1E40AF",
             borderRadius: "14px",
             padding: "20px 24px",
             textAlign: "center",
@@ -225,9 +225,9 @@ export default function LawyersCorner() {
           </a>
         </div>
 
-        <p className="font-family-playfair text-gray-400 text-[12px] text-center mt-8">
+        {/* <p className="font-family-playfair text-gray-400 text-[12px] text-center mt-8">
           © 2026 RISE MOTIVE. All rights reserved.
-        </p>
+        </p> */}
       </div>
     </div>
   );

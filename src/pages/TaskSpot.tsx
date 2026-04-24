@@ -49,7 +49,7 @@ export default function TaskSpot() {
   }, [location]);
 
   return (
-    <div className="py-7">
+    <div className="">
       {/* ── Hero Banner ── */}
       <div className="px-7 relative overflow-hidden py-20 bg-blue-800">
         {bubbles.map((bubble: Bubble, i: number) => (
