@@ -86,7 +86,7 @@ export default function ProSpot() {
   return (
     <div className="py-7">
       {/* Hero Banner */}
-      <div className="px-7 relative overflow-hidden py-20 bg-linear-to-r from-blue-900 border-none to-blue-300">
+      <div className="px-7 relative overflow-hidden py-20  bg-blue-800">
         {bubbles.map((bubble, i) => (
           <div
             key={i}
@@ -101,11 +101,11 @@ export default function ProSpot() {
           />
         ))}
         <div className="relative z-10 text-center px-4">
-          <h1 className="font-family-playfair text-[#1E3A8A] text-[20px] font-bold py-5">
+          <h1 className="font-family-playfair text-white text-[20px] font-bold py-5">
             RISEMOTIVE PRODUCT SPOT
           </h1>
-          <p className="font-family-playfair text-gray-700 text-[17px]">
-            <strong className="text-[#1E3A8A]">
+          <p className="font-family-playfair text-white text-[17px]">
+            <strong className="text-white">
               Smart Supplies for Work, School & Everyday Needs
             </strong>{" "}
             <br />

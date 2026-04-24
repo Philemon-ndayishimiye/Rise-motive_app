@@ -2,8 +2,9 @@ import ServiceCard from "./ServiceCard";
 import patrick from "../assets/patrick.jpeg";
 import prote from "../assets/prote.jpeg";
 import philemon from "../assets/komvuga ndayishimiye philemon.jpg";
+import deault from "../assets/default.png"
 
-import { Code, Globe, Briefcase, Users, Star, Info } from "lucide-react";
+import { Code, Users, Star, Info } from "lucide-react";
 
 import ProfileCard from "./ProfileCard";
 import Card from "./Card";
@@ -13,7 +14,7 @@ import { Link } from "react-router-dom";
 
 export default function WhoweWere() {
   return (
-    <div className="px-2 sm:px-8 md:px-16 lg:px-32  bg-linear-to-r from-blue-100/30 to-blue-50/25">
+    <div className="px-2 sm:px-8 md:px-16 lg:px-32  ">
       {/* Gradient Heading */}
       <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-[#1E3A8A] text-center font-bold py-5 font-family-playfair">
         WHO WE ARE
@@ -54,78 +55,101 @@ export default function WhoweWere() {
       {/**services */}
       <div className="py-7 ">
         {/* Section Title */}
-        <h1 className="pb-6 text-2xl sm:text-3xl md:text-4xl font-family-playfair text-[#1E3A8A] font-bold text-center">
-          Start your Learning Journey
+        <h1 className="py-12 text-xl sm:text-2xl md:text-3xl lg:4xl font-family-playfair text-[#1E3A8A] font-bold text-center">
+          We deliver creative media and graphic design solutions that engage,
+          inspire, and bring your brand to life
         </h1>
 
         {/* Responsive Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 pt-6 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           <Card
-            backgroundColor="bg-gradient-to-r from-blue-50 to-teal-50"
-            title="Media Production and Graphic Design"
-            items={["Media Production", "Graphic Design", "Digital Literacy"]}
-            description="We deliver creative media and graphic design solutions."
-          />
-
-          <Card
-            backgroundColor="bg-gradient-to-r from-teal-50 to-blue-100"
-            title="Office & Productivity Skills"
+            backgroundColor="bg-blue-800"
+            title="Media Production"
             items={[
-              "Office Skills",
-              "Productivity Skills",
-              "Community Learning",
+              "Photography",
+              "Videography",
+              "VideoEditing",
+              "Event Coverage",
+              "Content Creation",
+              "Video Streaming",
             ]}
-            description="We deliver creative media and graphic design solutions that engage, inspire, and bring your brand to life."
+            description="We create high-quality visual and digital media content that captures moments and communicates powerful stories."
           />
 
           <Card
-            backgroundColor="bg-gradient-to-r from-teal-50 to-blue-50"
+            backgroundColor="bg-blue-800"
+            title="Graphic Design"
+            items={[
+              "Logo Design",
+              "Posters",
+              "Flyers",
+              "Branding",
+              "Social Media Graphics",
+              "Print Desig",
+            ]}
+            description="We design visually appealing and brandfocused materials that help businesses stand out and communicate effectively."
+          />
+
+          <Card
+            backgroundColor="bg-blue-800"
             title="Basic Programming"
             items={["Frontend", "Backend", "System Analytics"]}
             description="We deliver creative media and graphic design solutions that engage, inspire, and bring your brand to life."
           />
 
           <Card
-            backgroundColor="bg-gradient-to-r from-teal-100 to-teal-50"
-            title="Video Streaming"
-            items={["Frontend", "Backend", "System Analytics"]}
-            description="We deliver creative media and graphic design solutions that engage, inspire, and bring your brand to life."
+            backgroundColor="bg-blue-800"
+            title="Digital Skills &Literacy"
+            items={[
+              "Basic Computer Skills",
+              "Internet Use",
+              "Online Tools",
+              "Digital Communication",
+            ]}
+            description="We equip individuals with essential digital knowledge to confidently use modern technology in daily life and work."
           />
 
           <Card
-            backgroundColor="bg-gradient-to-r from-teal-50 to-blue-100"
-            title="Photography and Videography"
-            items={["Frontend", "Backend", "System Analytics"]}
-            description="We deliver creative media and graphic design solutions that engage, inspire, and bring your brand to life."
+            backgroundColor="bg-blue-800"
+            title="Office & Productivity Skills
+"
+            items={[
+              "Microsoft Office (Word, Excel PowerPoint)",
+              "Google Workspace",
+              "Time Management",
+              "Workplace Productivity",
+            ]}
+            description="We train individuals and teams to work efficiently using professional tools and modern workflows."
           />
 
           <Card
-            backgroundColor="bg-gradient-to-r from-blue-50 to-teal-50"
-            title="Software Development"
-            items={["Train", "Develop", "Maintain"]}
-            description="We deliver creative media and graphic design solutions that engage, inspire, and bring your brand to life."
+            backgroundColor="bg-blue-800"
+            title="Programming & Tech Fundamentals"
+            items={["Basic Programming", "Mobile APP Development","System Design"]}
+
+            description="We introduce learners to the foundations of software development and analytical thinking."
           />
         </div>
       </div>
       {/*  Testimonial section*/}
 
       <div className="py-7 ">
-        <h1 className="pb-6 text-2xl sm:text-3xl md:text-4xl font-family-playfair text-[#1E3A8A] font-bold text-center">
+        <h1 className=" text-2xl sm:text-3xl md:text-4xl font-family-playfair text-[#1E3A8A] font-bold text-center">
           See What Our Customers Say About Us
         </h1>
 
         <TestimonialCarousel testimonials={testimonials} />
       </div>
-      <div className="py-3 px-4 sm:px-6 lg:px-10">
+      <div className=" px-4 sm:px-6 lg:px-10">
         {/* Section Title */}
-        <h1 className="text-center font-bold text-[#1E3A8A] text-[25px] sm:text-[28px] font-family-playfair pb-6">
+        {/* <h1 className="text-center font-bold text-[#1E3A8A] text-[25px] sm:text-[28px] font-family-playfair pb-6">
           Our Enterprise Ecosystem
-        </h1>
+        </h1> */}
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-center">
           {/* Card 1: Our Presence */}
-          <div className="w-full sm:w-auto rounded-lg py-5 px-5 bg-blue-50 ">
+          {/* <div className="w-full sm:w-auto rounded-lg py-5 px-5 bg-blue-800 ">
             <div className="flex flex-row gap-2 py-3 items-center">
               <Globe className="text-[#1E3A8A]" size={24} />
               <h1 className="text-[17px] font-family-playfair text-[#1E3A8A] font-bold">
@@ -141,10 +165,10 @@ export default function WhoweWere() {
             <h2 className="pb-2 text-[15px] font-family-playfair text-gray-700">
               Digital Platform
             </h2>
-          </div>
+          </div> */}
 
           {/* Card 2: Our Business Model */}
-          <div className="w-full sm:w-auto rounded-lg py-5 px-5 bg-blue-50">
+          {/* <div className="w-full sm:w-auto rounded-lg py-5 px-5 bg-blue-50">
             <div className="flex flex-row gap-2 py-3 items-center">
               <Briefcase className="text-[#1E3A8A]" size={24} />
               <h1 className="text-[17px] font-family-playfair text-[#1E3A8A] font-bold">
@@ -155,7 +179,7 @@ export default function WhoweWere() {
               We generate value through:
             </h1>
 
-            {/* First row of services */}
+            
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-5 pb-2">
               <h2 className="bg-blue-400 text-[15px] font-family-playfair text-white rounded-2xl px-3 py-1 text-center">
                 Learning program
@@ -165,7 +189,7 @@ export default function WhoweWere() {
               </h2>
             </div>
 
-            {/* Second row of services */}
+           
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-5 pb-2">
               <h2 className="bg-blue-400 text-[15px] font-family-playfair text-white rounded-2xl px-3 py-1 text-center">
                 Digital Product
@@ -175,11 +199,11 @@ export default function WhoweWere() {
               </h2>
             </div>
 
-            {/* Last service */}
+            
             <h2 className="bg-blue-400 text-[15px] font-family-playfair text-white rounded-2xl px-3 py-1 w-max text-center mt-2">
               Consultancy
             </h2>
-          </div>
+          </div> */}
         </div>
       </div>
       {/* Taskers*/}
@@ -188,12 +212,12 @@ export default function WhoweWere() {
         <div className="pb-6 flex flex-col sm:flex-row gap-2 items-center justify-center  sm:text-left">
           <Users className="text-blue-400" size={28} />
           <h1 className="text-[23px]  sm:text-3xl font-family-playfair  text-[#1E3A8A] font-bold">
-            MEET WITH OUR TASKERS
+            MEET  OUR TASKERS
           </h1>
         </div>
 
         {/* Subheading */}
-        <h1 className="text-blue-400 font-family-playfair text-center sm:text-left text-[16px] sm:text-[18px] font-semibold">
+        <h1 className="text-gray-600 font-family-playfair  sm:text-left text-[16px] sm:text-[18px] font-semibold text-center">
           The professionals making it happen.
         </h1>
 
@@ -201,27 +225,52 @@ export default function WhoweWere() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-7 justify-items-center">
           <ProfileCard
             photo={prote}
-            email="joe@gmail.com"
-            name="Hakizimana Joseph Patrick"
-            title="Graphic Designer"
-            phone="+250786789872"
+            email="tasks.risemotive@gmail.com"
+            name="MURWANASHYAKA Protegene"
+            title="Online Services & Basic Digital Skills Trainer"
+            phone="0795344768"
           />
 
           <ProfileCard
             photo={patrick}
-            email="joe@gmail.com"
+            email="tasks.risemotive@gmail.com"
             name="Hakizimana Joseph Patrick"
-            title="Consultancy and CEO"
-            phone="+250786789872"
+            title="RM Taskers Coordinator"
+            phone="0788625873 "
           />
 
           <ProfileCard
             photo={philemon}
-            email="philemonndayi@gmail.com"
+            email="tasks.risemotive@gmail.com"
             name="NDAYISHIMIYE Philemon"
-            title="Senior Software Engeneer"
-            phone="+250785436374"
+            title="Web Developer & Advanced Digital Skills Trainer"
+            phone="0785436374"
           />
+
+           <ProfileCard
+            photo={deault}
+            email="tasks.risemotive@gmail.com"
+            name="NDAYISHIMIYE Philemon"
+            title="Lawyer – IECMS Services"
+            phone="0795344768 "
+          />
+
+          <ProfileCard
+            photo={deault}
+            email="tasks.risemotive@gmail.com"
+            name="MUKANSANGA Marie Agnes"
+            title="Lawyer- Private Notary"
+            phone="0795344768"
+          />
+
+           <ProfileCard
+            photo={deault}
+            email="tasks.risemotive@gmail.com"
+            name="UWAJENEZA Adrienne"
+            title="RM ProSpot Dealer "
+            phone="0795344768"
+          />
+
         </div>
       </div>
     </div>

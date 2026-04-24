@@ -52,7 +52,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           width: "70px",
           height: "70px",
           borderRadius: "50%",
-          background: "#60A5FA",
+          background: "#1E40AF",
           display: "flex",
           color: "#ffffff",
           alignItems: "center",
@@ -68,7 +68,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       <p style={{ fontSize: "17px", fontFamily: "Playfair", fontWeight: 600, margin: 0 }}>{title}</p>
 
       {/* Subtitle */}
-      <p style={{ fontSize: "15px", color: "#60A5FA", margin: 0 }}>
+      <p style={{ fontSize: "15px", color: "#1E40AF", margin: 0 }}>
         {subtitle}
       </p>
 

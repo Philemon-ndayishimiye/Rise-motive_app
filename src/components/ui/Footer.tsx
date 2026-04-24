@@ -1,11 +1,12 @@
 import { Phone, Mail, MapPin } from "lucide-react";
-import { NavLink } from "react-router-dom";
-import { FaTwitter, FaInstagram, FaLinkedin, FaFacebook } from "react-icons/fa";
+import { NavLink, useNavigate } from "react-router-dom";
+import { FaTwitter, FaInstagram, FaWhatsapp, FaTiktok } from "react-icons/fa";
 
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <>
-      <footer className="bg-linear-to-r from-blue-900 to-blue-300 text-white">
+      <footer className="bg-blue-800 text-white">
         {/* CTA Section */}
         <div className="max-w-3xl mx-auto px-6 pt-16 pb-7 flex flex-col items-center text-center gap-6">
           <span className="text-md font-bold tracking-[0.2em] uppercase text-white font-family-playfair">
@@ -39,12 +40,12 @@ const Footer = () => {
       </footer>
 
       {/* Main Footer Grid */}
-      <div className="bg-linear-to-r from-blue-900 to-blue-300 px-6 py-10 sm:py-12">
+      <div className=" bg-blue-800 px-6 py-10 sm:py-12">
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-white">
           {/* Brand & Social */}
           <div>
             <NavLink to="/" className="flex items-center gap-3 group mb-4">
-              <h2 className="font-extrabold text-[17px] tracking-wide text-[#1E3A8A] group-hover:text-blue-500 transition-colors duration-200 pb-2 font-family-playfair">
+              <h2 className="font-extrabold tracking-wide text-[18px] text-whitegroup-hover:text-blue-500 transition-colors duration-200 pb-2 font-family-playfair">
                 RISEMOTIVE
               </h2>
             </NavLink>
@@ -57,33 +58,49 @@ const Footer = () => {
             <div className="flex gap-4 mt-5">
               <FaTwitter
                 className="text-white text-2xl cursor-pointer"
-                onClick={() => window.open("https://twitter.com", "_blank")}
+                onClick={() =>
+                  window.open(" https://x.com/risemotive_rw", "_blank")
+                }
               />
               <FaInstagram
                 className="text-white text-2xl cursor-pointer"
-                onClick={() => window.open("https://instagram.com", "_blank")}
+                onClick={() =>
+                  window.open(
+                    "https://www.instagram.com/risemotive_rm?igsh=MWtobjFnazQxbTRnbA==",
+                    "_blank",
+                  )
+                }
               />
-              <FaLinkedin
+              <FaWhatsapp
                 className="text-white text-2xl cursor-pointer"
-                onClick={() => window.open("https://linkedin.com", "_blank")}
+                onClick={() =>
+                  window.open(
+                    "https://whatsapp.com/channel/0029Vb7SVEm3WHTc1WqfaD1M",
+                    "_blank",
+                  )
+                }
               />
-              <FaFacebook
+              <FaTiktok
                 className="text-white text-2xl cursor-pointer"
-                onClick={() => window.open("https://facebook.com")}
+                onClick={() =>
+                  window.open(
+                    " https://www.tiktok.com/@risemotive_rw?_r=1&_t=ZS-95UBM13E7cO",
+                  )
+                }
               />
             </div>
           </div>
 
           {/* About */}
           <div>
-            <h1 className="font-family-playfair text-[15px] text-[#1E3A8A] font-bold pb-3">
+            <h1 className="font-family-playfair text-[18px] text-white font-bold pb-3">
               About Our Company
             </h1>
             <p className="font-family-playfair pb-3 text-[14px] text-white font-medium">
               Who We Are
             </p>
             <p className="font-family-playfair pb-3 text-[14px] text-white font-medium">
-              Our Business Model
+              Proffessionals
             </p>
             <p className="font-family-playfair pb-3 text-[14px] text-white font-medium">
               Clusters
@@ -92,37 +109,50 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h1 className="font-family-playfair text-[15px] text-[#1E3A8A] font-bold pb-3">
+            <h1 className="font-family-playfair text-[18px] text-white font-bold pb-3">
               Contact Us
             </h1>
             <div className="flex items-center gap-2 pb-3">
               <Phone size={17} />
-              <p className="text-[14px] text-white">+250785436369</p>
+              <p className="text-[14px] text-white">
+                +250795344768 | +250788625873
+              </p>
             </div>
             <div className="flex items-center gap-2 pb-3">
               <Mail size={17} />
-              <p className="text-[14px] text-white">he@gmail.com</p>
+              <p className="text-[14px] text-white">
+                tasks.risemotive@gmail.com
+              </p>
             </div>
             <div className="flex items-center gap-2 pb-3">
               <MapPin size={17} />
               <p className="text-[14px] text-white">
-                Kanombe, Kajagari, KK421
+                Kicukiro District, Nyarugunga Sector
               </p>
             </div>
           </div>
 
           {/* Legal */}
           <div>
-            <h1 className="font-family-playfair text-[15px] text-[#1E3A8A] font-bold pb-3">
+            <h1 className="font-family-playfair  text-[18px] text-white font-bold pb-3">
               Legal
             </h1>
-            <p className="font-family-playfair pb-3 text-[14px] text-white font-medium">
+            <p
+              onClick={() => navigate("/privacy")}
+              className="font-family-playfair pb-3 cursor-pointer text-[14px] text-white font-medium"
+            >
               Privacy Policy
             </p>
-            <p className="font-family-playfair pb-3 text-[14px] text-white font-medium">
+            <p
+              onClick={() => navigate("/terms")}
+              className="font-family-playfair pb-3 text-[14px] cursor-pointer text-white font-medium"
+            >
               Terms and Conditions
             </p>
-            <p className="font-family-playfair pb-3 text-[14px] text-white font-medium">
+            <p
+              onClick={() => navigate("/lawyer")}
+              className="font-family-playfair cursor-pointer pb-3 text-[14px] text-white font-medium"
+            >
               Lawyer's Corner
             </p>
           </div>
@@ -130,7 +160,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t bg-linear-to-r from-blue-900 to-blue-300 border-white/20 py-3 text-center text-sm text-white font-family-poppins">
+      <div className="border-t bg-blue-800  border-white/20 py-3 text-center text-sm text-white font-family-poppins">
         © {new Date().getFullYear()} Risemotive. All rights reserved.
       </div>
     </>

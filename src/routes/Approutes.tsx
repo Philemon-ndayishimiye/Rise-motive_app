@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "@/pages/Home";
 import RootLayout from "@/layouts/RootLayout";
-import Login from "@/pages/Login";
 import TaskSpot from "@/pages/TaskSpot";
 import InfoSpot from "@/pages/InfoSpot";
 import ProSpot from "@/pages/ProSpot";
@@ -20,6 +19,9 @@ import Settings from "@/layouts/Admin/Settings";
 import ProfilePage from "@/layouts/Admin/ProfilePage";
 import ViewProduct from "@/layouts/Admin/ViewProduct";
 import Information from "@/layouts/Admin/Information";
+import PrivacyPolicy from "@/pages/PrivacyPolicy";
+import LawyersCorner from "@/pages/LawyersCorner";
+import TermsAndConditions from "@/pages/TermsandCondition";
 
 const AppRouter = () => {
   return (
@@ -31,7 +33,10 @@ const AppRouter = () => {
           <Route path="/TaskSpot" element={<TaskSpot />} />
           <Route path="/InfoSpot" element={<InfoSpot />} />
           <Route path="/ProSpot" element={<ProSpot />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/Privacy" element={<PrivacyPolicy />} />
+          <Route path="/lawyer" element={<LawyersCorner />} />
+          <Route path="/terms" element={<TermsAndConditions />} />
+          
         </Route>
         {/* <Route path="*" element={<NotFound />} /> */}
         {/* 404 has no layout */}

@@ -1,64 +1,34 @@
-import type{TestimonialCardProps} from "./TestimonialCard"
+import type { TestimonialCardProps } from "./TestimonialCard";
 
 export const testimonials: TestimonialCardProps[] = [
   {
-    name: "Uwase Amina",
-    role: "Software Developer",
+    name: "N. Ezéchiel",
+    role: "Customer",
     quote:
-      "I focused on Django during my cohort and had the opportunity to build digital tools that help solve real-world problems. I am now equipped with the skills I need to thrive in the tech ecosystem.",
+      "I ordered office supplies from RISE MOTIVE, and everything arrived exactly as requested. Fast, reliable, and affordable.",
   },
   {
-    name: "Mugisha Caleb",
-    role: "UI/UX Designer",
+    name: "N. Mediatrice.",
+    role: "Customer",
     quote:
-      "The program helped me discover my passion for design. I learned how to create user-friendly interfaces and I now work with a team building products used across East Africa.",
+      "RISE MOTIVE helped me find specific items I couldn’t get elsewhere.Great customer care and timely delivery. and I really Appreciate thier Work",
   },
   {
-    name: "Ishimwe Leah",
-    role: "Data Analyst",
+    name: "NKUNDIMANA Claude",
+    role: "Trainee",
     quote:
-      "Before joining, I had no coding experience. Today I analyze large datasets confidently and present insights that drive business decisions. This journey changed my life completely.",
+      "I joined their digital skills training with zero experience, but now I can confidently use a computer for work. The training was clear andpractical.",
   },
   {
-    name: "Habimana Eric",
-    role: "Backend Engineer",
+    name: "Jean Claude N.",
+    role: "customer",
     quote:
-      "The hands-on projects gave me real experience. I built APIs from scratch and deployed them to production. The mentorship I received was world-class and truly transformative.",
+      "The team at RM TaskSpot is very responsive and professional. They understood exactly what I needed and delivered beyond my expectations",
   },
   {
-    name: "Niyonsaba Grace",
-    role: "Product Manager",
+    name: "NIYONAGIZE Ernest.",
+    role: "Trainee",
     quote:
-      "I gained both technical knowledge and soft skills. Understanding how developers think made me a much better product manager and improved collaboration across my entire team.",
-  },
-  {
-    name: "Bizimana Patrick",
-    role: "Cloud Engineer",
-    quote:
-      "Learning cloud infrastructure opened doors I never imagined. I now manage deployments on AWS and help startups scale their platforms to handle thousands of users daily.",
-  },
-  {
-    name: "Mukamana Diane",
-    role: "Cybersecurity Analyst",
-    quote:
-      "The program introduced me to ethical hacking and security best practices. I now protect systems and sensitive data for organizations across the country. It was truly eye-opening.",
-  },
-  {
-    name: "Nkurunziza Joel",
-    role: "Mobile Developer",
-    quote:
-      "I built my first Android app during the cohort and it now has over 2,000 downloads. The community support and real-project exposure made all the difference in my growth.",
-  },
-  {
-    name: "Umubyeyi Sandra",
-    role: "Full Stack Developer",
-    quote:
-      "From zero to full stack in six months — I still can not believe it. I learned React, Node.js, and PostgreSQL and immediately landed a job offer before even graduating.",
-  },
-  {
-    name: "Twizeyimana Felix",
-    role: "DevOps Engineer",
-    quote:
-      "The cohort taught me how to bridge development and operations seamlessly. I now automate deployments with CI/CD pipelines and ensure our systems run with maximum reliability.",
+      "RISE MOTIVE handled our event photography and videography so professionally. The quality was excellent, and everything was delivered on time. Highly recommended!",
   },
 ];

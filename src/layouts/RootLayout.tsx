@@ -1,6 +1,5 @@
 import { Outlet, NavLink } from "react-router-dom";
 import logo from "../assets/logo.jpg";
-import { useNavigate } from "react-router-dom";
 import { cn } from "../lib/utils";
 import {
   NavigationMenu,
@@ -9,9 +8,10 @@ import {
   NavigationMenuList,
 } from "../components/ui/navigation-menu";
 import { navigationMenuTriggerStyle } from "../components/ui/navigation-menu.styles";
-import { User, Menu, X } from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
 import { useState } from "react";
 import Footer from "@/components/ui/Footer";
+import TrackingSearch from "@/components/TrackingCodeSearch";
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
   cn(navigationMenuTriggerStyle({ active: isActive }));
@@ -24,12 +24,8 @@ const navItems = [
 ];
 
 const RootLayout = () => {
-  const navigate = useNavigate();
-  const handleLoginClick = () => {
-    setMobileOpen(false)
-    navigate("/login");
-  };
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openSearch, setOpenSearch] = useState(false);
 
   return (
     <div className="flex flex-col min-h-screen bg-white z-50">
@@ -49,9 +45,7 @@ const RootLayout = () => {
               <h2 className="font-extrabold text-[17px] tracking-wide text-[#1E3A8A] group-hover:text-blue-500 transition-colors duration-200 pb-2 font-family-playfair">
                 RISEMOTIVE
               </h2>
-              <p className="text-[11px] font-medium text-blue-400 tracking-wide font-family-playfair">
-                
-              </p>
+              <p className="text-[11px] font-medium text-blue-400 tracking-wide font-family-playfair"></p>
             </div>
           </NavLink>
 
@@ -74,11 +68,11 @@ const RootLayout = () => {
           <div className="flex items-center gap-3">
             {/* Portal Login Button */}
             <button
-              onClick={handleLoginClick}
+              onClick={() => setOpenSearch(true)}
               className="hidden sm:flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#1E3A8A] border border-blue-300 rounded-xl hover:bg-blue-50 hover:border-blue-400 active:scale-95 transition-all duration-200 cursor-pointer font-family-playfair"
             >
-              <User className="w-4 h-4 text-blue-400" />
-              Portal Login
+              <Search className="w-4 h-4 text-blue-400" />
+              Track Request
             </button>
 
             {/* Mobile Hamburger */}
@@ -120,12 +114,11 @@ const RootLayout = () => {
 
             {/* Mobile Portal Login */}
             <button
-            
-              onClick={handleLoginClick}
-              className="mt-2 flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-[#1E3A8A] border border-blue-300 cursor-pointer transition rounded-xl hover:bg-blue-50  w-full font-family-playfair"
+              onClick={() => setOpenSearch(true)}
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#1E3A8A] border border-blue-300 rounded-xl hover:bg-blue-50 hover:border-blue-400 active:scale-95 transition-all duration-200 cursor-pointer font-family-playfair"
             >
-              <User className="w-4 h-4 text-blue-400" />
-              Portal Login
+              <Search className="w-4 h-4 text-blue-400" />
+              Track Request
             </button>
           </div>
         )}
@@ -140,6 +133,59 @@ const RootLayout = () => {
       <footer className=" border-blue-100 bg-[#F8FAFF]">
         <Footer />
       </footer>
+
+      {openSearch && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.4)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 9999,
+            padding: "20px",
+          }}
+          onClick={() => setOpenSearch(false)}
+        >
+          <div
+            style={{
+              width: "100%",
+              maxWidth: "900px",
+              background: "#fff",
+              borderRadius: "16px",
+              padding: "20px",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
+              position: "relative",
+              maxHeight: "90vh",
+              overflowY: "auto",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setOpenSearch(false)}
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                background: "#EFF6FF",
+                border: "none",
+                borderRadius: "8px",
+                padding: "6px 10px",
+                cursor: "pointer",
+                fontWeight: 600,
+                color: "#1E3A8A",
+              }}
+            >
+              ✕
+            </button>
+
+            {/* Your search component */}
+            <TrackingSearch />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

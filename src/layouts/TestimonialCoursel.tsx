@@ -59,7 +59,7 @@ const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 py-8">
+    <div className="w-full max-w-5xl mx-auto px-4 py-8 ">
       {/* Carousel track */}
       <div
         ref={scrollRef}
@@ -73,7 +73,7 @@ const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
             className="flex gap-4 shrink-0 w-full snap-start"
           >
             {group.map((person: TestimonialCardProps) => (
-              <div key={person.name} className="flex-1 min-w-0">
+              <div key={person.name} className="flex-1 min-w-0 ">
                 <TestimonialCard
                   name={person.name}
                   role={person.role}
