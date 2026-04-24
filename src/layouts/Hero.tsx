@@ -7,7 +7,6 @@ export default function Hero() {
   const navigate = useNavigate();
   const images = [image1, image2, image4];
 
-
   return (
     <>
       <style>{`
@@ -15,33 +14,11 @@ export default function Hero() {
 
         /* ─── Background ─────────────────────────── */
         .hero-section {
-          background-color: #1E40AF;
-          min-height: 100vh;
-          position: relative;
-          overflow: hidden;
-          display: flex;
-          align-items: center;
-        }
-
-        .hero-section::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: rgb(30 64 175);
-          pointer-events: none;
-        }
-
-        .blob {
-          position: absolute;
-          border-radius: 50%;
-          filter: blur(60px);
-          pointer-events: none;
-          opacity: 0.45;
-        }
-        .blob-1 { width:380px; height:380px; background:rgba(255,255,255,0.5); top:-80px; left:-80px; }
-        .blob-2 { width:280px; height:280px; background:rgba(59,130,246,0.2); bottom:-60px; right:5%; }
-
-        /* ─── Layout ─────────────────────────────── */
+  background-color: #1E40AF; /* blue-800 */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
         .hero-inner {
           position: relative;
           z-index: 1;
