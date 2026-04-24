@@ -122,14 +122,14 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
       </p>
 
       {/* ── Title ── */}
-      <p
+      <p 
         style={{
           margin: "0 0 10px",
-          fontSize: "13px",
-          fontWeight: 400,
-          color: "#60A5FA",
+          fontSize: "15px",
+          fontWeight: 700,
+          color: "#1E40AF",
           textAlign: "center",
-          fontFamily: "font-family-playfair"
+          fontFamily: "'Playfair Display', serif",
         }}
       >
         {title}

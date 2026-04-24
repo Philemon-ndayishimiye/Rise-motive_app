@@ -102,7 +102,7 @@ export default function ProSpot() {
         ))}
         <div className="relative z-10 text-center px-4">
           <h1 className="font-family-playfair text-white text-[20px] font-bold py-5">
-            RISEMOTIVE PRODUCT SPOT
+            RM PRODUCT SPOT
           </h1>
           <p className="font-family-playfair text-white text-[16px]">
             <strong className="text-white py-1">
@@ -144,9 +144,9 @@ export default function ProSpot() {
             "Fast delivery options",
             "Customer-first service",
           ].map((text) => (
-            <div key={text} className="flex flex-row gap-2 pb-6">
+            <div key={text} className="flex flex-row gap-2 pb-6 pt-4">
               <BadgeCheck size={19} className="text-[#1E3A8A]" />
-              <p className="font-family-playfair text-gray-800 text-[15px]">
+              <p className="font-family-playfair text-gray-800 text-[16px] ">
                 {text}
               </p>
             </div>

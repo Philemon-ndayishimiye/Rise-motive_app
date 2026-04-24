@@ -43,7 +43,7 @@ const RootLayout = () => {
             </div>
             <div className="leading-tight">
               <h2 className="font-extrabold text-[17px] tracking-wide text-[#1E3A8A] group-hover:text-blue-500 transition-colors duration-200 pb-2 font-family-playfair">
-                RISEMOTIVE
+                 Rise Beyond Limits
               </h2>
               <p className="text-[11px] font-medium text-blue-400 tracking-wide font-family-playfair"></p>
             </div>

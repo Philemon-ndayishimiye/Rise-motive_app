@@ -96,7 +96,7 @@ export default function TermsAndConditions() {
             services or website.
           </p>
           <p className="font-family-playfair text-white text-[12px] mt-3">
-            Last updated: April 2026 2026 RISE MOTIVE.
+            Last updated: April 2026.
           </p>
         </div>
       </div>

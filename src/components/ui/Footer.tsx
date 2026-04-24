@@ -96,13 +96,22 @@ const Footer = () => {
             <h1 className="font-family-playfair text-[18px] text-white font-bold pb-3">
               About Our Company
             </h1>
-            <p className="font-family-playfair pb-3 text-[14px] text-white font-medium">
+            <p
+              onClick={() => navigate("/#whoWeAre")}
+              className="font-family-playfair cursor-pointer pb-3 text-[14px] text-white font-medium"
+            >
               Who We Are
             </p>
-            <p className="font-family-playfair pb-3 text-[14px] text-white font-medium">
+            <p
+              onClick={() => navigate("/#proffessionals")}
+              className="font-family-playfair cursor-pointer pb-3 text-[14px] text-white font-medium"
+            >
               Proffessionals
             </p>
-            <p className="font-family-playfair pb-3 text-[14px] text-white font-medium">
+            <p
+              onClick={() => navigate("/#clusters")}
+              className="font-family-playfair cursor-pointer pb-3 text-[14px] text-white font-medium"
+            >
               Clusters
             </p>
           </div>

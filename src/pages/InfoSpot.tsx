@@ -305,7 +305,7 @@ export default function RMInfoSpot() {
         ))}
         <div className="relative z-10 text-center px-4">
           <h1 className="font-family-playfair text-white text-[20px] font-bold py-5">
-            RISEMOTIVE INFO SPOT
+            RM INFO SPOT
           </h1>
           <p className="font-family-playfair text-white text-[17px]">
             <strong className="text-white">

@@ -2,7 +2,8 @@ import ServiceCard from "./ServiceCard";
 import patrick from "../assets/patrick.jpeg";
 import prote from "../assets/prote.jpeg";
 import philemon from "../assets/komvuga ndayishimiye philemon.jpg";
-import deault from "../assets/default.png"
+import deault from "../assets/default.png";
+import frank from "../assets/frank.jpeg";
 
 import { Code, Users, Star, Info } from "lucide-react";
 
@@ -13,10 +14,14 @@ import { testimonials } from "./Testimonies";
 import { Link } from "react-router-dom";
 
 export default function WhoweWere() {
+  
   return (
-    <div className="px-2 sm:px-8 md:px-16 lg:px-32  ">
+    <div id="whoWeAre" className="px-2 sm:px-4 md:px-8 lg:px-15  ">
       {/* Gradient Heading */}
-      <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-[#1E3A8A] text-center font-bold py-5 font-family-playfair">
+      <h1
+        
+        className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-blue-800 text-center font-bold py-5 font-family-playfair"
+      >
         WHO WE ARE
       </h1>
 
@@ -28,7 +33,7 @@ export default function WhoweWere() {
       </h4>
 
       <div className="py-4 px-5">
-        <div className="flex flex-col md:flex-row gap-7">
+        <div id="clusters" className="flex flex-col md:flex-row gap-7">
           <ServiceCard
             icon={<Code />}
             title="RM TaskSpot"
@@ -55,7 +60,7 @@ export default function WhoweWere() {
       {/**services */}
       <div className="py-7 ">
         {/* Section Title */}
-        <h1 className="py-12 text-xl sm:text-2xl md:text-3xl lg:4xl font-family-playfair text-[#1E3A8A] font-bold text-center">
+        <h1 className="py-12 text-xl sm:text-2xl md:text-3xl lg:4xl font-family-playfair text-blue-800 font-bold text-center">
           We deliver creative media and graphic design solutions that engage,
           inspire, and bring your brand to life
         </h1>
@@ -111,8 +116,7 @@ export default function WhoweWere() {
 
           <Card
             backgroundColor="bg-blue-800"
-            title="Office & Productivity Skills
-"
+            title="Office & Productivity Skills"
             items={[
               "Microsoft Office (Word, Excel PowerPoint)",
               "Google Workspace",
@@ -125,8 +129,11 @@ export default function WhoweWere() {
           <Card
             backgroundColor="bg-blue-800"
             title="Programming & Tech Fundamentals"
-            items={["Basic Programming", "Mobile APP Development","System Design"]}
-
+            items={[
+              "Basic Programming",
+              "Mobile APP Development",
+              "System Design",
+            ]}
             description="We introduce learners to the foundations of software development and analytical thinking."
           />
         </div>
@@ -134,7 +141,7 @@ export default function WhoweWere() {
       {/*  Testimonial section*/}
 
       <div className="py-7 ">
-        <h1 className=" text-2xl sm:text-3xl md:text-4xl font-family-playfair text-[#1E3A8A] font-bold text-center">
+        <h1 className=" text-2xl sm:text-2xl md:text-3xl font-family-playfair text-blue-800 font-bold text-center">
           See What Our Customers Say About Us
         </h1>
 
@@ -211,8 +218,8 @@ export default function WhoweWere() {
         {/* Header */}
         <div className="pb-6 flex flex-col sm:flex-row gap-2 items-center justify-center  sm:text-left">
           <Users className="text-blue-400" size={28} />
-          <h1 className="text-[23px]  sm:text-3xl font-family-playfair  text-[#1E3A8A] font-bold">
-            MEET  OUR TASKERS
+          <h1 className="text-[23px]  sm:text-2xl font-family-playfair  text-blue-800 font-bold">
+            MEET OUR TASKERS
           </h1>
         </div>
 
@@ -222,7 +229,7 @@ export default function WhoweWere() {
         </h1>
 
         {/* Profile Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-7 justify-items-center">
+        <div id="proffessionals" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-7 justify-items-center">
           <ProfileCard
             photo={prote}
             email="tasks.risemotive@gmail.com"
@@ -234,7 +241,7 @@ export default function WhoweWere() {
           <ProfileCard
             photo={patrick}
             email="tasks.risemotive@gmail.com"
-            name="Hakizimana Joseph Patrick"
+            name="Joe H.Patrick"
             title="RM Taskers Coordinator"
             phone="0788625873 "
           />
@@ -247,10 +254,10 @@ export default function WhoweWere() {
             phone="0785436374"
           />
 
-           <ProfileCard
-            photo={deault}
+          <ProfileCard
+            photo={frank}
             email="tasks.risemotive@gmail.com"
-            name="NDAYISHIMIYE Philemon"
+            name="Frank IRANKUNDA"
             title="Lawyer – IECMS Services"
             phone="0795344768 "
           />
@@ -263,14 +270,13 @@ export default function WhoweWere() {
             phone="0795344768"
           />
 
-           <ProfileCard
+          <ProfileCard
             photo={deault}
             email="tasks.risemotive@gmail.com"
             name="UWAJENEZA Adrienne"
             title="RM ProSpot Dealer "
             phone="0795344768"
           />
-
         </div>
       </div>
     </div>

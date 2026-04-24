@@ -67,7 +67,7 @@ export default function TaskSpot() {
         ))}
         <div className="relative z-10 text-center px-4">
           <h1 className="font-family-playfair text-white text-[20px] font-bold py-5">
-            RISEMOTIVE TASK SPOT
+            RM TASK SPOT
           </h1>
           <p className="font-family-playfair text-white text-[17px]">
             <strong className="text-white">
@@ -101,25 +101,25 @@ export default function TaskSpot() {
 
           <div className="flex flex-row gap-2 pb-6">
             <BadgeCheck size={19} className="text-[#1E3A8A]" />
-            <p className="font-family-playfair text-gray-800 text-[15px]">
+            <p className="font-family-playfair text-gray-800 text-[16px]">
               Request services from anywhere
             </p>
           </div>
           <div className="flex flex-row gap-2 pb-6">
             <BadgeCheck size={19} className="text-[#1E3A8A]" />
-            <p className="font-family-playfair text-gray-800 text-[15px]">
+            <p className="font-family-playfair text-gray-800 text-[16px]">
               Choose skilled and verified RM Taskers
             </p>
           </div>
           <div className="flex flex-row gap-2 pb-6">
             <BadgeCheck size={19} className="text-[#1E3A8A]" />
-            <p className="font-family-playfair text-gray-800 text-[15px]">
+            <p className="font-family-playfair text-gray-800 text-[16px]">
               Learn in-demand digital skills
             </p>
           </div>
           <div className="flex flex-row gap-2 pb-6">
             <BadgeCheck size={19} className="text-[#1E3A8A]" />
-            <p className="font-family-playfair text-gray-800 text-[15px]">
+            <p className="font-family-playfair text-gray-800 text-[16px]">
               Fast, reliable, and affordable
             </p>
           </div>
@@ -128,7 +128,7 @@ export default function TaskSpot() {
 
       {/* ── Service Cards ── */}
       <div className="pb-5 px-4 md:px-7">
-        <h1 className="font-family-playfair text-center text-[#1E3A8A] text-[20px] font-bold py-5">
+        <h1 className="font-family-playfair text-center text-blue-800 text-[20px] font-bold py-5">
           Request a Service (Send a Task), Get started by selecting a service
           below;
         </h1>
@@ -252,7 +252,7 @@ export default function TaskSpot() {
 
       {/* ── Available Modules ── */}
       <div className="pb-7 px-4 md:px-7">
-        <h1 className="font-family-playfair text-center text-[#1E3A8A] text-[20px] font-bold py-5">
+        <h1 className="font-family-playfair text-center text-blue-800 text-[20px] font-bold py-5">
           AVAILABLE MODULES
         </h1>
 

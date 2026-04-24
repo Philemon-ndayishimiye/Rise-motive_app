@@ -16,7 +16,7 @@ export function OrderSuccessModal({ onClose }: { onClose: () => void }) {
         <div className="flex items-center justify-center gap-2 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 mb-6">
           <Truck size={16} className="text-blue-800" />
           <span className="font-family-playfair text-blue-800 font-bold text-[13px]">
-            RISEMOTIVE PRODUCT SPOT
+            RM PRODUCT SPOT
           </span>
         </div>
         <button

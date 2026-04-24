@@ -85,8 +85,8 @@ export default function Hero() {
           display: block;
           margin-top: 17px;
           font-family: 'playfair', sans-serif;
-          font-size: clamp(7px,0.9vw,13px);
-          font-weight: 800;
+          font-size: clamp(7px,0.9vw,14px);
+          font-weight: bold;
           letter-spacing: 1.5px;
           text-transform: uppercase;
           color: #3B82F6;
@@ -216,11 +216,13 @@ export default function Hero() {
     transform: translateY(-20px);
     color: #1E3A8A;
   }
-}        .hero-title .accent { color:#1D4ED8;  }
+}        
+  
+.hero-title .accent { color:#1D4ED8;  }
 
-        .hero-body {
-          font-family: 'playfair', sans-serif;
-          font-size: clamp(14px,1.6vw,16px);
+     .hero-body {
+          font-family: 'playfair';
+          font-size: clamp(20px,1.6vw,16px);
           font-weight: 200;
           color:#ffffff;
           opacity: 1.85;
@@ -304,7 +306,6 @@ export default function Hero() {
                 opportunities. Explore our Clusters; RM TaskSpot, RM ProSpot,
                 and RM InfoSpot.
               </p>
-              <span>Rise Motive Ltd</span>
             </div>
 
             {images.map((src, i) => {

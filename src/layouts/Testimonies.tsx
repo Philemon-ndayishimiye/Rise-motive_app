@@ -27,8 +27,15 @@ export const testimonials: TestimonialCardProps[] = [
   },
   {
     name: "NIYONAGIZE Ernest.",
-    role: "Trainee",
+    role: "Customer",
     quote:
       "RISE MOTIVE handled our event photography and videography so professionally. The quality was excellent, and everything was delivered on time. Highly recommended!",
+  },
+
+  {
+    name: "Dr SHYAKA Emmanuel",
+    role: "Customer",
+    quote:
+      "What impressed me most about Rise Motive is their communication consistent updates, clear invoices and detailed receipts. ",
   },
 ];

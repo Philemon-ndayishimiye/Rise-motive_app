@@ -55,7 +55,7 @@ export const TaskCardService: React.FC<CardServiceProps> = ({
         "
       >
         {/* Icon */}
-        <div className="text-blue-800 transition-transform duration-200 ">
+        <div className="text-blue-800 text-3xl transition-transform duration-200 ">
           {icon}
         </div>
 
@@ -66,7 +66,7 @@ export const TaskCardService: React.FC<CardServiceProps> = ({
       </div>
 
       {/* ── Title ── */}
-      <h3 className="font-family-playfair text-gray-950 font-bold text-[15px] leading-snug text-center ">
+      <h3 className="font-family-playfair text-blue-800 font-bold text-[17px] leading-snug text-center ">
         {title}
       </h3>
 
@@ -75,10 +75,10 @@ export const TaskCardService: React.FC<CardServiceProps> = ({
         {items.map((item, idx) => (
           <li key={idx} className="flex items-center gap-2">
             <BadgeCheck
-              size={15}
-              className="text-blue-400 fill-white shrink-0"
+              size={17}
+              className="text-blue-800 fill-white shrink-0"
             />
-            <span className="font-family-playfair pb-1 text-gray-700 text-[13px] leading-snug">
+            <span className="font-family-playfair pb-1 text-gray-700 text-[15px] leading-snug">
               {item}
             </span>
           </li>
