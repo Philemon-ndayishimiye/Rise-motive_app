@@ -98,7 +98,7 @@ export default function ApplicationAndDocument() {
 
   if (isSuccess) {
     return (
-      <div className="flex flex-col items-center justify-center w-full h-full min-h-[40vh] text-center px-6">
+      <div id="application" className="flex flex-col items-center justify-center w-full h-full min-h-[40vh] text-center px-6">
         {/* Icon */}
         <div className="flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full mx-auto mb-6">
           <MailCheck className="w-10 h-10 text-[#1E3A8A]" />

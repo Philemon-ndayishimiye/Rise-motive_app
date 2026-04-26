@@ -8,9 +8,11 @@ import {
   GraduationCap,
   Lightbulb,
 } from "lucide-react";
+
 import { useGetAllInfoPostsQuery } from "../app/api/Infospot/Infospot";
 import type { InfoPost } from "../app/api/Infospot/Infospot";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type Bubble = { size: number; left: number; duration: number; delay: number };
 const bubbles: Bubble[] = Array.from({ length: 15 }).map(() => ({
@@ -50,6 +52,7 @@ const categoryConfig: Record<
 
 function InfoCard({ post }: { post: InfoPost }) {
   const cat = categoryConfig[post.category] ?? categoryConfig["OPPORTUNITY"];
+  const navigate = useNavigate();
 
   return (
     <div
@@ -194,11 +197,11 @@ function InfoCard({ post }: { post: InfoPost }) {
       {post.applyLink && (
         <div style={{ padding: "0 18px 18px" }}>
           <a
-            href={post.applyLink}
-            target="_blank"
+            onClick={() => navigate("/taskSpot#application")}
             rel="noreferrer"
             style={{
               display: "flex",
+              cursor: "pointer",
               alignItems: "center",
               justifyContent: "center",
               gap: "7px",
@@ -323,8 +326,8 @@ export default function RMInfoSpot() {
         <div className="flex flex-col md:flex-row gap-8">
           <div className="flex-1">
             <h1 className="py-2 font-family-playfair text-gray-800 text-[15px]">
-              RM InfoSpot is your trusted source for curated opportunities 
-              from jobs and scholarships to business opportunities and community
+              RM InfoSpot is your trusted source for curated opportunities from
+              jobs and scholarships to business opportunities and community
               programs.
             </h1>
             <h2 className="py-2 font-family-playfair text-gray-800 text-[15px]">

@@ -40,13 +40,21 @@ export default function TaskSpot() {
   const location = useLocation();
 
   useEffect(() => {
+    if (location.hash === "#application") {
+      // Defer setState to next tick — avoids synchronous setState inside effect
+      const timer = setTimeout(() => {
+        setOpenModal("document");
+      }, 0);
+      return () => clearTimeout(timer); // cleanup
+    }
+
     if (location.hash) {
       const el = document.querySelector(location.hash);
       if (el) {
         el.scrollIntoView({ behavior: "smooth" });
       }
     }
-  }, [location]);
+  }, [location.hash]); // only re-run when the hash changes, not on every render
 
   return (
     <div className="">
