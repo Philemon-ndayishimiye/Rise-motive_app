@@ -82,8 +82,8 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
       {/* ── Avatar ── */}
       <div
         style={{
-          width: "80px",
-          height: "80px",
+          width: "170px",
+          height: "170px",
           borderRadius: "50%",
           overflow: "hidden",
           border: "3px solid #EEF2FF",
