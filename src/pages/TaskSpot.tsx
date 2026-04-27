@@ -21,6 +21,7 @@ import ApplicationAndDocument from "@/layouts/Forms/ApplicationAndDocumentation"
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+
 type Bubble = {
   size: number;
   left: number;

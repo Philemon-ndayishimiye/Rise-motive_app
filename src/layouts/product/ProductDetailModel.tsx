@@ -1,5 +1,5 @@
 import { ShoppingCart, X, CheckCircle } from "lucide-react";
-import type{ Product } from "../product/Products";
+import type { Product } from "../product/Products";
 export function ProductDetailModal({
   product,
   onClose,
@@ -14,12 +14,12 @@ export function ProductDetailModal({
   return (
     // Backdrop
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 backdrop-blur-sm px-4"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/45 backdrop-blur-sm sm:px-4 sm:py-8"
       onClick={onClose}
     >
       {/* Panel */}
       <div
-        className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden"
+        className="relative w-full sm:max-w-lg bg-white sm:rounded-2xl shadow-2xl overflow-hidden h-full sm:h-auto max-h-full sm:max-h-[85vh] overflow-y-auto rounded-t-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -39,14 +39,20 @@ export function ProductDetailModal({
             onClick={onClose}
             className="ml-4 mt-1 w-8 h-8 rounded-full bg-white/15 hover:bg-white/30 flex items-center justify-center text-white transition-colors"
           >
-            <X size={17}  className="cursor-pointer"/>
+            <X size={17} className="cursor-pointer" />
           </button>
         </div>
 
         {/* Body */}
         <div className="px-7 py-6">
           {/* Big emoji display */}
-          <div className="text-7xl text-center py-4">{product.emoji}</div>
+          <div className="w-full  rounded-xl overflow-hidden mb-4">
+            <img
+              src={product.imageUrl}
+              alt={product.name}
+              className="w-[70%] h-[70%] object-cover"
+            />
+          </div>
 
           {/* {product.badge && (
             <div className="flex justify-center mb-3">

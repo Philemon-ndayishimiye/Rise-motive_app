@@ -1,9 +1,8 @@
 import ServiceCard from "./ServiceCard";
 import patrick from "../assets/patrick.jpeg";
 import prote from "../assets/prote.jpeg";
-import philemon from "../assets/komvuga ndayishimiye philemon.jpg";
-import deault from "../assets/default.png";
 import frank from "../assets/frank.jpeg";
+import defaultImg from "../assets/defoultImg.png"
 
 import { Code, Users, Star, Info } from "lucide-react";
 
@@ -248,7 +247,7 @@ export default function WhoweWere() {
           />
 
           <ProfileCard
-            photo={philemon}
+            photo={defaultImg}
             email="tasks.risemotive@gmail.com"
             name="NDAYISHIMIYE Philemon"
             title="Web Developer & Advanced Digital Skills Trainer"
@@ -264,7 +263,7 @@ export default function WhoweWere() {
           />
 
           <ProfileCard
-            photo={deault}
+            photo={defaultImg}
             email="tasks.risemotive@gmail.com"
             name="MUKANSANGA Marie Agnes"
             title="Lawyer- Private Notary"
@@ -272,7 +271,7 @@ export default function WhoweWere() {
           />
 
           <ProfileCard
-            photo={deault}
+            photo={defaultImg}
             email="tasks.risemotive@gmail.com"
             name="UWAJENEZA Adrienne"
             title="RM ProSpot Dealer "

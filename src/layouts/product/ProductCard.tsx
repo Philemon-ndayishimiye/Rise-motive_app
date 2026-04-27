@@ -20,15 +20,15 @@ export function ProductCard({
     <div className="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col gap-3 hover:shadow-md hover:border-blue-200 transition-all duration-200">
       {/* Emoji + badge */}
       <div
-        className="w-full aspect-square bg-gray-50 border border-dashed border-gray-100 rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer hover:border-blue-300 hover:bg-blue-50/40 transition-colors"
+        className="w-full aspect-square bg-gray-50 rounded-xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
         onClick={onViewDetail}
       >
         <img
           src={product.imageUrl}
           alt={product.name}
-          className="w-24 h-24 object-cover rounded-lg"
+          className="w-[80%] h-[80%] object-cover rounded-xl"
         />
-        <span className="text-[11px] font-family-playfair text-gray-400">
+        <span className="text-[11px] font-family-playfair bg-blue-800 text-white px-4 py-1 text-center rounded-lg">
           Tap to view details
         </span>
       </div>

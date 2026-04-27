@@ -60,7 +60,7 @@ export const TaskCardService: React.FC<CardServiceProps> = ({
         </div>
 
         {/* Click hint */}
-        <p className="text-[11px] font-medium text-[#1E3A8A] font-family-playfair group-hover:text-blue-500 transition-colors duration-200 tracking-wide text-center px-3">
+        <p className="text-[11px] font-medium text-white py-1 rounded-lg bg-blue-800  font-family-playfair  transition-colors duration-200 tracking-wide text-center px-3">
          {service}
         </p>
       </div>
