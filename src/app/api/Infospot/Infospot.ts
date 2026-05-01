@@ -3,10 +3,13 @@ import { apiSlice } from "../../api/EntryApi";
 export interface InfoPost {
   id: number;
   title: string;
+  slug: string;
+  qualificationCriteria: string[];
   description: string;
   category: string;
   deadline: string;
   location: string;
+  image:string;
   applyLink: string;
   contactInfo: string;
   isActive: boolean;
@@ -39,7 +42,6 @@ export interface MessageResponse {
 
 export const infospotApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-
     getAllInfoPosts: builder.query<InfoPostsResponse, void>({
       query: () => "info-posts",
       providesTags: ["InfoPost"],
@@ -86,7 +88,6 @@ export const infospotApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["InfoPost"],
     }),
-
   }),
 });
 

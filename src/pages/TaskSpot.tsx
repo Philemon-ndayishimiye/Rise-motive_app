@@ -1,7 +1,11 @@
 import { TaskCardService } from "@/layouts/TaskCardService";
 import TaskSpotImage from "../assets/RM TASKSPOT.jpg.jpeg";
+import egovernmentpic from "../assets/egovernment.png";
+import webdigit from "../assets/webdigital.png";
+import applicationdocs from "../assets/application.png";
+import creative from "../assets/creative.png";
 import { BadgeCheck } from "lucide-react";
-import { Globe, FileText, Palette, Code, Scale } from "lucide-react";
+import { Scale } from "lucide-react";
 import Ai from "../assets/Ai.jpg";
 import basicProgramming from "../assets/Basic Programming.jpg";
 import computerfoundation from "../assets/Computer & Digital Foundations.jpg";
@@ -20,7 +24,6 @@ import WebAndDigital from "@/layouts/Forms/WebAndDigital";
 import ApplicationAndDocument from "@/layouts/Forms/ApplicationAndDocumentation";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
 
 type Bubble = {
   size: number;
@@ -150,7 +153,7 @@ export default function TaskSpot() {
             <TaskCardService
               title="e-Government & Online Services"
               service="Click To Request Service"
-              icon={<Globe size={95} />}
+              icon={<img src={egovernmentpic} />}
               onClick={() => setOpenModal("government")}
               items={[
                 "Rembo services",
@@ -174,7 +177,7 @@ export default function TaskSpot() {
             <TaskCardService
               title="Applications & Documentation"
               service="Click To Request Service"
-              icon={<FileText size={95} />}
+              icon={<img src={applicationdocs} />}
               onClick={() => setOpenModal("document")}
               items={[
                 "Job Application",
@@ -200,7 +203,7 @@ export default function TaskSpot() {
             <TaskCardService
               title="Creative & Media Services"
               service="Click To Request Service"
-              icon={<Palette size={95} />}
+              icon={<img src={creative} />}
               onClick={() => setOpenModal("creative")}
               items={["Photography & Videography", "Graphic Design"]}
             />
@@ -218,7 +221,7 @@ export default function TaskSpot() {
             <TaskCardService
               title="Web & Digital Solutions"
               service="Click To Request Service"
-              icon={<Code size={95} />}
+              icon={<img className="" src={webdigit} />}
               onClick={() => setOpenModal("web")}
               items={["Website Development", "Online Setup & Support"]}
             />

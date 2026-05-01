@@ -23,12 +23,12 @@ import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import LawyersCorner from "@/pages/LawyersCorner";
 import TermsAndConditions from "@/pages/TermsandCondition";
 import ScrollManager from "@/layouts/ScrollRestoration";
-
+import InfoPostDetail from "@/layouts/InfoPostDetails";
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
-    <ScrollManager/>
+      <ScrollManager />
       <Routes>
         {/* All routes inside RootLayout get Navbar + Footer */}
         <Route element={<RootLayout />}>
@@ -39,7 +39,7 @@ const AppRouter = () => {
           <Route path="/Privacy" element={<PrivacyPolicy />} />
           <Route path="/lawyer" element={<LawyersCorner />} />
           <Route path="/terms" element={<TermsAndConditions />} />
-          
+          <Route path="/info/:slug" element={<InfoPostDetail />} />
         </Route>
         {/* <Route path="*" element={<NotFound />} /> */}
         {/* 404 has no layout */}

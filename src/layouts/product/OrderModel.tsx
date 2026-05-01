@@ -3,13 +3,6 @@ import type { CartItem } from "../product/CartSideBar";
 import { X, Package, Truck, Clock } from "lucide-react";
 import { useCreateOrderMutation } from "../../app/api/ProductSpot/Order";
 
-// interface ApiError {
-//   status: number;
-//   data: { message?: string; errors?: unknown };
-// }
-
-//type OrderFormErrors = Partial<Record<keyof OrderForm, string>>;
-
 type OrderForm = {
   customerName: string;
   customerPhone: string;
@@ -18,6 +11,7 @@ type OrderForm = {
   paymentMethod: string;
   note: string;
 };
+
 export function OrderModal({
   cart,
   onClose,
@@ -36,41 +30,32 @@ export function OrderModal({
     note: "",
   });
 
-  const [errors, setErrors] = useState<
-    Partial<Record<keyof OrderForm, string>>
-  >({});
+  const [errors, setErrors] = useState<Partial<Record<keyof OrderForm, string>>>({});
   const [createOrder, { isLoading }] = useCreateOrderMutation();
+
+  const totalItems = cart.reduce((s, i) => s + i.quantity, 0);
+  const totalPrice = cart.reduce((s, i) => s + Number(i.price )* i.quantity, 0);
 
   const set =
     (field: keyof OrderForm) =>
-    (
-      e: React.ChangeEvent<
-        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-      >,
-    ) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
       setForm((p) => ({ ...p, [field]: e.target.value }));
 
-  type OrderFormErrors = Partial<Record<keyof OrderForm, string>>;
-
-  const validate = (): OrderFormErrors => {
-    const err: OrderFormErrors = {};
-
+  const validate = (): Partial<Record<keyof OrderForm, string>> => {
+    const err: Partial<Record<keyof OrderForm, string>> = {};
     if (!form.customerName) err.customerName = "Required";
     if (!form.customerPhone) err.customerPhone = "Required";
     if (!form.address) err.address = "Required";
     if (!form.paymentMethod) err.paymentMethod = "Required";
-
     return err;
   };
 
   const handleSubmit = async () => {
     const err = validate();
-
     if (Object.keys(err).length > 0) {
       setErrors(err);
       return;
     }
-
     try {
       for (const item of cart) {
         await createOrder({
@@ -84,7 +69,6 @@ export function OrderModal({
           productId: item.id,
         }).unwrap();
       }
-
       onSuccess();
     } catch (error) {
       console.error("Order failed:", error);
@@ -128,23 +112,63 @@ export function OrderModal({
 
         {/* Body */}
         <div className="overflow-y-auto flex-1 px-7 py-6">
+
           {/* Order summary */}
           <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 mb-6">
-            <p className="font-family-playfair text-blue-800 font-bold text-[13px] mb-2">
-              Items Ordered ({cart.reduce((s, i) => s + i.quantity, 0)} total)
+            <p className="font-family-playfair text-blue-800 font-bold text-[13px] mb-3">
+              Items Ordered ({totalItems} total)
             </p>
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-2">
               {cart.map((item) => (
                 <div key={item.id} className="flex items-center gap-2">
-                  <span className="text-lg">{item.emoji}</span>
-                  <span className="font-family-playfair text-gray-700 text-[13px] flex-1">
+                  {item.imageUrl ? (
+                    <img
+                      src={item.imageUrl}
+                      alt={item.name}
+                      className="w-8 h-8 object-cover rounded-lg shrink-0"
+                    />
+                  ) : (
+                    <span className="text-lg">{item.emoji}</span>
+                  )}
+                  <span className="font-family-playfair text-gray-700 text-[13px] flex-1 truncate">
                     {item.name}
                   </span>
-                  <span className="font-family-playfair text-blue-800 font-bold text-[13px]">
-                    ×{item.quantity}
+                  <span className="font-family-playfair text-gray-400 text-[12px] shrink-0">
+                    {item.price.toLocaleString()} rwf × {item.quantity}
+                  </span>
+                  <span className="font-family-playfair text-amber-600 font-bold text-[13px] shrink-0">
+                    {(Number(item.price)* item.quantity).toLocaleString()} rwf
                   </span>
                 </div>
               ))}
+            </div>
+
+            {/* Total row */}
+            <div className="border-t border-blue-200 mt-3 pt-3 flex flex-col gap-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-family-playfair text-gray-500 text-[12px]">
+                  Subtotal
+                </span>
+                <span className="font-family-playfair text-gray-700 text-[13px] font-bold">
+                  {totalPrice.toLocaleString()} rwf
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="font-family-playfair text-gray-500 text-[12px]">
+                  Delivery
+                </span>
+                <span className="font-family-playfair text-green-600 text-[12px] font-bold">
+                  Calculated after order
+                </span>
+              </div>
+              <div className="flex items-center justify-between mt-1 pt-1.5 border-t border-blue-200">
+                <span className="font-family-playfair text-blue-900 font-bold text-[14px]">
+                  Total
+                </span>
+                <span className="font-family-playfair text-amber-600 font-bold text-[16px]">
+                  {totalPrice.toLocaleString()} rwf
+                </span>
+              </div>
             </div>
           </div>
 
@@ -163,9 +187,7 @@ export function OrderModal({
                 onChange={set("customerName")}
               />
               {errors.customerName && (
-                <p className="text-red-500 text-[11px] font-family-playfair">
-                  {errors.customerName}
-                </p>
+                <p className="text-red-500 text-[11px] font-family-playfair">{errors.customerName}</p>
               )}
             </div>
 
@@ -182,9 +204,7 @@ export function OrderModal({
                 onChange={set("customerPhone")}
               />
               {errors.customerPhone && (
-                <p className="text-red-500 text-[11px] font-family-playfair">
-                  {errors.customerPhone}
-                </p>
+                <p className="text-red-500 text-[11px] font-family-playfair">{errors.customerPhone}</p>
               )}
             </div>
 
@@ -216,32 +236,9 @@ export function OrderModal({
                 onChange={set("address")}
               />
               {errors.address && (
-                <p className="text-red-500 text-[11px] font-family-playfair">
-                  {errors.address}
-                </p>
+                <p className="text-red-500 text-[11px] font-family-playfair">{errors.address}</p>
               )}
             </div>
-
-            {/* Delivery Option */}
-            {/* <div className="flex flex-col gap-1">
-              <label className="font-family-playfair text-gray-700 font-bold text-[13px]">
-                Delivery Option <span className="text-blue-800">*</span>
-              </label>
-              <select
-                className={inputClass("delivery")}
-                value={form.paymentMethod}
-                onChange={set("delivery")}
-              >
-                <option value="">Select delivery type…</option>
-                <option value="sameday">Same Day Delivery</option>
-                <option value="scheduled">Scheduled Delivery</option>
-              </select>
-              {errors.delivery && (
-                <p className="text-red-500 text-[11px] font-family-playfair">
-                  {errors.delivery}
-                </p>
-              )}
-            </div> */}
 
             {/* Payment Method */}
             <div className="flex flex-col gap-1">
@@ -259,13 +256,9 @@ export function OrderModal({
                 <option value="AIRTEL">Airtel Money</option>
               </select>
               {errors.paymentMethod && (
-                <p className="text-red-500 text-[11px] font-family-playfair">
-                  {errors.paymentMethod}
-                </p>
+                <p className="text-red-500 text-[11px] font-family-playfair">{errors.paymentMethod}</p>
               )}
             </div>
-
-            {/* Scheduled Date */}
 
             {/* Note */}
             <div className="flex flex-col gap-1 sm:col-span-2">
@@ -286,12 +279,10 @@ export function OrderModal({
           {/* Delivery info tags */}
           <div className="flex flex-wrap gap-2 mt-5">
             <div className="flex items-center gap-1.5 text-[12px] font-family-playfair text-gray-600 bg-gray-50 border border-gray-100 rounded-full px-3 py-1">
-              <Clock size={12} className="text-blue-700" /> Same day: order
-              before 12 PM
+              <Clock size={12} className="text-blue-700" /> Same day: order before 12 PM
             </div>
             <div className="flex items-center gap-1.5 text-[12px] font-family-playfair text-gray-600 bg-gray-50 border border-gray-100 rounded-full px-3 py-1">
-              <Truck size={12} className="text-blue-700" /> Delivery within
-              Kigali
+              <Truck size={12} className="text-blue-700" /> Delivery within Kigali
             </div>
           </div>
 
@@ -304,30 +295,15 @@ export function OrderModal({
             >
               {isLoading ? (
                 <>
-                  <svg
-                    className="w-4 h-4 animate-spin"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                      opacity=".25"
-                    />
-                    <path
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                      opacity=".75"
-                    />
+                  <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" opacity=".25" />
+                    <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" opacity=".75" />
                   </svg>
                   Placing Order…
                 </>
               ) : (
                 <>
-                  <Package size={16} /> Click to Order Products
+                  <Package size={16} /> Click to Order — {totalPrice.toLocaleString()} rwf
                 </>
               )}
             </button>

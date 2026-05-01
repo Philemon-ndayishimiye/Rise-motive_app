@@ -55,7 +55,7 @@ export const TaskCardService: React.FC<CardServiceProps> = ({
         "
       >
         {/* Icon */}
-        <div className="text-blue-800 text-3xl transition-transform duration-200 ">
+        <div className="text-blue-800 text-2xl transition-transform duration-200 ">
           {icon}
         </div>
 

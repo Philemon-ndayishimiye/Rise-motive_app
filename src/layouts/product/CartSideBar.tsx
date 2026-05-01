@@ -2,7 +2,6 @@ import type { Product } from "../product/Products";
 import { ShoppingCart, X, Package, Plus, Minus } from "lucide-react";
 export type CartItem = Product & { quantity: number };
 
-
 export function CartSidebar({
   cart,
   onClose,
@@ -17,6 +16,7 @@ export function CartSidebar({
   onCheckout: () => void;
 }) {
   const totalItems = cart.reduce((s, i) => s + i.quantity, 0);
+  const totalPrice = cart.reduce((s, i) => s + Number(i.price) * i.quantity, 0);
 
   return (
     <div
@@ -60,7 +60,15 @@ export function CartSidebar({
                 key={item.id}
                 className="flex items-center gap-3 bg-gray-50 rounded-xl p-3 border border-gray-100"
               >
-                <span className="text-3xl">{item.emoji}</span>
+                {item.imageUrl ? (
+                  <img
+                    src={item.imageUrl}
+                    alt={item.name}
+                    className="w-12 h-12 object-cover rounded-lg shrink-0"
+                  />
+                ) : (
+                  <span className="text-3xl">{item.emoji}</span>
+                )}
                 <div className="flex-1 min-w-0">
                   <p className="font-family-playfair text-gray-950 font-bold text-[13px] truncate">
                     {item.name}
@@ -68,23 +76,33 @@ export function CartSidebar({
                   <p className="font-family-playfair text-gray-500 text-[11px]">
                     {item.category}
                   </p>
+                  <p className="font-family-playfair text-blue-700 text-[11px] font-bold mt-0.5">
+                    {item.price.toLocaleString()} rwf × {item.quantity}
+                  </p>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <button
-                    onClick={() => onDecrease(item.id)}
-                    className="w-6 h-6 rounded-lg bg-white border border-gray-200 hover:bg-red-50 flex items-center justify-center transition-colors"
-                  >
-                    <Minus size={11} className="text-gray-600" />
-                  </button>
-                  <span className="font-family-playfair font-bold text-blue-800 text-[13px] min-w-5 text-center">
-                    {item.quantity}
-                  </span>
-                  <button
-                    onClick={() => onIncrease(item.id)}
-                    className="w-6 h-6 rounded-lg bg-white border border-gray-200 hover:bg-green-50 flex items-center justify-center transition-colors"
-                  >
-                    <Plus size={11} className="text-gray-600" />
-                  </button>
+                <div className="flex flex-col items-end gap-1.5">
+                  {/* Subtotal */}
+                  <p className="font-family-playfair text-amber-600 font-bold text-[13px]">
+                    {(Number(item.price) * item.quantity).toLocaleString()} rwf
+                  </p>
+                  {/* Qty controls */}
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      onClick={() => onDecrease(item.id)}
+                      className="w-6 h-6 rounded-lg bg-white border border-gray-200 hover:bg-red-50 flex items-center justify-center transition-colors"
+                    >
+                      <Minus size={11} className="text-gray-600" />
+                    </button>
+                    <span className="font-family-playfair font-bold text-blue-800 text-[13px] min-w-5 text-center">
+                      {item.quantity}
+                    </span>
+                    <button
+                      onClick={() => onIncrease(item.id)}
+                      className="w-6 h-6 rounded-lg bg-white border border-gray-200 hover:bg-green-50 flex items-center justify-center transition-colors"
+                    >
+                      <Plus size={11} className="text-gray-600" />
+                    </button>
+                  </div>
                 </div>
               </div>
             ))
@@ -93,7 +111,35 @@ export function CartSidebar({
 
         {/* Footer */}
         {cart.length > 0 && (
-          <div className="px-5 py-4 border-t border-gray-100">
+          <div className="px-5 py-4 border-t border-gray-100 flex flex-col gap-3">
+            {/* Price breakdown */}
+            <div className="bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 flex flex-col gap-1.5">
+              <div className="flex items-center justify-between">
+                <span className="font-family-playfair text-gray-500 text-[12px]">
+                  Subtotal ({totalItems} item{totalItems !== 1 ? "s" : ""})
+                </span>
+                <span className="font-family-playfair text-gray-700 font-bold text-[13px]">
+                  {totalPrice.toLocaleString()} rwf
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="font-family-playfair text-gray-500 text-[12px]">
+                  Delivery
+                </span>
+                <span className="font-family-playfair text-green-600 font-bold text-[12px]">
+                  Calculated at checkout
+                </span>
+              </div>
+              <div className="border-t border-blue-200 mt-1 pt-2 flex items-center justify-between">
+                <span className="font-family-playfair text-blue-900 font-bold text-[14px]">
+                  Total
+                </span>
+                <span className="font-family-playfair text-amber-600 font-bold text-[16px]">
+                  {totalPrice.toLocaleString()} rwf
+                </span>
+              </div>
+            </div>
+
             <button
               onClick={onCheckout}
               className="w-full bg-blue-800 hover:bg-blue-900 text-white font-family-playfair font-bold text-[14px] py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2"

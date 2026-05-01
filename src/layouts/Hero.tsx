@@ -194,6 +194,14 @@ export default function Hero() {
 .hero-title span:nth-child(11) { color: #ffffff; animation-delay: 0.9s; }
 .hero-title span:nth-child(12) { color: #ffffff; animation-delay: 0.9s; }
 .hero-title span:nth-child(13) { color: #ffffff; animation-delay: 0.9s; }
+.hero-title span:nth-child(14) { color: #ffffff; animation-delay: 0.9s; }
+.hero-title span:nth-child(15) { color: #ffffff; animation-delay: 0.9s; }
+.hero-title span:nth-child(16) { color: #ffffff; animation-delay: 0.9s; }
+.hero-title span:nth-child(17) { color: #ffffff; animation-delay: 0.9s; }
+.hero-title span:nth-child(18) { color: #ffffff; animation-delay: 0.9s; }
+.hero-title span:nth-child(18) { color: #ffffff; animation-delay: 0.9s; }
+.hero-title span:nth-child(19) { color: #ffffff; animation-delay: 0.9s; }
+
 
 @keyframes letterAnim {
   0% {

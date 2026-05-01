@@ -19,7 +19,7 @@ export function ProductDetailModal({
     >
       {/* Panel */}
       <div
-        className="relative w-full sm:max-w-lg bg-white sm:rounded-2xl shadow-2xl overflow-hidden h-full sm:h-auto max-h-full sm:max-h-[85vh] overflow-y-auto rounded-t-2xl"
+        className="relative w-full sm:max-w-lg bg-white sm:rounded-2xl shadow-2xl overflow-hidden h-full  sm:h-auto max-h-full sm:max-h-[85vh] overflow-y-auto rounded-t-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -52,6 +52,10 @@ export function ProductDetailModal({
               alt={product.name}
               className="w-[70%] h-[70%] object-cover"
             />
+
+            <h1 className="text-center text-amber-500 py-2 font-bold">
+              {product.price} rwf
+            </h1>
           </div>
 
           {/* {product.badge && (

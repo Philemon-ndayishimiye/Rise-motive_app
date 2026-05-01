@@ -2,10 +2,13 @@ import {
   BadgeCheck,
   MapPin,
   Calendar,
-  ExternalLink,
+  Eye,
   Phone,
   Briefcase,
   GraduationCap,
+  Users,
+  BookOpen,
+  Trophy,
   Lightbulb,
 } from "lucide-react";
 
@@ -46,6 +49,25 @@ const categoryConfig: Record<
     color: "#14532D",
     border: "#86EFAC",
   },
+
+  COMPETITION: {
+    icon: <Trophy size={14} />,
+    bg: "#FCE7F3",
+    color: "#9D174D",
+    border: "#FBCFE8",
+  },
+  COMMUNITY: {
+    icon: <Users size={14} />,
+    bg: "#DCFCE7",
+    color: "#14532D",
+    border: "#86EFAC",
+  },
+  ADVISORY: {
+    icon: <BookOpen size={14} />,
+    bg: "#EDE9FE",
+    color: "#4C1D95",
+    border: "#DDD6FE",
+  },
 };
 
 // ── Info Card ──────────────────────────────────────────────────────────────
@@ -54,8 +76,13 @@ function InfoCard({ post }: { post: InfoPost }) {
   const cat = categoryConfig[post.category] ?? categoryConfig["OPPORTUNITY"];
   const navigate = useNavigate();
 
+  const handleViewDetails = () => {
+    navigate(`/info/${post.slug}`, { state: { post } });
+  };
+
   return (
     <div
+      onClick={handleViewDetails}
       style={{
         background: "#fff",
         border: "1px solid #DBEAFE",
@@ -64,12 +91,14 @@ function InfoCard({ post }: { post: InfoPost }) {
         display: "flex",
         flexDirection: "column",
         transition: "transform 0.15s, box-shadow 0.15s",
+        cursor: "pointer",
+        position: "relative",
       }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLDivElement).style.transform =
           "translateY(-3px)";
         (e.currentTarget as HTMLDivElement).style.boxShadow =
-          "0 8px 24px rgba(30,58,138,0.1)";
+          "0 8px 24px rgba(30,58,138,0.13)";
       }}
       onMouseLeave={(e) => {
         (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
@@ -81,39 +110,32 @@ function InfoCard({ post }: { post: InfoPost }) {
 
       <div
         style={{
-          padding: "18px 18px 14px",
+          padding: "18px 18px 16px",
           flex: 1,
           display: "flex",
           flexDirection: "column",
           gap: "10px",
         }}
       >
-        {/* Category badge */}
-        <div
+        {/* Category badge only */}
+        <span
           style={{
-            display: "flex",
+            display: "inline-flex",
             alignItems: "center",
-            justifyContent: "space-between",
+            gap: "5px",
+            background: cat.bg,
+            color: cat.color,
+            border: `1px solid ${cat.border}`,
+            padding: "3px 10px",
+            borderRadius: "999px",
+            fontSize: "11px",
+            fontWeight: 700,
+            alignSelf: "flex-start",
           }}
         >
-          <span
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "5px",
-              background: cat.bg,
-              color: cat.color,
-              border: `1px solid ${cat.border}`,
-              padding: "3px 10px",
-              borderRadius: "999px",
-              fontSize: "11px",
-              fontWeight: 700,
-            }}
-          >
-            {cat.icon}
-            {post.category}
-          </span>
-        </div>
+          {cat.icon}
+          {post.category}
+        </span>
 
         {/* Title */}
         <h3
@@ -128,25 +150,25 @@ function InfoCard({ post }: { post: InfoPost }) {
           {post.title}
         </h3>
 
-        {/* Description */}
+        {/* Description clamped */}
         <p
           style={{
             fontSize: "13px",
             color: "#6B7280",
             margin: 0,
             lineHeight: 1.6,
-            flexGrow: 1,
             display: "-webkit-box",
             WebkitLineClamp: 3,
             WebkitBoxOrient: "vertical",
             overflow: "hidden",
+            flexGrow: 1,
           }}
         >
           {post.description}
         </p>
 
         {/* Meta */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
           {post.location && (
             <div
               style={{
@@ -157,8 +179,7 @@ function InfoCard({ post }: { post: InfoPost }) {
                 color: "#6B7280",
               }}
             >
-              <MapPin size={13} color="#1E3A8A" />
-              {post.location}
+              <MapPin size={13} color="#1E3A8A" /> {post.location}
             </div>
           )}
           {post.deadline && (
@@ -186,38 +207,33 @@ function InfoCard({ post }: { post: InfoPost }) {
                 color: "#6B7280",
               }}
             >
-              <Phone size={13} color="#1E3A8A" />
-              {post.contactInfo}
+              <Phone size={13} color="#1E3A8A" /> {post.contactInfo}
             </div>
           )}
         </div>
-      </div>
 
-      {/* Apply button */}
-      {post.applyLink && (
-        <div style={{ padding: "0 18px 18px" }}>
-          <a
-            onClick={() => navigate("/taskSpot#application")}
-            rel="noreferrer"
-            style={{
-              display: "flex",
-              cursor: "pointer",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "7px",
-              padding: "10px",
-              borderRadius: "10px",
-              background: "#1E3A8A",
-              color: "#fff",
-              fontSize: "13px",
-              fontWeight: 700,
-              textDecoration: "none",
-            }}
-          >
-            Apply Now <ExternalLink size={13} />
-          </a>
+        {/* View more — bottom CTA */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "6px",
+            marginTop: "4px",
+            padding: "9px 0",
+            borderRadius: "10px",
+            background: "#EFF6FF",
+            border: "1px solid #BFDBFE",
+            color: "#1E3A8A",
+            fontSize: "12px",
+            fontWeight: 700,
+          }}
+        >
+          <Eye size={13} color="#1E3A8A" />
+          View Full Details
+          <span style={{ fontSize: "15px", lineHeight: 1 }}>›</span>
         </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -277,20 +293,22 @@ export default function RMInfoSpot() {
   const { data, isLoading, isError } = useGetAllInfoPostsQuery();
   const allItems = (data?.items ?? []).filter((p) => p.isActive);
 
-  const categories = ["ALL", "JOB", "SCHOLARSHIP", "OPPORTUNITY"];
+  // ← updated to all 5 categories
+  const categories = ["ALL", "JOB", "SCHOLARSHIP", "COMPETITION", "COMMUNITY", "ADVISORY"];
   const [activeFilter, setActiveFilter] = useState("ALL");
 
   const filtered =
     activeFilter === "ALL"
       ? allItems
       : allItems.filter((p) => p.category === activeFilter);
+
   const count = (cat: string) =>
     cat === "ALL"
       ? allItems.length
       : allItems.filter((p) => p.category === cat).length;
 
   return (
-    <div className="">
+    <div>
       {/* ── Hero Banner ── */}
       <div className="px-7 relative overflow-hidden py-20 bg-blue-800">
         {bubbles.map((bubble, i) => (
@@ -348,8 +366,18 @@ export default function RMInfoSpot() {
               </div>
             ))}
           </div>
-          {/* Stats */}
-          <div className="flex flex-row md:flex-col gap-4 justify-center md:justify-start">
+
+          {/* Stats — all 5 categories in a responsive wrap */}
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "12px",
+              justifyContent: "center",
+              alignContent: "flex-start",
+              maxWidth: "320px",
+            }}
+          >
             {categories.slice(1).map((cat) => {
               const conf = categoryConfig[cat];
               return (
@@ -359,29 +387,19 @@ export default function RMInfoSpot() {
                     background: conf.bg,
                     border: `1px solid ${conf.border}`,
                     borderRadius: "14px",
-                    padding: "16px 20px",
-                    minWidth: "120px",
+                    padding: "12px 16px",
+                    minWidth: "90px",
                     textAlign: "center",
+                    flex: "1 1 90px",
                   }}
                 >
-                  <p
-                    style={{
-                      fontSize: "28px",
-                      fontWeight: 700,
-                      color: conf.color,
-                      margin: 0,
-                    }}
-                  >
+                  <div style={{ display: "flex", justifyContent: "center", marginBottom: "4px", color: conf.color }}>
+                    {conf.icon}
+                  </div>
+                  <p style={{ fontSize: "24px", fontWeight: 700, color: conf.color, margin: 0 }}>
                     {count(cat)}
                   </p>
-                  <p
-                    style={{
-                      fontSize: "12px",
-                      color: conf.color,
-                      margin: 0,
-                      fontWeight: 600,
-                    }}
-                  >
+                  <p style={{ fontSize: "10px", color: conf.color, margin: 0, fontWeight: 600 }}>
                     {cat}S
                   </p>
                 </div>
@@ -397,11 +415,11 @@ export default function RMInfoSpot() {
           Browse Opportunities
         </h1>
 
-        {/* Filter tabs */}
+        {/* Filter tabs — wraps nicely on mobile */}
         <div
           style={{
             display: "flex",
-            gap: "10px",
+            gap: "8px",
             flexWrap: "wrap",
             marginBottom: "24px",
             justifyContent: "center",
@@ -420,45 +438,12 @@ export default function RMInfoSpot() {
 
         {/* Loading */}
         {isLoading && (
-          <div
-            style={{
-              textAlign: "center",
-              padding: "60px",
-              color: "#9CA3AF",
-              fontSize: "14px",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "8px",
-              }}
-            >
-              <svg
-                style={{
-                  width: "16px",
-                  height: "16px",
-                  animation: "spin 1s linear infinite",
-                }}
-                fill="none"
-                viewBox="0 0 24 24"
-              >
+          <div style={{ textAlign: "center", padding: "60px", color: "#9CA3AF", fontSize: "14px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+              <svg style={{ width: "16px", height: "16px", animation: "spin 1s linear infinite" }} fill="none" viewBox="0 0 24 24">
                 <style>{`@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}`}</style>
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="#1E3A8A"
-                  strokeWidth="3"
-                  opacity=".2"
-                />
-                <path
-                  fill="#1E3A8A"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                  opacity=".75"
-                />
+                <circle cx="12" cy="12" r="10" stroke="#1E3A8A" strokeWidth="3" opacity=".2" />
+                <path fill="#1E3A8A" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" opacity=".75" />
               </svg>
               Loading opportunities...
             </div>
@@ -476,16 +461,8 @@ export default function RMInfoSpot() {
 
         {/* Empty */}
         {!isLoading && !isError && filtered.length === 0 && (
-          <div
-            style={{
-              textAlign: "center",
-              padding: "60px",
-              color: "#9CA3AF",
-              fontSize: "14px",
-            }}
-          >
-            No {activeFilter === "ALL" ? "" : activeFilter.toLowerCase()}{" "}
-            opportunities available right now. Check back soon!
+          <div style={{ textAlign: "center", padding: "60px", color: "#9CA3AF", fontSize: "14px" }}>
+            No {activeFilter === "ALL" ? "" : activeFilter.toLowerCase()} opportunities available right now. Check back soon!
           </div>
         )}
 

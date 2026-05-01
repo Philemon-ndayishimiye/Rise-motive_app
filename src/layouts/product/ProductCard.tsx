@@ -18,9 +18,9 @@ export function ProductCard({
 }) {
   return (
     <div className="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col gap-3 hover:shadow-md hover:border-blue-200 transition-all duration-200">
-      {/* Emoji + badge */}
+      {/* Image */}
       <div
-        className="w-full aspect-square bg-gray-50 rounded-xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+        className="w-full aspect-square bg-gray-50 rounded-xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity flex flex-col items-center justify-center"
         onClick={onViewDetail}
       >
         <img
@@ -28,21 +28,19 @@ export function ProductCard({
           alt={product.name}
           className="w-[80%] h-[80%] object-cover rounded-xl"
         />
-        <span className="text-[11px] font-family-playfair bg-blue-800 text-white px-4 py-1 text-center rounded-lg">
+        <h1 className="text-center text-amber-500 py-4 font-bold text-[15px]">
+          {product.price.toLocaleString()} rwf
+        </h1>
+        {/* <span className="text-[11px] font-family-playfair bg-blue-800 text-white px-4 py-2 text-center rounded-lg">
           Tap to view details
-        </span>
+        </span> */}
       </div>
 
-      {/* Category + badge */}
+      {/* Category */}
       <div className="flex items-center justify-between">
         <span className="text-[10px] font-family-playfair text-blue-700 bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-full font-bold tracking-wide">
           {product.category}
         </span>
-        {/* {product.badge && (
-          <span className="text-[10px] font-family-playfair text-amber-700 bg-amber-50 border border-amber-100 px-2 py-0.5 rounded-full font-bold">
-            ★ {product.badge}
-          </span>
-        )} */}
       </div>
 
       {/* Name */}
@@ -53,7 +51,7 @@ export function ProductCard({
         {product.name}
       </h3>
 
-      {/* Short description */}
+      {/* Description */}
       <p className="font-family-playfair text-gray-700 text-[12px] leading-snug flex-1">
         {product.description}
       </p>
@@ -67,22 +65,28 @@ export function ProductCard({
           <ShoppingCart size={14} /> Add to Cart
         </button>
       ) : (
-        <div className="flex items-center justify-between bg-blue-50 border border-blue-200 rounded-xl px-3 py-2">
-          <button
-            onClick={onDecrease}
-            className="w-7 h-7 rounded-lg bg-white border border-blue-200 hover:bg-red-50 hover:border-red-200 flex items-center justify-center transition-colors"
-          >
-            <Minus size={13} className="text-gray-700" />
-          </button>
-          <span className="font-family-playfair font-bold text-blue-800 text-[14px]">
-            {cartQty}
-          </span>
-          <button
-            onClick={onIncrease}
-            className="w-7 h-7 rounded-lg bg-white border border-blue-200 hover:bg-green-50 hover:border-green-200 flex items-center justify-center transition-colors"
-          >
-            <Plus size={13} className="text-gray-700" />
-          </button>
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center justify-between bg-blue-50 border border-blue-200 rounded-xl px-3 py-2">
+            <button
+              onClick={onDecrease}
+              className="w-7 h-7 rounded-lg bg-white border border-blue-200 hover:bg-red-50 hover:border-red-200 flex items-center justify-center transition-colors"
+            >
+              <Minus size={13} className="text-gray-700" />
+            </button>
+            <span className="font-family-playfair font-bold text-blue-800 text-[14px]">
+              {cartQty}
+            </span>
+            <button
+              onClick={onIncrease}
+              className="w-7 h-7 rounded-lg bg-white border border-blue-200 hover:bg-green-50 hover:border-green-200 flex items-center justify-center transition-colors"
+            >
+              <Plus size={13} className="text-gray-700" />
+            </button>
+          </div>
+          {/* Subtotal under qty controls */}
+          <p className="text-center font-family-playfair text-amber-600 font-bold text-[12px]">
+            Subtotal: {(Number(product.price) * cartQty).toLocaleString()} rwf
+          </p>
         </div>
       )}
     </div>
