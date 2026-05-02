@@ -8,6 +8,10 @@ interface ApiError {
   data: { message?: string; errors?: unknown };
 }
 
+type WebFormProps = {
+  serviceOptions?: { value: string; label: string }[];
+};
+
 type WebFormData = {
   customerName: string;
   customerEmail: string;
@@ -48,7 +52,7 @@ const validateForm = (data: WebFormData): FormErrors => {
   return errors;
 };
 
-export default function WebAndDigital() {
+export default function WebAndDigital({ serviceOptions = [] }: WebFormProps) {
   const [formData, setFormData] = useState<WebFormData>(INITIAL_FORM_STATE);
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSuccess, setIsSuccess] = useState(false);
@@ -169,14 +173,14 @@ export default function WebAndDigital() {
             type="select"
             label="Service"
             placeholder="Select Service Category"
-            options={[
-              { value: "website", label: "Web Development" },
-              { value: "online", label: "Online Setup & Support" },
-            ]}
-            value={formData.service}
-            variant={errors.service ? "danger" : "default"}
-            helperText={errors.service}
-            onChange={(e) => handleChange("service", e.target.value)}
+            options={
+              serviceOptions.length > 0
+                ? serviceOptions
+                : [
+                    { value: "website", label: "Web Development" },
+                    { value: "online", label: "Online Setup & Support" },
+                  ]
+            }
           />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 pb-3">

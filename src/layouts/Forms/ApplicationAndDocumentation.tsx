@@ -8,6 +8,10 @@ interface ApiError {
   data: { message?: string; errors?: unknown };
 }
 
+type ApplicationFormProps = {
+  serviceOptions?: { value: string; label: string }[];
+};
+
 type ApplicationFormData = {
   customerName: string;
   customerEmail: string;
@@ -48,7 +52,9 @@ const validateForm = (data: ApplicationFormData): FormErrors => {
   return errors;
 };
 
-export default function ApplicationAndDocument() {
+export default function ApplicationAndDocument({
+  serviceOptions = [],
+}: ApplicationFormProps) {
   const [formData, setFormData] =
     useState<ApplicationFormData>(INITIAL_FORM_STATE);
   const [errors, setErrors] = useState<FormErrors>({});
@@ -98,7 +104,10 @@ export default function ApplicationAndDocument() {
 
   if (isSuccess) {
     return (
-      <div id="application" className="flex flex-col items-center justify-center w-full h-full min-h-[40vh] text-center px-6">
+      <div
+        id="application"
+        className="flex flex-col items-center justify-center w-full h-full min-h-[40vh] text-center px-6"
+      >
         {/* Icon */}
         <div className="flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full mx-auto mb-6">
           <MailCheck className="w-10 h-10 text-[#1E3A8A]" />
@@ -170,18 +179,22 @@ export default function ApplicationAndDocument() {
             type="select"
             label="Service"
             placeholder="Select Service Category"
-            options={[
-              { value: "Job", label: "Job Application" },
-              { value: "Scholarship", label: "ScholarShip Application" },
-              { value: "CV", label: "CV & Cover Letter" },
-              { value: "Project", label: "Project Proposal Writing" },
-              { value: "Report", label: "Report Writing & Editing" },
-              { value: "Book", label: "Book Writing & Formatting" },
-              {
-                value: "General",
-                label: "General Document Preparation & Editing",
-              },
-            ]}
+            options={
+              serviceOptions.length > 0
+                ? serviceOptions
+                : [
+                    { value: "Job", label: "Job Application" },
+                    { value: "Scholarship", label: "ScholarShip Application" },
+                    { value: "CV", label: "CV & Cover Letter" },
+                    { value: "Project", label: "Project Proposal Writing" },
+                    { value: "Report", label: "Report Writing & Editing" },
+                    { value: "Book", label: "Book Writing & Formatting" },
+                    {
+                      value: "General",
+                      label: "General Document Preparation & Editing",
+                    },
+                  ]
+            }
             value={formData.service}
             variant={errors.service ? "danger" : "default"}
             helperText={errors.service}

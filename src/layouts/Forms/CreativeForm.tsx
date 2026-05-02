@@ -4,6 +4,9 @@ import { Button, Input } from "@/components/ui/InputAndButton";
 import { useCreateCreativeRequestMutation } from "../../app/api/Taskspot/creative";
 
 // ── Types ──────────────────────────────────────────────────────────────────
+type CreativeFormProps = {
+  serviceOptions?: { value: string; label: string }[];
+};
 
 interface ApiError {
   status: number;
@@ -66,7 +69,9 @@ const validateForm = (data: CreativeFormData): FormErrors => {
 
 // ── Component ──────────────────────────────────────────────────────────────
 
-export default function CreativeForm() {
+export default function CreativeForm({
+  serviceOptions = [],
+}: CreativeFormProps) {
   const [formData, setFormData] =
     useState<CreativeFormData>(INITIAL_FORM_STATE);
   const [errors, setErrors] = useState<FormErrors>({});
@@ -201,14 +206,14 @@ export default function CreativeForm() {
             type="select"
             label="Service"
             placeholder="Select Service Category"
-            options={[
-              { value: "photo", label: "Photography & Videography" },
-              { value: "graphic", label: "Graphic Design" },
-            ]}
-            value={formData.service}
-            variant={errors.service ? "danger" : "default"}
-            helperText={errors.service}
-            onChange={(e) => handleChange("service", e.target.value)}
+            options={
+              serviceOptions.length > 0
+                ? serviceOptions
+                : [
+                    { value: "photo", label: "Photography & Videography" },
+                    { value: "graphic", label: "Graphic Design" },
+                  ]
+            }
           />
         </div>
 

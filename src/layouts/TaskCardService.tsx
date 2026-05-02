@@ -14,7 +14,7 @@ type CardServiceProps = {
   items: string[];
   /** Optional extra class names on the wrapper */
   className?: string;
-  service : string ;
+  service: string;
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -61,7 +61,7 @@ export const TaskCardService: React.FC<CardServiceProps> = ({
 
         {/* Click hint */}
         <p className="text-[11px] font-medium text-white py-1 rounded-lg bg-blue-800  font-family-playfair  transition-colors duration-200 tracking-wide text-center px-3">
-         {service}
+          {service}
         </p>
       </div>
 
@@ -71,18 +71,44 @@ export const TaskCardService: React.FC<CardServiceProps> = ({
       </h3>
 
       {/* ── Items List ── */}
+      {/* ── Items List ── */}
       <ul className="flex flex-col gap-2 list-none">
-        {items.map((item, idx) => (
-          <li key={idx} className="flex items-center gap-2">
-            <BadgeCheck
-              size={17}
-              className="text-blue-800 fill-white shrink-0"
-            />
-            <span className="font-family-playfair pb-1 text-gray-700 text-[15px] leading-snug">
-              {item}
-            </span>
-          </li>
-        ))}
+        {items.map((item, idx) => {
+          const parts = item.split("—");
+          const name = parts[0]?.trim();
+          const price = parts[1]?.trim();
+
+          return (
+            <li key={idx} className="flex items-center gap-2">
+              <BadgeCheck
+                size={17}
+                className="text-blue-800 fill-white shrink-0"
+              />
+              <span className="font-family-playfair pb-1 text-gray-700 text-[15px] leading-snug">
+                {name}
+                {price && (
+                  <>
+                    {" "}
+                    <span
+                      style={{
+                        color: "#ffffff",
+                        background: "#1E3A8A",
+                        fontSize: "11px",
+                        fontWeight: 700,
+                        padding: "1px 7px",
+                        borderRadius: "999px",
+                        marginLeft: "4px",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {price}
+                    </span>
+                  </>
+                )}
+              </span>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

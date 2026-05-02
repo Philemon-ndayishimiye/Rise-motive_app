@@ -8,6 +8,10 @@ interface ApiError {
   data: { message?: string; errors?: unknown };
 }
 
+type LegalFormProps = {
+  serviceOptions?: { value: string; label: string }[];
+};
+
 type LegalFormData = {
   customerName: string;
   customerEmail: string;
@@ -48,7 +52,9 @@ const validateForm = (data: LegalFormData): FormErrors => {
   return errors;
 };
 
-export default function LegalandOfficialServices() {
+export default function LegalandOfficialServices({
+  serviceOptions = [],
+}: LegalFormProps) {
   const [formData, setFormData] = useState<LegalFormData>(INITIAL_FORM_STATE);
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSuccess, setIsSuccess] = useState(false);
@@ -63,7 +69,7 @@ export default function LegalandOfficialServices() {
     if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 
- const handleSubmit = async () => {
+  const handleSubmit = async () => {
     const validationErrors = validateForm(formData);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -113,7 +119,7 @@ export default function LegalandOfficialServices() {
         </p>
         <p className="font-family-playfair text-gray-500 text-sm leading-relaxed max-w-sm">
           We've sent an email with your{" "}
-          <span className="font-semibold text-[#1E3A8A]">tracking code</span> 
+          <span className="font-semibold text-[#1E3A8A]">tracking code</span>
           please check your inbox (and spam folder) to track your request
           status.
         </p>
@@ -170,20 +176,24 @@ export default function LegalandOfficialServices() {
             type="select"
             label="Service"
             placeholder="Select Service Category"
-            options={[
-              { value: "notary", label: "Notary Services" },
-              { value: "Case", label: "Case Filing" },
-              {
-                value: "Representation",
-                label: "Legal Representation Support",
-              },
-              { value: "court", label: "Court Case Submission" },
-              { value: "legal", label: "Legal Advisory & Consultation" },
-              {
-                value: "recognized",
-                label: "Legally Recognized Contracts & Agreements",
-              },
-            ]}
+            options={
+              serviceOptions.length > 0
+                ? serviceOptions
+                : [
+                    { value: "notary", label: "Notary Services" },
+                    { value: "Case", label: "Case Filing" },
+                    {
+                      value: "Representation",
+                      label: "Legal Representation Support",
+                    },
+                    { value: "court", label: "Court Case Submission" },
+                    { value: "legal", label: "Legal Advisory & Consultation" },
+                    {
+                      value: "recognized",
+                      label: "Legally Recognized Contracts & Agreements",
+                    },
+                  ]
+            }
             value={formData.service}
             variant={errors.service ? "danger" : "default"}
             helperText={errors.service}

@@ -4,8 +4,7 @@ import egovernmentpic from "../assets/egovernment.png";
 import webdigit from "../assets/webdigital.png";
 import applicationdocs from "../assets/application.png";
 import creative from "../assets/creative.png";
-import { BadgeCheck } from "lucide-react";
-import { Scale } from "lucide-react";
+import { BadgeCheck, Scale } from "lucide-react";
 import Ai from "../assets/Ai.jpg";
 import basicProgramming from "../assets/Basic Programming.jpg";
 import computerfoundation from "../assets/Computer & Digital Foundations.jpg";
@@ -16,21 +15,26 @@ import microsoft from "../assets/Microsoft Office.jpg";
 import egovernment from "../assets/e-Government Tools & Services.jpg";
 import GovernmentForm from "@/layouts/Forms/GovernmentForm";
 import { Modal } from "@/components/ui/Model";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CourseForm from "@/layouts/Forms/Courses";
 import CreativeForm from "@/layouts/Forms/CreativeForm";
 import LegalandOfficialServices from "@/layouts/Forms/Legal";
 import WebAndDigital from "@/layouts/Forms/WebAndDigital";
 import ApplicationAndDocument from "@/layouts/Forms/ApplicationAndDocumentation";
-import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-type Bubble = {
-  size: number;
-  left: number;
-  duration: number;
-  delay: number;
-};
+// Replace these imports at the top:
+import {
+  useEGovernmentOptions,
+  useWebOptions,
+  useAppDocOptions,
+  useLegalOptions,
+  useCreativeOptions,
+} from "../hooks/spotservice"; // ← use the hooks file
+
+// ── Helpers ────────────────────────────────────────────────────────────────
+
+type Bubble = { size: number; left: number; duration: number; delay: number };
 
 const bubbles: Bubble[] = Array.from({ length: 15 }).map(() => ({
   size: Math.random() * 60 + 20,
@@ -39,32 +43,68 @@ const bubbles: Bubble[] = Array.from({ length: 15 }).map(() => ({
   delay: Math.random() * 5,
 }));
 
+// "Rembo services — 5,000 RWF"
+
+// ── Fallbacks (shown while loading) ───────────────────────────────────────
+
+const FALLBACK_EGOV = [
+  "Rembo services",
+  "RRA services",
+  "RDB services",
+  "RURA Services",
+  "MIFOTRA Services",
+];
+const FALLBACK_APPDOC = [
+  "Job Application",
+  "Scholarship Application",
+  "CV & Cover Letter Writing",
+  "Project Proposal Writing",
+  "Report Writing & Editing",
+  "Book Writing & Formatting",
+  "General Document Preparation",
+];
+const FALLBACK_CREATIVE = ["Photography & Videography", "Graphic Design"];
+const FALLBACK_WEB = ["Website Development", "Online Setup & Support"];
+const FALLBACK_LEGAL = [
+  "Notary Services",
+  "Case Filing & Legal Representation Support",
+  "Bail Application Assistance",
+  "Court Case Submission & Filing",
+  "Legal Advisory & Consultation",
+  "Legally Recognized Contracts & Agreements",
+];
+
+// ── Component ──────────────────────────────────────────────────────────────
+
 export default function TaskSpot() {
   const [openModal, setOpenModal] = useState<string | null>(null);
   const location = useLocation();
 
+  // ── Fetch all services via hooks ──────────────────────────
+  const { items: egovItems, options: egovOptions } = useEGovernmentOptions();
+  const { items: webItems, options: webOptions } = useWebOptions();
+  const { items: appDocItems, options: appDocOptions } = useAppDocOptions();
+  const { items: legalItems, options: legalOptions } = useLegalOptions();
+  const { items: creativeItems, options: creativeOptions } =
+    useCreativeOptions();
+
+  // ── Hash navigation ────────────────────────────────────────────────────
   useEffect(() => {
     if (location.hash === "#application") {
-      // Defer setState to next tick — avoids synchronous setState inside effect
-      const timer = setTimeout(() => {
-        setOpenModal("document");
-      }, 0);
-      return () => clearTimeout(timer); // cleanup
+      const timer = setTimeout(() => setOpenModal("document"), 0);
+      return () => clearTimeout(timer);
     }
-
     if (location.hash) {
       const el = document.querySelector(location.hash);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
+      if (el) el.scrollIntoView({ behavior: "smooth" });
     }
-  }, [location.hash]); // only re-run when the hash changes, not on every render
+  }, [location.hash]);
 
   return (
-    <div className="">
+    <div>
       {/* ── Hero Banner ── */}
       <div className="px-7 relative overflow-hidden py-20 bg-blue-800">
-        {bubbles.map((bubble: Bubble, i: number) => (
+        {bubbles.map((bubble, i) => (
           <div
             key={i}
             className="bubble"
@@ -88,7 +128,7 @@ export default function TaskSpot() {
             <br />
             Access reliable digital services and practical skills all in one
             place. Send a task, choose a skilled RM Tasker, or start learning
-            today
+            today.
           </p>
         </div>
       </div>
@@ -103,38 +143,26 @@ export default function TaskSpot() {
         </div>
         <div>
           <h1 className="py-2 font-family-playfair text-gray-800 text-[15px]">
-            RM TaskSpot is, your go to platform to access trusted services and
+            RM TaskSpot is your go-to platform to access trusted services and
             practical digital skills from RISE MOTIVE.
           </h1>
           <h2 className="py-2 font-family-playfair text-gray-800 text-[15px]">
             Whether you need something done or want to learn how to do it
-            yourself we have got you covered.
+            yourself, we have got you covered.
           </h2>
-
-          <div className="flex flex-row gap-2 pb-6">
-            <BadgeCheck size={19} className="text-[#1E3A8A]" />
-            <p className="font-family-playfair text-gray-800 text-[16px]">
-              Request services from anywhere
-            </p>
-          </div>
-          <div className="flex flex-row gap-2 pb-6">
-            <BadgeCheck size={19} className="text-[#1E3A8A]" />
-            <p className="font-family-playfair text-gray-800 text-[16px]">
-              Choose skilled and verified RM Taskers
-            </p>
-          </div>
-          <div className="flex flex-row gap-2 pb-6">
-            <BadgeCheck size={19} className="text-[#1E3A8A]" />
-            <p className="font-family-playfair text-gray-800 text-[16px]">
-              Learn in-demand digital skills
-            </p>
-          </div>
-          <div className="flex flex-row gap-2 pb-6">
-            <BadgeCheck size={19} className="text-[#1E3A8A]" />
-            <p className="font-family-playfair text-gray-800 text-[16px]">
-              Fast, reliable, and affordable
-            </p>
-          </div>
+          {[
+            "Request services from anywhere",
+            "Choose skilled and verified RM Taskers",
+            "Learn in-demand digital skills",
+            "Fast, reliable, and affordable",
+          ].map((text) => (
+            <div key={text} className="flex flex-row gap-2 pb-6">
+              <BadgeCheck size={19} className="text-[#1E3A8A]" />
+              <p className="font-family-playfair text-gray-800 text-[16px]">
+                {text}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -149,19 +177,14 @@ export default function TaskSpot() {
           id="services"
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"
         >
+          {/* e-Government */}
           <>
             <TaskCardService
               title="e-Government & Online Services"
               service="Click To Request Service"
               icon={<img src={egovernmentpic} />}
               onClick={() => setOpenModal("government")}
-              items={[
-                "Rembo services",
-                "RRA services",
-                "RDB services",
-                "RURA Services",
-                "MIFOTRA Services",
-              ]}
+              items={egovItems.length > 0 ? egovItems : FALLBACK_EGOV}
             />
             <Modal
               isOpen={openModal === "government"}
@@ -169,25 +192,21 @@ export default function TaskSpot() {
               title="e-Government & Online Services"
               subtitle="Fill in the details below and we'll connect you with the right agency."
             >
-              <GovernmentForm title="Submit your request for e-Government services quickly and securely." />
+              <GovernmentForm
+                title="Submit your request for e-Government services quickly and securely."
+                serviceOptions={egovOptions}
+              />
             </Modal>
           </>
 
+          {/* Applications & Documentation */}
           <>
             <TaskCardService
               title="Applications & Documentation"
               service="Click To Request Service"
               icon={<img src={applicationdocs} />}
               onClick={() => setOpenModal("document")}
-              items={[
-                "Job Application",
-                "Scholarship Application",
-                "CV & Cover Letter Writing",
-                "Project Proposal Writing",
-                "Report Writing & Editing",
-                "Book Writing & Formatting",
-                "General Document Preparation",
-              ]}
+              items={appDocItems.length > 0 ? appDocItems : FALLBACK_APPDOC}
             />
             <Modal
               isOpen={openModal === "document"}
@@ -195,17 +214,20 @@ export default function TaskSpot() {
               title="Application And Documentation"
               subtitle="Fill in the details below and we'll connect you with the right agency."
             >
-              <ApplicationAndDocument />
+              <ApplicationAndDocument serviceOptions={appDocOptions} />
             </Modal>
           </>
 
+          {/* Creative & Media */}
           <>
             <TaskCardService
               title="Creative & Media Services"
               service="Click To Request Service"
               icon={<img src={creative} />}
               onClick={() => setOpenModal("creative")}
-              items={["Photography & Videography", "Graphic Design"]}
+              items={
+                creativeItems.length > 0 ? creativeItems : FALLBACK_CREATIVE
+              }
             />
             <Modal
               isOpen={openModal === "creative"}
@@ -213,17 +235,18 @@ export default function TaskSpot() {
               title="Creative and Media Services"
               subtitle="Fill in the details below and we'll connect you with the right agency."
             >
-              <CreativeForm />
+              <CreativeForm serviceOptions={creativeOptions} />
             </Modal>
           </>
 
+          {/* Web & Digital */}
           <>
             <TaskCardService
               title="Web & Digital Solutions"
               service="Click To Request Service"
-              icon={<img className="" src={webdigit} />}
+              icon={<img src={webdigit} />}
               onClick={() => setOpenModal("web")}
-              items={["Website Development", "Online Setup & Support"]}
+              items={webItems.length > 0 ? webItems : FALLBACK_WEB}
             />
             <Modal
               isOpen={openModal === "web"}
@@ -231,24 +254,18 @@ export default function TaskSpot() {
               title="Web and Digital Solution"
               subtitle="Fill in the details below and we'll connect you with the right agency."
             >
-              <WebAndDigital />
+              <WebAndDigital serviceOptions={webOptions} />
             </Modal>
           </>
 
+          {/* Legal */}
           <>
             <TaskCardService
               title="Legal & Official Services"
               service="Click To Request Service"
               icon={<Scale size={95} />}
               onClick={() => setOpenModal("legal")}
-              items={[
-                "Notary Services",
-                "Case Filing & Legal Representation Support",
-                "Bail Application Assistance",
-                "Court Case Submission & Filing",
-                "Legal Advisory & Consultation",
-                "Legally Recognized Contracts & Agreements",
-              ]}
+              items={legalItems.length > 0 ? legalItems : FALLBACK_LEGAL}
             />
             <Modal
               isOpen={openModal === "legal"}
@@ -256,7 +273,7 @@ export default function TaskSpot() {
               title="Legal and Official Services"
               subtitle="Fill in the details below and we'll connect you with the right agency."
             >
-              <LegalandOfficialServices />
+              <LegalandOfficialServices serviceOptions={legalOptions} />
             </Modal>
           </>
         </div>
@@ -267,151 +284,75 @@ export default function TaskSpot() {
         <h1 className="font-family-playfair text-center text-blue-800 text-[20px] font-bold py-5">
           AVAILABLE MODULES
         </h1>
-
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
-          <>
-            <TaskCardService
-              title="Computer & Digital Foundations"
-              service="Click To Apply"
-              icon={<img src={computerfoundation} alt="computer foundation" />}
-              onClick={() => setOpenModal("computerFoundation")}
-              items={[]}
-            />
-            <Modal
-              isOpen={openModal === "computerFoundation"}
-              onClose={() => setOpenModal(null)}
-              title="Please Apply Computer And Digital Foundations"
-              subtitle="Fill in the details below and we'll connect you with the right agency."
-            >
-              <CourseForm />
-            </Modal>
-          </>
-
-          <>
-            <TaskCardService
-              title="Microsoft Office Applications"
-              service="Click To Apply"
-              icon={<img src={microsoft} alt="microsoft" />}
-              onClick={() => setOpenModal("microsoft")}
-              items={[]}
-            />
-            <Modal
-              isOpen={openModal === "microsoft"}
-              onClose={() => setOpenModal(null)}
-              title="Microsoft Office Applications"
-              subtitle="Fill in the details below and we'll connect you with the right agency."
-            >
-              <CourseForm />
-            </Modal>
-          </>
-
-          <>
-            <TaskCardService
-              title="Google Tools & Online Collaboration"
-              service="Click To Apply"
-              icon={<img src={googletools} alt="google tools" />}
-              onClick={() => setOpenModal("googletools")}
-              items={[]}
-            />
-            <Modal
-              isOpen={openModal === "googletools"}
-              onClose={() => setOpenModal(null)}
-              title="Apply for Google Tools and Online Collaboration"
-              subtitle="Fill in the details below and we'll connect you with the right agency."
-            >
-              <CourseForm />
-            </Modal>
-          </>
-
-          <>
-            <TaskCardService
-              title="e-Government Tools & Services"
-              service="Click To Apply"
-              icon={<img src={egovernment} alt="e-government" />}
-              onClick={() => setOpenModal("egovernm")}
-              items={[]}
-            />
-            <Modal
-              isOpen={openModal === "egovernm"}
-              onClose={() => setOpenModal(null)}
-              title="Apply for e-Government Tools and Services"
-              subtitle="Fill in the details below and we'll connect you with the right agency."
-            >
-              <CourseForm />
-            </Modal>
-          </>
-
-          <>
-            <TaskCardService
-              title="Digital Content Creation"
-              service="Click To Apply"
-              icon={<img src={digitalContent} alt="digital content" />}
-              onClick={() => setOpenModal("digitalcont")}
-              items={[]}
-            />
-            <Modal
-              isOpen={openModal === "digitalcont"}
-              onClose={() => setOpenModal(null)}
-              title="Apply for Digital Content Creation"
-              subtitle="Fill in the details below and we'll connect you with the right agency."
-            >
-              <CourseForm />
-            </Modal>
-          </>
-
-          <>
-            <TaskCardService
-              title="Graphic Design"
-              service="Click To Apply"
-              icon={<img src={graphicDesign} alt="graphic design" />}
-              onClick={() => setOpenModal("graphicDesign")}
-              items={[]}
-            />
-            <Modal
-              isOpen={openModal === "graphicDesign"}
-              onClose={() => setOpenModal(null)}
-              title="Apply for Graphic Design"
-              subtitle="Fill in the details below and we'll connect you with the right agency."
-            >
-              <CourseForm />
-            </Modal>
-          </>
-
-          <>
-            <TaskCardService
-              title="Introduction to Artificial Intelligence & Digital Tools"
-              service="Click To Apply"
-              icon={<img src={Ai} alt="AI" />}
-              onClick={() => setOpenModal("AI")}
-              items={[]}
-            />
-            <Modal
-              isOpen={openModal === "AI"}
-              onClose={() => setOpenModal(null)}
-              title="Apply for Introduction To Artificial Intelligence"
-              subtitle="Fill in the details below and we'll connect you with the right agency."
-            >
-              <CourseForm />
-            </Modal>
-          </>
-
-          <>
-            <TaskCardService
-              title="Basic Programming"
-              service="Click To Apply"
-              icon={<img src={basicProgramming} alt="basic programming" />}
-              onClick={() => setOpenModal("programming")}
-              items={[]}
-            />
-            <Modal
-              isOpen={openModal === "programming"}
-              onClose={() => setOpenModal(null)}
-              title="Apply for Basic Programming"
-              subtitle="Fill in the details below and we'll connect you with the right agency."
-            >
-              <CourseForm />
-            </Modal>
-          </>
+          {[
+            {
+              key: "computerFoundation",
+              title: "Computer & Digital Foundations",
+              img: computerfoundation,
+              alt: "computer foundation",
+            },
+            {
+              key: "microsoft",
+              title: "Microsoft Office Applications",
+              img: microsoft,
+              alt: "microsoft",
+            },
+            {
+              key: "googletools",
+              title: "Google Tools & Online Collaboration",
+              img: googletools,
+              alt: "google tools",
+            },
+            {
+              key: "egovernm",
+              title: "e-Government Tools & Services",
+              img: egovernment,
+              alt: "e-government",
+            },
+            {
+              key: "digitalcont",
+              title: "Digital Content Creation",
+              img: digitalContent,
+              alt: "digital content",
+            },
+            {
+              key: "graphicDesign",
+              title: "Graphic Design",
+              img: graphicDesign,
+              alt: "graphic design",
+            },
+            {
+              key: "AI",
+              title: "Introduction to Artificial Intelligence & Digital Tools",
+              img: Ai,
+              alt: "AI",
+            },
+            {
+              key: "programming",
+              title: "Basic Programming",
+              img: basicProgramming,
+              alt: "basic programming",
+            },
+          ].map(({ key, title, img, alt }) => (
+            <div key={key}>
+              <TaskCardService
+                title={title}
+                service="Click To Apply"
+                icon={<img src={img} alt={alt} />}
+                onClick={() => setOpenModal(key)}
+                items={[]}
+              />
+              <Modal
+                isOpen={openModal === key}
+                onClose={() => setOpenModal(null)}
+                title={`Apply for ${title}`}
+                subtitle="Fill in the details below and we'll connect you with the right agency."
+              >
+                <CourseForm />
+              </Modal>
+            </div>
+          ))}
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { MailCheck } from "lucide-react";
 import { Button, Input } from "@/components/ui/InputAndButton";
 import { SERVICE_OPTIONS, TASKER_OPTIONS } from "@/utils/Constants";
 import { useCreateServiceRequestMutation } from "../../app/api/Taskspot/government";
+//import { useEGovernmentOptions } from "../../hooks/useServiceOptions";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -16,6 +17,7 @@ interface ApiError {
 
 type GovernmentFormProps = {
   title: string;
+  serviceOptions?: { value: string; label: string }[];
 };
 
 type GovernmentFormData = {
@@ -71,7 +73,7 @@ const validateForm = (data: GovernmentFormData): FormErrors => {
 
 // ── Component ──────────────────────────────────────────────────────────────
 
-export default function GovernmentForm({ title }: GovernmentFormProps) {
+export default function GovernmentForm({ title, serviceOptions = [] }: GovernmentFormProps) {
   const [formData, setFormData] =
     useState<GovernmentFormData>(INITIAL_FORM_STATE);
   const [errors, setErrors] = useState<FormErrors>({});
@@ -207,7 +209,7 @@ export default function GovernmentForm({ title }: GovernmentFormProps) {
             type="select"
             label="Service"
             placeholder="Select Service Category"
-            options={SERVICE_OPTIONS}
+            options={serviceOptions.length > 0 ? serviceOptions : SERVICE_OPTIONS}
             value={formData.service}
             variant={errors.service ? "danger" : "default"}
             helperText={errors.service}

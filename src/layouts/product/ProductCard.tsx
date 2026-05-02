@@ -29,7 +29,7 @@ export function ProductCard({
           className="w-[80%] h-[80%] object-cover rounded-xl"
         />
         <h1 className="text-center text-amber-500 py-4 font-bold text-[15px]">
-          {product.price.toLocaleString()} rwf
+          {product.price.toLocaleString()} RWF
         </h1>
         {/* <span className="text-[11px] font-family-playfair bg-blue-800 text-white px-4 py-2 text-center rounded-lg">
           Tap to view details
